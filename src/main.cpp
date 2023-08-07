@@ -1,7 +1,15 @@
 #include<iostream>
+#include<windows.h>
+#include "game.hpp"
 
 int main()
 {
-    std::cout <<"hello world !" <<std::endl;
+    Game game;
+    return 0;
+}
+
+int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+    main();
     return 0;
 }
