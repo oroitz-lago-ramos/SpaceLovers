@@ -3,6 +3,8 @@
 # Prerequisites
 *.d
 desktop.ini
+SDL2.dll
+SDL2_ttf.dll
 
 # Object files
 *.o
