@@ -11,11 +11,9 @@ public:
     
 private:
     Graphics graphics;
+
+    // Methode a appeler dans game.cpp pour créer les buttons
+    void createButtons();
 };
-
-
-
-
-
 
 #endif

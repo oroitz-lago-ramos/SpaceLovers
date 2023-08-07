@@ -5,6 +5,10 @@
 SDL_Window *Graphics::window = nullptr;
 SDL_Renderer *Graphics::renderer = nullptr;
 
+
+//Initialisation d'un tableau de boutons a 0
+std::set<Button *> Graphics::buttons = {};
+
 Graphics::Graphics()
 {
     std::cout << "Game destructor called!" << std::endl;
