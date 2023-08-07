@@ -12,7 +12,7 @@ SDL_INCLUDE := -I./include
 CFLAGS := -Wall -Wextra -flto -O1 -I$(INCLUDE_FOLDER) -I$(PREREQUISITES_FOLDER) -I$(SDL_INCLUDE) -MMD
 LDFLAGS := -L./lib/
 
-SRCS_RAW := mainu.cpp \
+SRCS_RAW := main.cpp \
 
 SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS_RAW))
 OBJS := $(SRCS:$(SRCS_FOLDER)/%.cpp=$(OBJS_FOLDER)/%.o)
