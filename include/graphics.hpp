@@ -7,8 +7,8 @@ class Graphics
 public:
     Graphics();
     ~Graphics();
-    SDL_Window *window;
-    SDL_Renderer *renderer;
+    static SDL_Window *window;
+    static SDL_Renderer *renderer;
     
 };
 
