@@ -3,19 +3,14 @@
 
 #include "functional"
 #include <SDL2/SDL.h>
+#include "entity.hpp"
 
-class Button
+class Button:public Entity
 {
 public:
-    Button();
     Button(int r, int g, int b, SDL_Rect rect, std::function<void()> onClick);
     ~Button();
-    void render();
 
-    int r;
-    int g;
-    int b;
-    SDL_Rect rect;
     std::function<void()> onClick;
 };
 

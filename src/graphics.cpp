@@ -8,6 +8,7 @@ SDL_Renderer *Graphics::renderer = nullptr;
 
 //Initialisation d'un tableau de bouton à 0
 std::set<Button *> Graphics::buttons = {};
+std::set<Enemy *> Graphics::enemys = {};
 
 Graphics::Graphics()
 {

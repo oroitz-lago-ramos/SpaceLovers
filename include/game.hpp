@@ -14,6 +14,7 @@ private:
 
     // Methode appelée dans game.cpp pour créer les boutons
     void createButtons();
+    void createEnemys();
 };
 
 #endif
