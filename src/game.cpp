@@ -25,7 +25,7 @@ Game::Game()
             {
                 const SDL_Point point = {event.button.x, event.button.y};
 
-                // Test tous les boutons du tableau pour voir si il est sur le SDL_Point
+                // Test tous les boutons du tableau pour voir si le &point est dans un &button->rect
                 for (auto button : std::set<Button *>(Graphics::buttons))
                 {
                     if(SDL_PointInRect(&point, &button->rect))
@@ -43,7 +43,7 @@ Game::Game()
         SDL_Rect rectangle = {50, 10, 100, 100};
         SDL_RenderFillRect(Graphics::renderer, &rectangle);
 
-        // Créer le rendu graphics de chaque bouton
+        // Créer le rendu graphique de chaque bouton
         for (auto button : std::set<Button *>(Graphics::buttons))
         {
             button->render();
@@ -58,7 +58,7 @@ Game::~Game()
     std::cout << "Game destructor called!" << std::endl;
 }
 
-// Methode pour créer des buttons, chaque nouveau bouton doit être fais dans la méthode
+// Methode pour créer des boutons, chaque nouveau bouton doit être fait dans la méthode
 
 void Game::createButtons()
 {
@@ -67,5 +67,5 @@ void Game::createButtons()
     new Button(0, 255, 0, {200, 50, 100, 100}, []() 
                     { std::cout << "Button2 clicked!" << std::endl;});
     new Button(0, 0, 255, {400, 400, 100, 100}, []() 
-                    { std::cout << "Button3 clicked!" << std::endl;}); 
+                    { std::cout << "Button3 clicked!" << std::endl;});
 }
