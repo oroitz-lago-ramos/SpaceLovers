@@ -26,7 +26,7 @@ void Projectile::update()
 
 	// if (SDL_HasIntersection(&this->rect, &Level::player->rect))
 	// {
-	// 	Level::player->takeDamage(1);
+	// 	Player::instance->takeDamage(1);
 	// 	this->~Projectile();
 	// 	return;
 	// }
