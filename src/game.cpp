@@ -5,13 +5,13 @@
 #include "graphics.hpp"
 #include "game.hpp"
 #include "enemy.hpp"
+#include "level.hpp"
 
 Game::Game()
 {
     // Appel de la méthode de création des boutons
     this -> createButtons();
-    this -> createEnemys();
-    
+    srand(time(NULL));
 
     std::cout << "Game destructor called!" << std::endl;
     
@@ -54,12 +54,14 @@ Game::Game()
         SDL_RenderClear(Graphics::renderer);
 
         // Créer le rendu graphique de chaque bouton
-        /* for (auto button : std::set<Button *>(Graphics::buttons))
+        for (auto button : std::set<Button *>(Graphics::buttons))
         {
             button->render();
-        } */
-        for (auto enemy : std::set<Enemy *>(Graphics::enemys))
+        }
+        
+        for (auto enemy : std::set<Enemy *>(Level::enemies))
         {
+            enemy->update();
             enemy->render();
         }
 
@@ -86,13 +88,4 @@ void Game::createButtons()
                     { std::cout << "Button2 clicked!" << std::endl;});
     new Button(0, 0, 255, {400, 400, 100, 100}, []() 
                     { std::cout << "Button3 clicked!" << std::endl;});
-}
-
-//Methode pour créer des ennemi, chaque nouvel ennemi doit être fait dans la méthode
-
-void Game::createEnemys()
-{
-    new Enemy(135, 53, 77, {20, 20, 40, 40});
-    new Enemy(53, 135, 77, {150, 20, 40, 40});
-    new Enemy(77, 53, 135, {350, 20, 40, 40});
 }
