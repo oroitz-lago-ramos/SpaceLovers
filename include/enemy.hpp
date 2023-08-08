@@ -2,16 +2,16 @@
 #define ENEMY_HPP
 
 #include <SDL2/SDL.h>
-#include "entity.hpp"
+#include "character.hpp"
 
-class Enemy:public Entity
+class Enemy:public Character
 {
 public:
-    Enemy(int power, int speed, int defense, SDL_Rect rect);
+    Enemy(int power, int defense);
     ~Enemy();
+    void update();
 
     int power;
-    int speed;
     int defense;
 };
 

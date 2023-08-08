@@ -16,7 +16,6 @@ public:
 
     //Include de "set" afin de créer un tableau de tous les (Button *) le tableau s'appelle buttons
     static std::set<Button *> buttons;
-    static std::set<Enemy *> enemys;
 };
 
 
