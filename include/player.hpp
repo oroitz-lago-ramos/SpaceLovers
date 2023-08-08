@@ -9,6 +9,7 @@ public:
     Player();
     ~Player();
     void update(int direction);
+    void shoot();
     
 private:
     

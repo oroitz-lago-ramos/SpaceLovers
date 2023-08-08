@@ -52,7 +52,7 @@ Game::Game()
                 }
                 else if (event.key.keysym.sym == SDLK_SPACE || event.key.keysym.sym == SDLK_UP || event.key.keysym.scancode == SDL_SCANCODE_W)
                 {
-                    new Projectile(0, 255, 0, this->player.getX(), this -> player.getY(), -1);
+                    player.shoot();
                 }
             }
 
