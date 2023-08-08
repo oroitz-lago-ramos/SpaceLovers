@@ -8,7 +8,10 @@ class Player : public Character
 public:
     Player();
     ~Player();
-    void update(int direction);
+    
+	static Player *instance;
+
+	void update(int direction);
     void shoot();
 private:
     
