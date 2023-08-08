@@ -7,12 +7,13 @@
 class Character : public Entity
 {
 public:
-    Character(int r, int g, int b, SDL_Rect rect);
+    Character(int r, int g, int b, SDL_Rect rect, float speed);
     ~Character();
     void moveUp();
     void moveDown();
     void moveRight();
     void moveLeft();
+    float speed;
 };
 
 #endif

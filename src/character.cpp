@@ -4,8 +4,9 @@
 #include "entity.hpp"
 #include "character.hpp"
 
-Character::Character(int r, int g, int b, SDL_Rect rect)
-    : Entity(r, g, b, rect)
+Character::Character(int r, int g, int b, SDL_Rect rect, float speed)
+    : Entity(r, g, b, rect),
+    speed(speed)
 {
 }
 
@@ -28,3 +29,5 @@ void Character::moveRight()
 void Character::moveLeft()
 {
 }
+
+
