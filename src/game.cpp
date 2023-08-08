@@ -85,10 +85,4 @@ Game::~Game()
 
 void Game::createButtons()
 {
-    new Button(255, 0, 0, {50, 50, 100, 100}, []() 
-                    { std::cout << "Button1 clicked!" << std::endl;});
-    new Button(0, 255, 0, {200, 50, 100, 100}, []() 
-                    { std::cout << "Button2 clicked!" << std::endl;});
-    new Button(0, 0, 255, {400, 400, 100, 100}, []() 
-                    { std::cout << "Button3 clicked!" << std::endl;});
 }

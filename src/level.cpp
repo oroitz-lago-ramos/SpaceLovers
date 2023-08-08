@@ -27,7 +27,7 @@ Level::~Level()
 void Level::update()
 {
 	this -> timeSinceLastSpawn ++;
-	if (this -> timeSinceLastSpawn > 100000)
+	if (this -> timeSinceLastSpawn > 10000)
 	{
 		new Enemy(10, 10);
 		this -> timeSinceLastSpawn = 0;

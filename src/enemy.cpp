@@ -22,4 +22,8 @@ Enemy::~Enemy()
 void Enemy::update()
 {
     this -> moveDown();
+    if (this -> rect.y > Graphics::screenHeight)
+    {
+        this -> ~Enemy();
+    }
 }
