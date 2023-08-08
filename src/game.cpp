@@ -6,6 +6,7 @@
 #include "game.hpp"
 #include "enemy.hpp"
 #include "level.hpp"
+#include "projectile.hpp"
 
 Game::Game()
 {
@@ -41,15 +42,20 @@ Game::Game()
             }
             else if (event.type == SDL_KEYDOWN)
             {
-                if (event.key.keysym.sym == SDLK_LEFT || event.key.keysym.sym == SDLK_a)
+                if (event.key.keysym.sym == SDLK_LEFT || event.key.keysym.scancode == SDL_SCANCODE_A)
                 {
                     player.update(-1);
                 }
-                else if (event.key.keysym.sym == SDLK_RIGHT || event.key.keysym.sym == SDLK_d)
+                else if (event.key.keysym.sym == SDLK_RIGHT || event.key.keysym.scancode == SDL_SCANCODE_D)
                 {
                     player.update(1);
                 }
+                else if (event.key.keysym.sym == SDLK_SPACE || event.key.keysym.sym == SDLK_UP || event.key.keysym.scancode == SDL_SCANCODE_W)
+                {
+                    new Projectile(0, 255, 0, this->player.getX(), this -> player.getY(), -1);
+                }
             }
+
         }
         SDL_SetRenderDrawColor(Graphics::renderer, 30, 30, 30, 30);
         SDL_RenderClear(Graphics::renderer);
@@ -64,6 +70,12 @@ Game::Game()
         {
             enemy->update();
             enemy->render();
+        }
+
+        for (auto projectile : std::set<Projectile *>(Level::projectiles))
+        {
+            projectile->update();
+            projectile->render();
         }
 
         level.update();

@@ -4,8 +4,8 @@
 #include "entity.hpp"
 #include "inGameItem.hpp"
 
-InGameItem::InGameItem(int r, int g, int b, SDL_Rect rect)
-    : Entity(r, g, b, rect)
+InGameItem::InGameItem(int r, int g, int b, int x, int y, int width, int height)
+    : Entity(r, g, b, x, y, width, height)
 {
 }
 

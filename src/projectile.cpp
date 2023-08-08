@@ -4,8 +4,8 @@
 #include "level.hpp"
 #include "graphics.hpp"
 
-Projectile::Projectile(int r, int g, int b, SDL_Rect rect, int direction)
-	: Character(r, g, b, rect, 1.0f),
+Projectile::Projectile(int r, int g, int b, int x, int y, int direction)
+	: Character(r, g, b, x, y, 5, 5, 1.0f),
 	  direction(direction)
 
 {

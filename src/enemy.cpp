@@ -8,7 +8,7 @@
 #include "graphics.hpp"
 
 Enemy::Enemy(int power, int defense)
-    : Character(255, 0, 0, {rand()%Graphics::screenWidth, 0, 20, 20}, 0.01),
+    : Character(255, 0, 0, rand()%Graphics::screenWidth, 10, 20, 20, 0.01),
     power(power), defense(defense)
 {
     Level::enemies.insert(this);

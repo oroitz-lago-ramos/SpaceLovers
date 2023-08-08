@@ -7,7 +7,8 @@
 
 class Projectile : public Character
 {
-	Projectile(int r, int g, int b, SDL_Rect rect, int direction);
+public:
+	Projectile(int r, int g, int b, int x, int y, int direction);
 	~Projectile();
 	
 	void update();

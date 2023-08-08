@@ -5,8 +5,8 @@
 #include "graphics.hpp"
 #include "entity.hpp"
 
-Button::Button(int r, int g, int b, SDL_Rect rect, std::function<void()> onClick)
-    : Entity(r, g, b, rect),
+Button::Button(int r, int g, int b, int x, int y, int width, int height, std::function<void()> onClick)
+    : Entity(r, g, b, x, y, width, height),
     onClick(onClick)
 {
     // Permet d'ajouter un nouveau bouton à la liste

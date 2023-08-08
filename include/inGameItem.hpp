@@ -7,7 +7,7 @@
 class InGameItem : public Entity
 {
 public:
-    InGameItem(int r, int g, int b, SDL_Rect rect);
+    InGameItem(int r, int g, int b, int x, int y, int width, int height);
     ~InGameItem();
 };
 

@@ -4,7 +4,7 @@
 
 Player::Player()
     //Pour changer la couleur on modifie les trois premiers paramètres
-    : Character(200, 200, 200, { Graphics::screenWidth / 2 - 25, Graphics::screenHeight - 70, 50, 50 }, 10.0f)
+    : Character(200, 200, 200, Graphics::screenWidth / 2 - 25, Graphics::screenHeight - 70, 50, 50 , 10.0f)
 {
 }
 

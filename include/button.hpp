@@ -8,7 +8,7 @@
 class Button:public Entity
 {
 public:
-    Button(int r, int g, int b, SDL_Rect rect, std::function<void()> onClick);
+    Button(int r, int g, int b,  int x, int y, int width, int height, std::function<void()> onClick);
     ~Button();
 
     std::function<void()> onClick;
