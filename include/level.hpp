@@ -14,6 +14,9 @@ public:
 	~Level();
 	static std::set<Projectile *> projectiles;
 	static std::set<Enemy *> enemies;
+	void update();
+
+	int timeSinceLastSpawn;
 };
 
 #endif

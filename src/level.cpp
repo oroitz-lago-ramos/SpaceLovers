@@ -8,7 +8,8 @@ std::set<Projectile *> Level::projectiles = {};
 std::set<Enemy *> Level::enemies = {};
 
 Level::Level()
-{
+	: timeSinceLastSpawn(0)
+{	
 }
 
 Level::~Level()
@@ -20,5 +21,15 @@ Level::~Level()
 	for (auto enemy : enemies)
 	{
 		enemies.erase(enemy);
+	}
+}
+
+void Level::update()
+{
+	this -> timeSinceLastSpawn ++;
+	if (this -> timeSinceLastSpawn > 100000)
+	{
+		new Enemy(10, 10);
+		this -> timeSinceLastSpawn = 0;
 	}
 }

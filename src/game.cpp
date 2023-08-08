@@ -12,6 +12,7 @@ Game::Game()
     // Appel de la méthode de création des boutons
     this -> createButtons();
     srand(time(NULL));
+    Level level;
 
     std::cout << "Game destructor called!" << std::endl;
     
@@ -64,6 +65,8 @@ Game::Game()
             enemy->update();
             enemy->render();
         }
+
+        level.update();
 
         // Affichage du joueur
         player.render();
