@@ -3,6 +3,7 @@
 #include "projectile.hpp"
 #include "level.hpp"
 #include "graphics.hpp"
+#include "enemy.hpp"
 
 Projectile::Projectile(int r, int g, int b, int x, int y, int direction)
 	: Character(r, g, b, x, y, 5, 5, 1.0f),
@@ -24,12 +25,12 @@ void Projectile::update()
 	else if (this->direction == -1)
 		this->moveUp();
 
-	// if (SDL_HasIntersection(&this->rect, &Level::player->rect))
-	// {
-	// 	Level::player->takeDamage(1);
-	// 	this->~Projectile();
-	// 	return;
-	// }
+	if (SDL_HasIntersection(&this->rect, &Level::enemies->rect))
+	{
+		Level::enemies->takeDamage(1);
+		this->~Projectile();
+		return;
+	}
 
 	if (this->rect.y > Graphics::screenHeight || this->rect.y < 0 || this->rect.x > Graphics::screenWidth || this->rect.x < 0)
 	{
