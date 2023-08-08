@@ -33,3 +33,18 @@ void Level::update()
 		this -> timeSinceLastSpawn = 0;
 	}
 }
+
+// void Level::render()
+// {
+// 	for (auto enemy : std::set<Enemy *>(Level::enemies))
+//     {
+//         enemy->update();
+//         enemy->render();
+//     }
+
+//     for (auto projectile : std::set<Projectile *>(Level::projectiles))
+//     {
+//         projectile->update();
+//         projectile->render();
+//     }
+// }

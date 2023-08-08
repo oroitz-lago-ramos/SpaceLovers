@@ -15,6 +15,7 @@ public:
 	static std::set<Projectile *> projectiles;
 	static std::set<Enemy *> enemies;
 	void update();
+	// void render();
 
 	int timeSinceLastSpawn;
 };
