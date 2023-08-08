@@ -31,7 +31,7 @@ Game::Game()
         level.update();
 
         // Affichage du joueur
-		this->player.update(1);
+		this->player.update();
         this -> player.render();
 
         SDL_RenderPresent(Graphics::renderer);
