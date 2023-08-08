@@ -11,6 +11,7 @@ Game::Game()
     // Appel de la méthode de création des boutons
     this -> createButtons();
     this -> createEnemys();
+    
 
     std::cout << "Game destructor called!" << std::endl;
     
@@ -37,19 +38,34 @@ Game::Game()
                     }
                 }
             }
+            else if (event.type == SDL_KEYDOWN)
+            {
+                if (event.key.keysym.sym == SDLK_LEFT || event.key.keysym.sym == SDLK_a)
+                {
+                    player.update(-1);
+                }
+                else if (event.key.keysym.sym == SDLK_RIGHT || event.key.keysym.sym == SDLK_d)
+                {
+                    player.update(1);
+                }
+            }
         }
         SDL_SetRenderDrawColor(Graphics::renderer, 30, 30, 30, 30);
         SDL_RenderClear(Graphics::renderer);
 
         // Créer le rendu graphique de chaque bouton
-        for (auto button : std::set<Button *>(Graphics::buttons))
+        /* for (auto button : std::set<Button *>(Graphics::buttons))
         {
             button->render();
-        }
+        } */
         for (auto enemy : std::set<Enemy *>(Graphics::enemys))
         {
             enemy->render();
         }
+
+        // Affichage du joueur
+        player.render();
+
 
         SDL_RenderPresent(Graphics::renderer);
     }
