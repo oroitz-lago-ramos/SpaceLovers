@@ -27,3 +27,9 @@ Premier pas dans l'orienté objet
 
 ### 08.08.2023
 
+Discution concernant les divers fonctionnalité necessaire a notre projet création d'un arbre des famille objet.
+Trvail sur les différents objets que sont les Entity, Charaters et tous leurs enfants Enemy, Projectile, Player.
+Fin de journée et but pour la suite du projet:
+    - Oroitz calcul des attaques et dommages
+    - Barbara calcul des collisions entre les projectiles et les ennemies.
+    - Anthony recherche d'une solution pour les FPS
