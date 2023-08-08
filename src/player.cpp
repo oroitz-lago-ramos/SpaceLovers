@@ -3,10 +3,13 @@
 #include "game.hpp"
 #include "projectile.hpp"
 
+Player *Player::instance = nullptr;
+
 Player::Player()
 	// Pour changer la couleur on modifie les trois premiers paramètres
 	: Character(200, 200, 200, Graphics::screenWidth / 2 - 25, Graphics::screenHeight - 70, 50, 50, 0.01f)
 {
+	Player::instance = this;
 }
 
 Player::~Player()
