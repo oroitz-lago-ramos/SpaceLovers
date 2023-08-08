@@ -18,11 +18,11 @@ Player::~Player()
 
 void Player::update(int direction)
 {
-	if (Game::inputs & BUTTON_LEFT)
+	if (Game::inputs & BUTTON_LEFT && this->getX() > 0 + this->width / 2)
 	{
 		this->moveLeft();
 	}
-	else if (Game::inputs & BUTTON_RIGHT)
+	else if (Game::inputs & BUTTON_RIGHT && this->getY() < Graphics::screenWidth - this->width / 2)
 	{
 		this->moveRight();
 	}
