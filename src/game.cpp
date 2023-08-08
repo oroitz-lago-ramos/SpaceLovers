@@ -8,6 +8,8 @@
 #include "level.hpp"
 #include "projectile.hpp"
 
+int Game::inputs = 0;
+
 Game::Game()
 {
     // Appel de la méthode de création des boutons
@@ -29,6 +31,7 @@ Game::Game()
         level.update();
 
         // Affichage du joueur
+		this->player.update(1);
         this -> player.render();
 
         SDL_RenderPresent(Graphics::renderer);
@@ -53,7 +56,7 @@ void Game::eventLoop()
     {
         if (event.type == SDL_QUIT)
         {
-            return;
+            exit(0);
         }
         else if (event.type == SDL_MOUSEBUTTONDOWN)
         {
@@ -63,6 +66,10 @@ void Game::eventLoop()
         {
             this->keydown(&event);
         }
+		else if (event.type == SDL_KEYUP)
+		{
+			this->keyup(&event);
+		}
     }
 }
 
@@ -85,15 +92,37 @@ void Game::keydown(SDL_Event *event)
 {
     if (event->key.keysym.sym == SDLK_LEFT || event->key.keysym.scancode == SDL_SCANCODE_A)
     {
-        player.update(-1);
+		Game::inputs |= BUTTON_LEFT;
+        // player.update(-1);
     }
     else if (event->key.keysym.sym == SDLK_RIGHT || event->key.keysym.scancode == SDL_SCANCODE_D)
     {
-        player.update(1);
+		Game::inputs |= BUTTON_RIGHT;
+        // player.update(1);
     }
     else if (event->key.keysym.sym == SDLK_SPACE || event->key.keysym.sym == SDLK_UP || event->key.keysym.scancode == SDL_SCANCODE_W)
     {
-        new Projectile(0, 255, 0, this->player.getX(), this->player.getY(), -1);
+		Game::inputs |= BUTTON_SHOOT;
+        // new Projectile(0, 255, 0, this->player.getX(), this->player.getY(), -1);
+    }
+}
+
+void Game::keyup(SDL_Event *event)
+{
+	if (event->key.keysym.sym == SDLK_LEFT || event->key.keysym.scancode == SDL_SCANCODE_A)
+    {
+		Game::inputs &= ~BUTTON_LEFT;
+        // player.update(-1);
+    }
+    else if (event->key.keysym.sym == SDLK_RIGHT || event->key.keysym.scancode == SDL_SCANCODE_D)
+    {
+		Game::inputs &= ~BUTTON_RIGHT;
+        // player.update(1);
+    }
+    else if (event->key.keysym.sym == SDLK_SPACE || event->key.keysym.sym == SDLK_UP || event->key.keysym.scancode == SDL_SCANCODE_W)
+    {
+		Game::inputs &= ~BUTTON_SHOOT;
+        // new Projectile(0, 255, 0, this->player.getX(), this->player.getY(), -1);
     }
 }
 

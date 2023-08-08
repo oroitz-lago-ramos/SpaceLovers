@@ -1,11 +1,11 @@
 #include "player.hpp"
 #include "graphics.hpp"
+#include "game.hpp"
 #include "projectile.hpp"
 
-
 Player::Player()
-    //Pour changer la couleur on modifie les trois premiers paramètres
-    : Character(200, 200, 200, Graphics::screenWidth / 2, Graphics::screenHeight - 40, 50, 50 , 10.0f)
+	// Pour changer la couleur on modifie les trois premiers paramètres
+	: Character(200, 200, 200, Graphics::screenWidth / 2 - 25, Graphics::screenHeight - 70, 50, 50, 0.01f)
 {
 }
 
@@ -15,17 +15,21 @@ Player::~Player()
 
 void Player::update(int direction)
 {
-    if (direction == -1 && this->getX() > 0 + this->width / 2)
-    {
-        this->moveLeft();
-    }
-    else if (direction == 1 && this->getX() < Graphics::screenWidth - this->width / 2)
-    {
-        this->moveRight();
-    }
+	if (Game::inputs & BUTTON_LEFT)
+	{
+		this->moveLeft();
+	}
+	else if (Game::inputs & BUTTON_RIGHT)
+	{
+		this->moveRight();
+	}
+	if (Game::inputs & BUTTON_SHOOT)
+	{
+		this->shoot();
+	}
 }
 
 void Player::shoot()
 {
-    new Projectile(0, 255, 0, this->getX(), this->getY(), -1);
+	new Projectile(0, 255, 0, this->getX(), this->getY() - this->height/2, -1);
 }
