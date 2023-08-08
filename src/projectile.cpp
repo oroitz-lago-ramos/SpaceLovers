@@ -13,3 +13,20 @@ Projectile::~Projectile()
 {
 	Level::projectiles.erase(this);
 }
+
+void Projectile::update()
+{
+	this->moveDown();
+
+	// if (SDL_HasIntersection(&this->rect, &Level::player->rect))
+	// {
+	// 	Level::player->takeDamage(1);
+	// 	this->~Projectile();
+	// 	return;
+	// }
+
+	if (this->rect.y > 600)
+	{
+		this->~Projectile();
+	}
+}

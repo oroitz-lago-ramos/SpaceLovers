@@ -14,6 +14,8 @@ public:
     void moveRight();
     void moveLeft();
     float speed;
+    float x;
+    float y;
 };
 
 #endif
