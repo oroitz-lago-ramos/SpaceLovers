@@ -18,6 +18,8 @@ graphics.cpp \
 button.cpp 	\
 enemy.cpp 	\
 entity.cpp 	\
+level.cpp 	\
+projectile.cpp 	\
 
 SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS_RAW))
 OBJS := $(SRCS:$(SRCS_FOLDER)/%.cpp=$(OBJS_FOLDER)/%.o)
