@@ -65,7 +65,6 @@ Game::Game()
 
 Game::~Game()
 {
-	// Destruction des boutons
 }
 
 // Methode pour créer des boutons, chaque nouveau bouton doit être fait dans la méthode
@@ -209,12 +208,12 @@ void Game::renderLoop()
 	// }
 	// La j'ai essayé de faire un truc pour afficher des petites flammes à la place de la jauge mais ce sera pour plus tard j'imagine.bisous
 
-	Rect* rect = new Rect(0, 255, 0, Graphics::windowWidth -100, Graphics::screenHeight - 50, 152, 32); 
+	Rect *rect = new Rect(0, 255, 0, Graphics::windowWidth - 100, Graphics::screenHeight - 50, 152, 32);
 	rect->render(true);
-	rect = new Rect(30, 30, 30, Graphics::windowWidth -100, Graphics::screenHeight - 50, 150, 30); 
+	rect = new Rect(30, 30, 30, Graphics::windowWidth - 100, Graphics::screenHeight - 50, 150, 30);
 	rect->render(true);
 	float lifePointsPercents = Player::instance->lifePoints / Player::instance->maxLifePoints;
-	rect = new Rect(250 - 100 * lifePointsPercents , 150 * lifePointsPercents , 150 * lifePointsPercents, Graphics::windowWidth -100, Graphics::screenHeight - 50, lifePointsPercents * 150, 30); 
+	rect = new Rect(250 - 100 * lifePointsPercents, 150 * lifePointsPercents, 150 * lifePointsPercents, Graphics::windowWidth - 100, Graphics::screenHeight - 50, lifePointsPercents * 150, 30);
 	rect->render(true);
 }
 
