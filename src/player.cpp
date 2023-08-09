@@ -4,6 +4,7 @@
 #include "graphics.hpp"
 #include "game.hpp"
 #include "projectile.hpp"
+#include "level.hpp"
 
 Player *Player::instance = nullptr;
 
@@ -12,7 +13,6 @@ Player::Player()
 	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 40, 40, 0.02f)
 {
 	Player::instance = this;
-	this->lifePoints = 100.0f;
 	this -> timeSinceLastShot = 0;
 }
 
@@ -52,6 +52,5 @@ void Player::shoot()
 
 void Player::die()
 {
-	std::cout << "You lose" << std::endl;
-	Game::isRunning = false;
+	Level::instance->~Level();
 }

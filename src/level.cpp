@@ -12,7 +12,8 @@ Level* Level::instance = nullptr;
 Level::Level()
 	: timeSinceLastSpawn(0)
 {
-	Level::instance = this;	
+	Level::instance = this;
+	Player::instance->lifePoints = 100.0f;
 }
 
 Level::~Level()
