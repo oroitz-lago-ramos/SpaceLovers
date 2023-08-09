@@ -11,6 +11,7 @@ public:
     ~Enemy();
     void update();
     void die();
+    void shoot();
 
     int power;
     int defense;

@@ -5,10 +5,11 @@
 #include "level.hpp"
 #include "graphics.hpp"
 #include "enemy.hpp"
+#include "player.hpp"
 
-Projectile::Projectile(int r, int g, int b, int x, int y, int direction)
-	: Character(r, g, b, x, y, 5, 5, 1.0f),
-	  direction(direction)
+Projectile::Projectile(int r, int g, int b, int x, int y, int direction, int power)
+	: Character(r, g, b, x, y, 5, 5, 0.1f),
+	  direction(direction), power(power)
 
 {
 	Level::projectiles.insert(this);
@@ -27,14 +28,22 @@ void Projectile::update()
 		this->moveUp();
 
 	for (auto enemy : std::set<Enemy *>(Level::enemies))
-	{
+	{	
 		if (SDL_HasIntersection(&this->rect, &enemy->rect))
 		{
 			enemy->takeDamage(1);
+			this->~Projectile();
 
 			return;
 		}
 	}
+	if (SDL_HasIntersection(&this->rect, &Player::instance->rect))
+		{
+			Player::instance->takeDamage(this->power);
+			this->~Projectile();
+
+			return;
+		}
 
 	if (this->rect.y > Graphics::screenHeight || this->rect.y < 0 || this->rect.x > Graphics::screenWidth || this->rect.x < 0)
 	{

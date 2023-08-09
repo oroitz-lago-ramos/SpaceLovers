@@ -8,11 +8,15 @@
 class Projectile : public Character
 {
 public:
-	Projectile(int r, int g, int b, int x, int y, int direction);
+	Projectile(int r, int g, int b, int x, int y, int direction, int power);
 	~Projectile();
 	
 	void update();
 	int direction;
+
+	int power;
+private:
+	
 };
 
 #endif

@@ -13,10 +13,13 @@ public:
 
 	void update();
     void shoot();
-    
-    
+    void die();
 
+    
 private:
+
+    
+    
     
 };
 
