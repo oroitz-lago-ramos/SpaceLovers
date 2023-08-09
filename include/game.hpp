@@ -12,6 +12,7 @@ class Game
 {
 public:
 	static int inputs;
+    static unsigned int frameTime;
     Game();
     ~Game();
     
