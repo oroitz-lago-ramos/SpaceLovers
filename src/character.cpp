@@ -38,19 +38,6 @@ void Character::moveLeft()
 
 void Character::takeDamage(float damage)
 {
-	// if (this->lifePoints > damage)
-	// {
-		this->lifePoints -= damage;
-	// }
-	// else
-	// {
-    //     this-> die();
-	// 	// Game::isRunning = false;
-	// }
+	this->lifePoints -= damage;
 }
-
-// void Character::die()
-// {
-
-// }
 
