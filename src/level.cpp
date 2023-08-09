@@ -13,7 +13,7 @@ Level::Level()
 	: timeSinceLastSpawn(0)
 {
 	Level::instance = this;
-	Player::instance->lifePoints = 100.0f;
+	Player::instance->lifePoints = Player::instance->maxLifePoints;
 }
 
 Level::~Level()
