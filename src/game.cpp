@@ -9,6 +9,7 @@
 #include "projectile.hpp"
 
 int Game::inputs = 0;
+bool Game::isRunning = true;
 
 Game::Game()
 {
@@ -19,7 +20,7 @@ Game::Game()
 
     std::cout << "Game destructor called!" << std::endl;
 
-    while (true)
+    while (Game::isRunning)
     {
         this->eventLoop();
 
@@ -56,7 +57,7 @@ void Game::eventLoop()
     {
         if (event.type == SDL_QUIT)
         {
-            exit(0);
+            Game::isRunning = false;
         }
         else if (event.type == SDL_MOUSEBUTTONDOWN)
         {

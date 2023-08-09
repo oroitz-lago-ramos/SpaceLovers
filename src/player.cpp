@@ -7,10 +7,10 @@ Player *Player::instance = nullptr;
 
 Player::Player()
 	// Pour changer la couleur on modifie les trois premiers paramètres
-	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 40, 40, 0.05f),
-	lifePoints(100.0f)
+	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 40, 40, 0.05f)
 {
 	Player::instance = this;
+	this->lifePoints = 100;
 }
 
 Player::~Player()
@@ -38,7 +38,3 @@ void Player::shoot()
 	new Projectile(0, 255, 0, this->getX(), this->getY() - this->height/2, -1);
 }
 
-void Player::takeDamage(float damage)
-{
-	this->lifePoints -= damage;
-}

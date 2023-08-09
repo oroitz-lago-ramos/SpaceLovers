@@ -13,9 +13,8 @@ public:
 
 	void update();
     void shoot();
-    void takeDamage(float damage);
-
-    float lifePoints;
+    
+    
 
 private:
     

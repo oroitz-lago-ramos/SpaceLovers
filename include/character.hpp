@@ -14,6 +14,9 @@ public:
     void moveRight();
     void moveLeft();
     float speed;
+
+    float lifePoints;
+    void takeDamage(float damage);
 };
 
 #endif
