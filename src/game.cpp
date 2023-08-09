@@ -1,6 +1,7 @@
 #include <iostream>
-
 #include <SDL2/SDL.h>
+#include <chrono>
+
 #include "button.hpp"
 #include "graphics.hpp"
 #include "game.hpp"
@@ -9,18 +10,27 @@
 #include "projectile.hpp"
 
 int Game::inputs = 0;
+bool Game::isRunning = true;
+using namespace std;
+unsigned int Game::frameTime = 0;
 
 Game::Game()
 {
     // Appel de la méthode de création des boutons
     this->createButtons();
+
     srand(time(NULL));
     Level level;
+    auto start = chrono::steady_clock::now();
 
     std::cout << "Game destructor called!" << std::endl;
 
-    while (true)
+    while (Game::isRunning)
     {
+        auto end = chrono::steady_clock::now();
+        frameTime = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
+        start = end;
+        
         this->eventLoop();
 
         SDL_SetRenderDrawColor(Graphics::renderer, 30, 30, 30, 30);
@@ -31,7 +41,7 @@ Game::Game()
         level.update();
 
         // Affichage du joueur
-		this->player.update(1);
+		this->player.update();
         this -> player.render();
 
         SDL_RenderPresent(Graphics::renderer);
@@ -56,7 +66,7 @@ void Game::eventLoop()
     {
         if (event.type == SDL_QUIT)
         {
-            exit(0);
+            Game::isRunning = false;
         }
         else if (event.type == SDL_MOUSEBUTTONDOWN)
         {

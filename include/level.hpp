@@ -17,7 +17,7 @@ public:
 	void update();
 	// void render();
 
-	int timeSinceLastSpawn;
+	unsigned long long int timeSinceLastSpawn;
 };
 
 #endif

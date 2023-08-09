@@ -11,8 +11,11 @@ public:
     
 	static Player *instance;
 
-	void update(int direction);
+	void update();
     void shoot();
+    
+    
+
 private:
     
 };
