@@ -20,6 +20,7 @@ public:
     int width;
     int height;
     SDL_Rect rect;
+    SDL_Texture* texture;
 
 private:
     float x;
