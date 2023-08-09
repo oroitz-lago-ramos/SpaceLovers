@@ -9,7 +9,7 @@
 #include "game.hpp"
 
 Enemy::Enemy(int power, int defense)
-    : Character(255, 0, 0, rand()%Graphics::screenWidth, 10, 20, 20, 0.01, 1),
+    : Character(255, 0, 0, rand()%Graphics::screenWidth, 10, 20, 20, 0.008),
     power(power), defense(defense)
 {
     Level::enemies.insert(this);
@@ -24,7 +24,10 @@ Enemy::~Enemy()
 void Enemy::update()
 {
     this -> timeSinceLastShot += Game::frameTime;
-    this -> shoot();
+    if (this -> timeSinceLastShot >  1500000000 )
+    {
+        this -> shoot();
+    }
 
     if (this->lifePoints <= 0)
     {
@@ -43,10 +46,7 @@ void Enemy::die()
 }
 
 void Enemy::shoot()
-{
-    if (this -> timeSinceLastShot > 500000000)
-	{
-		new Projectile(255, 0, 0, this->getX(), this->getY() + this->height, 1, this->power);
+{  
+		new Projectile(255, 0, 0, this->getX(), this->getY() + this->height, 1, this->power, 0.02f);
 		this -> timeSinceLastShot = 0;
-	}
 }

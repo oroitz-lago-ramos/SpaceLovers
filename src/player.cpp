@@ -45,7 +45,7 @@ void Player::shoot()
 {
 	if (this -> timeSinceLastShot > 500000000)
 	{
-		new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5);
+		new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
 		this -> timeSinceLastShot = 0;
 	}
 }
