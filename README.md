@@ -38,7 +38,7 @@ Fin de journée et but pour la suite du projet:
 
 Mise en place du travail effectué sur les time stamps dommages et collisions, c'est parti pour les nouveaux projet:
 - Oroitz / Limiter la cadence de tir du joueur 
-- Oroitz  / Projectile tiré par les ennemis avec cadence de tir aléatoire mais beaucoup moins rapide de joueur
+- Oroitz  / Projectile tiré par les ennemis avec cadence de tir (aléatoire (pour plus tard) ) beaucoup moins rapide de joueur
 - Barbara / Page de menu et démarrage de partie
 - Barbara / Mort du joueur = retour au menu
 
