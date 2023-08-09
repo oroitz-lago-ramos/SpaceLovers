@@ -7,22 +7,18 @@
 class Character : public Entity
 {
 public:
-	Character(int r, int g, int b, int x, int y, int width, int height, float speed, float lifePoints, float power, float defense);
+	Character(int r, int g, int b, int x, int y, int width, int height, float speed, float lifePoints);
 	Character(int r, int g, int b, int x, int y, int width, int height, float speed);
 	~Character();
-
-	float speed;
-	float lifePoints;
-	float maxLifePoints;
-	float power;
-	float defense;
-
-	unsigned long long int timeSinceLastShot;
-
 	void moveUp();
 	void moveDown();
 	void moveRight();
 	void moveLeft();
+	float speed;
+
+	float lifePoints;
+	float maxLifePoints;
+	unsigned long long int timeSinceLastShot;
 
 	void takeDamage(float damage);
 
