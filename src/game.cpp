@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <chrono>
 
 #include "button.hpp"
@@ -162,23 +163,52 @@ void Game::keyup(SDL_Event *event)
 
 void Game::renderLoop()
 {
-	// Créer le rendu graphique de chaque bouton
+    // Créer le rendu graphique de chaque bouton
 
-	// Affichage du joueur
-	this->player.update();
-	this->player.render();
+    // Affichage du joueur
+    this->player.update();
+    this->player.render();
 
-	for (auto enemy : std::set<Enemy *>(Level::enemies))
-	{
-		enemy->update();
-		enemy->render();
-	}
+    for (auto enemy : std::set<Enemy *>(Level::enemies))
+    {
+        enemy->update();
+        enemy->render();
+    }
 
-	for (auto projectile : std::set<Projectile *>(Level::projectiles))
-	{
-		projectile->update();
-		projectile->render();
-	}
+    for (auto projectile : std::set<Projectile *>(Level::projectiles))
+    {
+        projectile->update();
+        projectile->render();
+    }
+
+
+    // A partir d'ici c'est des tests vous pouvez les enlever si ça gêne ! bisous (j'enlève l'image pour pas que ça gêne pendant les gitgit)
+    // SDL_Surface image = *IMG_Load("Flamme 2.png");
+    // SDL_Texture* heartTexture = SDL_CreateTextureFromSurface(Graphics::renderer, &image);
+    // SDL_FreeSurface(&image);
+
+    // for (int i = 0; i < Player::instance->maxLifePoints; ++i)
+    // {
+    //     int heartX = 10 + i * (10 + 5);
+    //     int heartY = 10;
+    //     SDL_Rect heartRect = {heartX, heartY, 10, 10};
+    //     SDL_RenderCopy(Graphics::renderer, heartTexture, NULL, &heartRect);
+    // }
+    // La j'ai essayé de faire un truc pour afficher des petites flammes à la place de la jauge mais ce sera pour plus tard j'imagine.bisous 
+
+
+    // La c'est pour afficher notre jauge de vie ! bisous
+    SDL_Rect recthealth = {9, 9, 102, 22};
+    SDL_SetRenderDrawColor(Graphics::renderer, 0, 255, 0, 255);
+    SDL_RenderFillRect(Graphics::renderer, &recthealth);
+    SDL_Rect healthrect = {10, 10, 100, 20};
+    SDL_SetRenderDrawColor(Graphics::renderer, 30, 30, 30, 255);
+    SDL_RenderFillRect(Graphics::renderer, &healthrect);
+    SDL_SetRenderDrawColor(Graphics::renderer, 150, 150, 150, 255);
+
+    healthrect.w = Player::instance->lifePoints * 100 / Player::instance->maxLifePoints;
+    SDL_RenderFillRect(Graphics::renderer, &healthrect);
+    // bisous
 }
 
 void Game::menuRenderLoop()
