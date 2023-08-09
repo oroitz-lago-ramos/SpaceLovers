@@ -13,6 +13,7 @@ int Game::inputs = 0;
 bool Game::isRunning = true;
 using namespace std;
 unsigned int Game::frameTime = 0;
+GameState Game::currentState = MENU;
 
 Game::Game()
 {
@@ -20,29 +21,34 @@ Game::Game()
     this->createButtons();
 
     srand(time(NULL));
-    Level level;
     auto start = chrono::steady_clock::now();
-
-    std::cout << "Game destructor called!" << std::endl;
 
     while (Game::isRunning)
     {
         auto end = chrono::steady_clock::now();
         frameTime = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
         start = end;
-        
         this->eventLoop();
-
         SDL_SetRenderDrawColor(Graphics::renderer, 30, 30, 30, 30);
         SDL_RenderClear(Graphics::renderer);
 
-        this -> renderLoop();
+        if (Game::currentState == MENU)
+        {
+            // Boucle de gestion d'événements du menu
+            this->menuEventLoop();
 
-        level.update();
+            // Boucle de rendu du menu
+            this->menuRenderLoop();
+        }
 
-        // Affichage du joueur
-		this->player.update();
-        this -> player.render();
+        else if (Game::currentState == GAME)
+        {
+
+            // Render loop du jeu (pas du menu)
+            this->renderLoop();
+
+            Level::instance->update();
+        }
 
         SDL_RenderPresent(Graphics::renderer);
     }
@@ -50,13 +56,14 @@ Game::Game()
 
 Game::~Game()
 {
-    std::cout << "Game destructor called!" << std::endl;
+
 }
 
 // Methode pour créer des boutons, chaque nouveau bouton doit être fait dans la méthode
-
 void Game::createButtons()
 {
+    new Button(255, 255, 255, Graphics::screenWidth / 2, Graphics::screenHeight / 2, 100, 100, []()
+               { Game::currentState = GAME; new Level();});
 }
 
 void Game::eventLoop()
@@ -76,10 +83,27 @@ void Game::eventLoop()
         {
             this->keydown(&event);
         }
-		else if (event.type == SDL_KEYUP)
-		{
-			this->keyup(&event);
-		}
+        else if (event.type == SDL_KEYUP)
+        {
+            this->keyup(&event);
+        }
+    }
+}
+
+void Game::menuEventLoop()
+{
+    GameState currentState = MENU;
+    SDL_Event event;
+    while (SDL_PollEvent(&event))
+    {
+        if (event.type == SDL_QUIT)
+        {
+            Game::isRunning = false;
+        }
+        else if (event.type == SDL_MOUSEBUTTONDOWN)
+        {
+            this->mousebuttondown(&event);
+        }
     }
 }
 
@@ -102,36 +126,36 @@ void Game::keydown(SDL_Event *event)
 {
     if (event->key.keysym.sym == SDLK_LEFT || event->key.keysym.scancode == SDL_SCANCODE_A)
     {
-		Game::inputs |= BUTTON_LEFT;
+        Game::inputs |= BUTTON_LEFT;
         // player.update(-1);
     }
     else if (event->key.keysym.sym == SDLK_RIGHT || event->key.keysym.scancode == SDL_SCANCODE_D)
     {
-		Game::inputs |= BUTTON_RIGHT;
+        Game::inputs |= BUTTON_RIGHT;
         // player.update(1);
     }
     else if (event->key.keysym.sym == SDLK_SPACE || event->key.keysym.sym == SDLK_UP || event->key.keysym.scancode == SDL_SCANCODE_W)
     {
-		Game::inputs |= BUTTON_SHOOT;
+        Game::inputs |= BUTTON_SHOOT;
         // new Projectile(0, 255, 0, this->player.getX(), this->player.getY(), -1);
     }
 }
 
 void Game::keyup(SDL_Event *event)
 {
-	if (event->key.keysym.sym == SDLK_LEFT || event->key.keysym.scancode == SDL_SCANCODE_A)
+    if (event->key.keysym.sym == SDLK_LEFT || event->key.keysym.scancode == SDL_SCANCODE_A)
     {
-		Game::inputs &= ~BUTTON_LEFT;
+        Game::inputs &= ~BUTTON_LEFT;
         // player.update(-1);
     }
     else if (event->key.keysym.sym == SDLK_RIGHT || event->key.keysym.scancode == SDL_SCANCODE_D)
     {
-		Game::inputs &= ~BUTTON_RIGHT;
+        Game::inputs &= ~BUTTON_RIGHT;
         // player.update(1);
     }
     else if (event->key.keysym.sym == SDLK_SPACE || event->key.keysym.sym == SDLK_UP || event->key.keysym.scancode == SDL_SCANCODE_W)
     {
-		Game::inputs &= ~BUTTON_SHOOT;
+        Game::inputs &= ~BUTTON_SHOOT;
         // new Projectile(0, 255, 0, this->player.getX(), this->player.getY(), -1);
     }
 }
@@ -139,10 +163,10 @@ void Game::keyup(SDL_Event *event)
 void Game::renderLoop()
 {
     // Créer le rendu graphique de chaque bouton
-    for (auto button : std::set<Button *>(Graphics::buttons))
-    {
-        button->render();
-    }
+
+    // Affichage du joueur
+    this->player.update();
+    this->player.render();
 
     for (auto enemy : std::set<Enemy *>(Level::enemies))
     {
@@ -154,5 +178,13 @@ void Game::renderLoop()
     {
         projectile->update();
         projectile->render();
+    }
+}
+
+void Game::menuRenderLoop()
+{
+    for (auto button : std::set<Button *>(Graphics::buttons))
+    {
+        button->render();
     }
 }

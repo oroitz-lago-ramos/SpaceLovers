@@ -7,10 +7,12 @@
 
 std::set<Projectile *> Level::projectiles = {};
 std::set<Enemy *> Level::enemies = {};
+Level* Level::instance = nullptr;
 
 Level::Level()
 	: timeSinceLastSpawn(0)
-{	
+{
+	Level::instance = this;	
 }
 
 Level::~Level()
@@ -23,6 +25,7 @@ Level::~Level()
 	{
 		enemies.erase(enemy);
 	}
+	Game::currentState = MENU;
 }
 
 void Level::update()

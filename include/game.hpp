@@ -8,12 +8,19 @@
 #include "graphics.hpp"
 #include "player.hpp"
 
+enum GameState 
+{
+    MENU,
+    GAME
+};
+
 class Game
 {
 public:
 	static int inputs;
     static bool isRunning;
     static unsigned int frameTime;
+    static GameState currentState;
     Game();
     ~Game();
     
@@ -23,10 +30,12 @@ private:
     // Methode appelée dans game.cpp pour créer les boutons
     void createButtons();
     void eventLoop();
+    void menuEventLoop();
     void mousebuttondown(SDL_Event *event);
     void keydown(SDL_Event *event);
     void keyup(SDL_Event *event);
     void renderLoop();
+    void menuRenderLoop();
 };
 
 #endif
