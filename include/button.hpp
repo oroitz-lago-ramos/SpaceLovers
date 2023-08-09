@@ -12,6 +12,8 @@ public:
     Button(int r, int g, int b,  int x, int y, int width, int height, std::function<void()> onClick, const char* message, bool add);
     ~Button();
 
+    char* message;
+
     std::function<void()> onClick;
     const char* message;
 
