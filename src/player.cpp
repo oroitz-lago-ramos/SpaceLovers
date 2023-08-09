@@ -10,7 +10,7 @@ Player::Player()
 	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 40, 40, 0.05f)
 {
 	Player::instance = this;
-	this->lifePoints = 100;
+	this->lifePoints = 100.0f;
 }
 
 Player::~Player()
