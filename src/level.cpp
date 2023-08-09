@@ -3,6 +3,7 @@
 #include "level.hpp"
 #include "enemy.hpp"
 #include "projectile.hpp"
+#include "game.hpp"
 
 std::set<Projectile *> Level::projectiles = {};
 std::set<Enemy *> Level::enemies = {};
@@ -26,8 +27,8 @@ Level::~Level()
 
 void Level::update()
 {
-	this -> timeSinceLastSpawn ++;
-	if (this -> timeSinceLastSpawn > 10000)
+	this -> timeSinceLastSpawn += Game::frameTime;
+	if (this -> timeSinceLastSpawn > 2000000000)
 	{
 		new Enemy(10, 10);
 		this -> timeSinceLastSpawn = 0;

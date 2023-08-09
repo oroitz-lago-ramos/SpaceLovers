@@ -13,6 +13,7 @@ class Game
 public:
 	static int inputs;
     static bool isRunning;
+    static unsigned int frameTime;
     Game();
     ~Game();
     
