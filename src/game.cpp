@@ -63,7 +63,7 @@ Game::~Game()
 void Game::createButtons()
 {
     new Button(255, 255, 255, Graphics::screenWidth / 2, Graphics::screenHeight / 2, 100, 100, []()
-               { Game::currentState = GAME; new Level();});
+               { Game::currentState = GAME; new Level();}, "New game");
 }
 
 void Game::eventLoop()
