@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <iostream>
 #include "character.hpp"
 #include "projectile.hpp"
 #include "level.hpp"
@@ -25,21 +26,18 @@ void Projectile::update()
 	else if (this->direction == -1)
 		this->moveUp();
 
-<<<<<<< HEAD
-	if (SDL_HasIntersection(&this->rect, &Level::enemies->rect))
+
+	for (auto enemy : std::set<Enemy *>(Level::enemies))
 	{
-		Level::enemies->takeDamage(1);
-		this->~Projectile();
-		return;
+		if (SDL_HasIntersection(&this->rect, &enemy->rect))
+		{
+			// enemy->takeDamage(1);
+			// std::cout << "projectile collision!" << std::endl;
+			
+			return;
+		}
 	}
-=======
-	// if (SDL_HasIntersection(&this->rect, &Level::player->rect))
-	// {
-	// 	Player::instance->takeDamage(1);
-	// 	this->~Projectile();
-	// 	return;
-	// }
->>>>>>> 7cde139f6399d7c3c3fa8bb01ce1a57c2f7e6dc7
+
 
 	if (this->rect.y > Graphics::screenHeight || this->rect.y < 0 || this->rect.x > Graphics::screenWidth || this->rect.x < 0)
 	{
