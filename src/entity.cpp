@@ -20,7 +20,7 @@ void Entity::render()
 {
     SDL_SetRenderDrawColor(Graphics::renderer, this->r, this->g, this->b, 255);
     SDL_RenderFillRect(Graphics::renderer, &this->rect);
-    if (this -> texture)
+    if (this -> texture != nullptr)
     {
         SDL_RenderCopy(Graphics::renderer, this -> texture, NULL, &this -> rect);
     }
