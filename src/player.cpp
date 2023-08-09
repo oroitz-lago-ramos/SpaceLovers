@@ -10,7 +10,7 @@ Player *Player::instance = nullptr;
 
 Player::Player()
 	// Pour changer la couleur on modifie les trois premiers paramètres
-	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 40, 40, 0.02f, 100)
+	: Character(200, 200, 200, Graphics::screenWidth / 2, Graphics::screenHeight - 30, 40, 40, 0.02f)
 {
 	Player::instance = this;
 	this -> timeSinceLastShot = 0;
