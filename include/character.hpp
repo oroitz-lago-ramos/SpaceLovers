@@ -23,6 +23,11 @@ public:
 	void takeDamage(float damage);
 	void die();
 
+    float lifePoints;
+    unsigned long long int timeSinceLastShot;
+    
+    void takeDamage(float damage);
+    void die();
 private:
 };
 
