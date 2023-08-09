@@ -24,6 +24,7 @@ public:
 	void die();
 
     float lifePoints;
+    float maxLifePoints;
     unsigned long long int timeSinceLastShot;
     
     void takeDamage(float damage);
