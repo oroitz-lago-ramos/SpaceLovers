@@ -14,10 +14,13 @@ public:
 	~Level();
 	static std::set<Projectile *> projectiles;
 	static std::set<Enemy *> enemies;
+	static Level *instance;
 	void update();
 	// void render();
 
 	unsigned long long int timeSinceLastSpawn;
 };
+
+// 
 
 #endif
