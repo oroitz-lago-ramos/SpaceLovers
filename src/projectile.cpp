@@ -7,8 +7,8 @@
 #include "enemy.hpp"
 #include "player.hpp"
 
-Projectile::Projectile(int r, int g, int b, int x, int y, int direction, int power)
-	: Character(r, g, b, x, y, 5, 5, 0.1f),
+Projectile::Projectile(int r, int g, int b, int x, int y, int direction, int power, float speed)
+	: Character(r, g, b, x, y, 5, 5, speed),
 	  direction(direction), power(power)
 
 {

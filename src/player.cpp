@@ -10,7 +10,7 @@ Player *Player::instance = nullptr;
 
 Player::Player()
 	// Pour changer la couleur on modifie les trois premiers paramètres
-	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 40, 40, 0.02f)
+	: Character(200, 200, 200, Graphics::screenWidth / 2, Graphics::screenHeight - 30, 40, 40, 0.02f)
 {
 	Player::instance = this;
 	this -> timeSinceLastShot = 0;
@@ -45,7 +45,7 @@ void Player::shoot()
 {
 	if (this -> timeSinceLastShot > 500000000)
 	{
-		new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5);
+		new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
 		this -> timeSinceLastShot = 0;
 	}
 }
