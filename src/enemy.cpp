@@ -21,9 +21,18 @@ Enemy::~Enemy()
 
 void Enemy::update()
 {
+    if (this->lifePoints <= 0)
+    {
+        this->die();
+    }
     this -> moveDown();
     if (this -> rect.y > Graphics::screenHeight)
     {
         this -> ~Enemy();
     }
+}
+
+void Enemy::die()
+{
+   this->~Enemy(); 
 }

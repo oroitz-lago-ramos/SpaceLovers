@@ -17,6 +17,8 @@ public:
 
     float lifePoints;
     void takeDamage(float damage);
+    void die();
 };
+
 
 #endif

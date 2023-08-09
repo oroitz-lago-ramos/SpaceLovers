@@ -26,18 +26,15 @@ void Projectile::update()
 	else if (this->direction == -1)
 		this->moveUp();
 
-
 	for (auto enemy : std::set<Enemy *>(Level::enemies))
 	{
 		if (SDL_HasIntersection(&this->rect, &enemy->rect))
 		{
-			// enemy->takeDamage(1);
-			// std::cout << "projectile collision!" << std::endl;
-			
+			enemy->takeDamage(1);
+
 			return;
 		}
 	}
-
 
 	if (this->rect.y > Graphics::screenHeight || this->rect.y < 0 || this->rect.x > Graphics::screenWidth || this->rect.x < 0)
 	{

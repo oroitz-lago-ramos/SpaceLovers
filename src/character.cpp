@@ -17,34 +17,40 @@ Character::~Character()
 
 void Character::moveUp()
 {
-    this -> setY(this -> getY() - this ->speed);  
+    this -> setY(this -> getY() - this ->speed * Game::frameTime / 100000);  
 }
 
 void Character::moveDown()
 {
-    this -> setY(this -> getY() + this ->speed);
+    this -> setY(this -> getY() + this ->speed * Game::frameTime / 100000);
 }
 
 void Character::moveRight()
 {
-    this -> setX(this -> getX() + this ->speed);  
+    this -> setX(this -> getX() + this ->speed * Game::frameTime / 100000);  
 }
 
 void Character::moveLeft()
 {
-    this -> setX(this -> getX() - this ->speed);  
+    this -> setX(this -> getX() - this ->speed * Game::frameTime / 100000);  
     
 }
 
 void Character::takeDamage(float damage)
 {
-	if (this->lifePoints > damage)
-	{
+	// if (this->lifePoints > damage)
+	// {
 		this->lifePoints -= damage;
-	}
-	else
-	{
-		Game::isRunning = false;
-	}
+	// }
+	// else
+	// {
+    //     this-> die();
+	// 	// Game::isRunning = false;
+	// }
 }
+
+// void Character::die()
+// {
+
+// }
 

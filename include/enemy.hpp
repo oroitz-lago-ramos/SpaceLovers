@@ -10,9 +10,11 @@ public:
     Enemy(int power, int defense);
     ~Enemy();
     void update();
+    void die();
 
     int power;
     int defense;
 };
+
 
 #endif
