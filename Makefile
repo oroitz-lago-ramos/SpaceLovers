@@ -26,6 +26,8 @@ projectile.cpp 	\
 skillNode.cpp \
 skillTree.cpp \
 text.cpp 	\
+skillNode.cpp \
+skillTree.cpp \
 
 
 SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS_RAW))
