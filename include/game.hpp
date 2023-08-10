@@ -29,6 +29,7 @@ private:
     Player player;
     // Methode appelée dans game.cpp pour créer les boutons
     void createButtons();
+    void createTexts();
     void eventLoop();
     void menuEventLoop();
     void mousebuttondown(SDL_Event *event);
