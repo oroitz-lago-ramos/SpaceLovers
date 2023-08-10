@@ -23,6 +23,8 @@ inGameItem.cpp 	\
 player.cpp 	\
 level.cpp 	\
 projectile.cpp 	\
+skillNode.cpp \
+skillTree.cpp \
 
 
 SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS_RAW))
