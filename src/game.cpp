@@ -207,13 +207,22 @@ void Game::renderLoop()
 	// }
 	// La j'ai essayé de faire un truc pour afficher des petites flammes à la place de la jauge mais ce sera pour plus tard j'imagine.bisous
 
-	Rect *rect = new Rect(0, 255, 0, Graphics::windowWidth - 100, Graphics::screenHeight - 50, 152, 32);
-	rect->render(true);
-	rect = new Rect(30, 30, 30, Graphics::windowWidth - 100, Graphics::screenHeight - 50, 150, 30);
-	rect->render(true);
-	float lifePointsPercents = Player::instance->lifePoints / Player::instance->maxLifePoints;
-	rect = new Rect(250 - 100 * lifePointsPercents, 150 * lifePointsPercents, 150 * lifePointsPercents, Graphics::windowWidth - 100, Graphics::screenHeight - 50, lifePointsPercents * 150, 30);
-	rect->render(true);
+	// La c'est pour afficher notre jauge de vie ! bisous
+	SDL_Rect recthealth = {9, 9, 102, 22};
+	SDL_SetRenderDrawColor(Graphics::renderer, 0, 255, 0, 255);
+	SDL_RenderFillRect(Graphics::renderer, &recthealth);
+	SDL_Rect healthrect = {10, 10, 100, 20};
+	SDL_SetRenderDrawColor(Graphics::renderer, 30, 30, 30, 255);
+	SDL_RenderFillRect(Graphics::renderer, &healthrect);
+	SDL_SetRenderDrawColor(Graphics::renderer, 150, 150, 150, 255);
+
+	healthrect.w = Player::instance->lifePoints * 100 / Player::instance->maxLifePoints;
+	SDL_RenderFillRect(Graphics::renderer, &healthrect);
+	// bisous
+
+	// La c'est pour afficher le timer de temps restant avant de passer au prochain level.
+	SDL_Rect countdown = {Graphics::windowWidth - 100, 100, 100, 70};
+	SDL_SetRenderDrawColor(Graphics::renderer, 0, 255, 0, 255);
 }
 
 void Game::menuRenderLoop()
