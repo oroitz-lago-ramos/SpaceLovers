@@ -5,7 +5,7 @@
 #include "skillNode.hpp"
 
 SkillNode::SkillNode(int r, int g, int b, std::string name)
-	: Entity(r, g, b, 0, 0, 100, 100), name(name)
+	: Entity(r, g, b, 0, 0, 100, 100), name(name), requiredBy(0), depth(0), checkedRequirements(0)
 {
 }
 
