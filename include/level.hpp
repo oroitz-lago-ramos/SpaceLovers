@@ -18,7 +18,7 @@ public:
 	static Level *instance;
 	long long int nanoSecond;
 	std::string count;
-	Text timer;
+	Text *timer;
 	void update();
 	void countdown();
 
