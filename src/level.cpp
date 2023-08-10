@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <set>
 #include <iostream>
+#include <stdio.h>
 
 #include "level.hpp"
 #include "enemy.hpp"
@@ -85,5 +86,8 @@ void Level::countdown()
 		this->nanoSecond == 60000000000;
 		currentLvl++;
 		difficulty *= 1.1;
+		char str[15];
+		snprintf(str, 15, "Niveau %03d", this->currentLvl);
+		this->levelRunning->textUpdate(str);
 	}
 }
