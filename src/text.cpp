@@ -28,12 +28,9 @@ Text::~Text()
 
 void Text::textUpdate(const char *message)
 {
-	// if (this->message != message)
-	// {
 	this->message = message;
 	SDL_DestroyTexture(this->texture);
 	SDL_Surface *text = TTF_RenderText_Blended(this->fontChoice, this->message, this->color);
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, text);
 	SDL_FreeSurface(text);
-	// }
 }
