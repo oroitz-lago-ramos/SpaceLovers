@@ -66,6 +66,8 @@ Game::Game()
 
 Game::~Game()
 {
+	// Destruction des boutons
+	
 }
 
 // Methode pour créer des boutons, chaque nouveau bouton doit être fait dans la méthode

@@ -31,7 +31,6 @@ Button::~Button()
 	auto it = Graphics::buttons.find(this);
 	if (it != Graphics::buttons.end())
 		Graphics::buttons.erase(this);
-	std::cout << "Button deleted" << std::endl;
 }
 
 void Button::text()

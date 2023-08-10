@@ -1,4 +1,5 @@
 #include <vector>
+#include <set>
 #include <iostream>
 #include <SDL2/SDL.h>
 
@@ -80,8 +81,6 @@ void SkillTree::autoLayout()
 	int nodeWidth = 100;
 	for (SkillNode *node : nodes)
 	{
-		std::cout << node->name << std::endl;
-		std::cout << node->requirements.size() << std::endl;
 
 		if (node->requirements.size() == 0)
 		{
@@ -108,9 +107,9 @@ void SkillTree::autoLayout()
 SkillTree::~SkillTree()
 {
 	Game::currentState = MENU;
-	for (auto button : buttons)
+	for (auto button : std::set<Button*>(this->buttons))
 	{
-		buttons.erase(button);
+		this->buttons.erase(button);
 		button->~Button();
 	}
 }
