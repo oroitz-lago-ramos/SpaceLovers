@@ -15,6 +15,8 @@ public:
     void shoot();
     void die();
 
+    float experience;
+
     
 private:
 

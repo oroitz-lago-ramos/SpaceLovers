@@ -8,10 +8,11 @@
 
 std::set<Projectile *> Level::projectiles = {};
 std::set<Enemy *> Level::enemies = {};
+std::set<InGameItem *> Level::powerUps = {};
 Level* Level::instance = nullptr;
 
 Level::Level()
-	: timeSinceLastSpawn(0), nanoSecond(60000000000)
+	: timeSinceLastSpawn(0), nanoSecond(60000000000), timeSinceLastPoweUp(0)
 {
 	Level::instance = this;
 	Player::instance->lifePoints = Player::instance->maxLifePoints;
@@ -34,6 +35,7 @@ Level::~Level()
 void Level::update()
 {
 	this -> timeSinceLastSpawn += Game::frameTime;
+	this -> timeSinceLastPoweUp += Game::frameTime;
 	if (this -> timeSinceLastSpawn > 2000000000)
 	{
 		new Enemy(10, 10);
@@ -41,6 +43,11 @@ void Level::update()
 	}
 	// this -> countdown();
 	this -> timer.render();
+	if (this -> timeSinceLastPoweUp > 2000000000)
+	{
+		new InGameItem();
+		this -> timeSinceLastPoweUp = 0;
+	}
 }
 
 void Level::countdown()
