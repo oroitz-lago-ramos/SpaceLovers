@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
+int Graphics::windowWidth = 1000;
 int Graphics::screenWidth = 800;
 int Graphics::screenHeight = 600;
 
@@ -16,7 +17,7 @@ std::set<Button *> Graphics::buttons = {};
 Graphics::Graphics()
 {
     SDL_Init(SDL_INIT_EVERYTHING);
-    Graphics::window = SDL_CreateWindow("C++",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, this->screenWidth, this->screenHeight, SDL_WINDOW_SHOWN);
+    Graphics::window = SDL_CreateWindow("C++",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, this->windowWidth, this->screenHeight, SDL_WINDOW_SHOWN);
     Graphics::renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
 	TTF_Init();
 }

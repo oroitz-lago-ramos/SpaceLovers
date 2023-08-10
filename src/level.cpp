@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <set>
+#include <iostream>
 
 #include "level.hpp"
 #include "enemy.hpp"
@@ -11,10 +12,11 @@ std::set<Enemy *> Level::enemies = {};
 Level* Level::instance = nullptr;
 
 Level::Level()
-	: timeSinceLastSpawn(0)
+	: timeSinceLastSpawn(0), nanoSecond(60000000000)
 {
 	Level::instance = this;
 	Player::instance->lifePoints = Player::instance->maxLifePoints;
+	this -> timer = Text(255, 255, 255, Graphics::windowWidth -100, 100, 100, 75, "60", "Kichenset.otf", 32);
 }
 
 Level::~Level()
@@ -38,19 +40,18 @@ void Level::update()
 		new Enemy(10, 10);
 		this -> timeSinceLastSpawn = 0;
 	}
+	// this -> countdown();
+	this -> timer.render();
 }
 
-// void Level::render()
-// {
-// 	for (auto enemy : std::set<Enemy *>(Level::enemies))
-//     {
-//         enemy->update();
-//         enemy->render();
-//     }
+void Level::countdown()
+{
+	this->nanoSecond -= Game::frameTime;
+	int second = Level::nanoSecond / 1000000000;
+	if (second >= 0)
+	{
+		this -> count = std::to_string(second);
+		this -> timer.textUpdate(this -> count.c_str());
+	}
+}
 
-//     for (auto projectile : std::set<Projectile *>(Level::projectiles))
-//     {
-//         projectile->update();
-//         projectile->render();
-//     }
-// }

@@ -6,6 +6,7 @@
 
 #include "enemy.hpp"
 #include "projectile.hpp"
+#include "text.hpp"
 
 class Level
 {
@@ -15,12 +16,15 @@ public:
 	static std::set<Projectile *> projectiles;
 	static std::set<Enemy *> enemies;
 	static Level *instance;
+	long long int nanoSecond;
+	std::string count;
+	Text timer;
 	void update();
-	// void render();
+	void countdown();
+
 
 	unsigned long long int timeSinceLastSpawn;
 };
 
-// 
 
 #endif
