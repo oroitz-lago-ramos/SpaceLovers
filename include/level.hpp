@@ -7,6 +7,7 @@
 #include "enemy.hpp"
 #include "projectile.hpp"
 #include "text.hpp"
+#include "inGameItem.hpp"
 
 class Level
 {
@@ -15,6 +16,7 @@ public:
 	~Level();
 	static std::set<Projectile *> projectiles;
 	static std::set<Enemy *> enemies;
+	static std::set<InGameItem *> powerUps;
 	static Level *instance;
 	long long int nanoSecond;
 	std::string count;
@@ -24,6 +26,7 @@ public:
 
 
 	unsigned long long int timeSinceLastSpawn;
+	unsigned long long int timeSinceLastPoweUp;
 };
 
 

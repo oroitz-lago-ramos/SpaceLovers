@@ -27,6 +27,16 @@ void Projectile::update()
 	else if (this->direction == -1)
 		this->moveUp();
 
+	this-> checkCollisions();
+	
+	if (this->rect.y > Graphics::screenHeight || this->rect.y < 0 || this->rect.x > Graphics::screenWidth || this->rect.x < 0)
+	{
+		this->~Projectile();
+	}
+}
+
+void Projectile::checkCollisions()
+{
 	for (auto enemy : std::set<Enemy *>(Level::enemies))
 	{	
 		if (SDL_HasIntersection(&this->rect, &enemy->rect))
@@ -38,15 +48,10 @@ void Projectile::update()
 		}
 	}
 	if (SDL_HasIntersection(&this->rect, &Player::instance->rect))
-		{
-			Player::instance->takeDamage(this->power);
-			this->~Projectile();
-
-			return;
-		}
-
-	if (this->rect.y > Graphics::screenHeight || this->rect.y < 0 || this->rect.x > Graphics::screenWidth || this->rect.x < 0)
 	{
+		Player::instance->takeDamage(this->power);
 		this->~Projectile();
+
+		return;
 	}
 }
