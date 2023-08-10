@@ -4,6 +4,7 @@
 #include <set>
 #include <iostream>
 #include <stdio.h>
+#include <set>
 
 #include "level.hpp"
 #include "enemy.hpp"
