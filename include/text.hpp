@@ -16,6 +16,7 @@ public:
     const char* message;
     const char* font;
     int fontSize;
+	SDL_Color color;
 
     void textUpdate(const char *message);
 };
