@@ -14,6 +14,7 @@ Player::Player()
 {
 	Player::instance = this;
 	this -> timeSinceLastShot = 0;
+	this -> experience = 0.0f;
 }
 
 Player::~Player()
