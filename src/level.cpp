@@ -80,4 +80,10 @@ void Level::countdown()
 		snprintf(str, 15, "Niveau %03d", this->currentLvl);
 		this->levelRunning->textUpdate(str);
 	}
+	if (second == 0)
+	{
+		this->nanoSecond == 60000000000;
+		currentLvl++;
+		difficulty *= 1.1;
+	}
 }
