@@ -30,7 +30,6 @@ Game::Game()
 		auto end = chrono::steady_clock::now();
 		frameTime = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
 		start = end;
-
 		SDL_SetRenderDrawColor(Graphics::renderer, 30, 30, 30, 30);
 		SDL_RenderClear(Graphics::renderer);
 		SDL_SetRenderDrawColor(Graphics::renderer, 255, 255, 255, 255);
