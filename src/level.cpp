@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <set>
 
 #include "level.hpp"
 #include "enemy.hpp"
@@ -18,11 +19,11 @@ Level::Level()
 
 Level::~Level()
 {
-	for (auto projectile : projectiles)
+	for (auto projectile : std::set<Projectile*>(this->projectiles))
 	{
 		projectiles.erase(projectile);
 	}
-	for (auto enemy : enemies)
+	for (auto enemy : std::set<Enemy*>(this->enemies))
 	{
 		enemies.erase(enemy);
 	}
