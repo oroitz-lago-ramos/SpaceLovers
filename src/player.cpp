@@ -10,10 +10,13 @@ Player *Player::instance = nullptr;
 
 Player::Player()
 	// Pour changer la couleur on modifie les trois premiers paramètres
+	//Demander si il faut qu'il le reçoive la speed en params pour pouvoir la modifier
+	//demander pour l'ajout de power et defense (comment proceder et ou initialiser)
 	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 40, 40, 0.02f, 100)
 {
 	Player::instance = this;
 	this -> timeSinceLastShot = 0;
+	this -> experience = 0.0f;
 }
 
 Player::~Player()

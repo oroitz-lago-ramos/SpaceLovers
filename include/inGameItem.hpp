@@ -4,11 +4,18 @@
 #include <SDL2/SDL.h>
 #include "entity.hpp"
 
-class InGameItem : public Entity
+class InGameItem : public Character
 {
 public:
-    InGameItem(int r, int g, int b, int x, int y, int width, int height);
+    InGameItem();
     ~InGameItem();
+    void update();
+
+private:
+    void checkCollisions();
+
+    void heal();
+    void speedUp();
 };
 
 #endif

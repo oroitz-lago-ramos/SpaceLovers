@@ -43,7 +43,8 @@ void Enemy::update()
 
 void Enemy::die()
 {
-   this->~Enemy(); 
+   this->~Enemy();
+   Player::instance -> experience += 1;
 }
 
 void Enemy::shoot()
