@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <stdio.h>
 
 #include "level.hpp"
 #include "enemy.hpp"
@@ -16,7 +17,10 @@ Level::Level()
 {
 	Level::instance = this;
 	Player::instance->lifePoints = Player::instance->maxLifePoints;
-	this -> timer = new Text(255, 255, 255, Graphics::windowWidth - 100, 100, 100, 75, "60", "Kichenset.otf", 24);
+	char str[15];
+	snprintf(str, 15, "Niveau %03d", this -> currentLvl);
+	this -> timer = new Text(0, 250, 200, Graphics::windowWidth - 100, 200, 100, 75, "60", "Kichenset.otf", 24);
+	this -> levelRunning = new Text(0, 250, 200 ,Graphics::windowWidth -100, 100, 150, 75, str, "Kichenset.otf", 24);
 }
 
 Level::~Level()
@@ -41,8 +45,7 @@ void Level::update()
 		new Enemy(10, 10);
 		this -> timeSinceLastSpawn = 0;
 	}
-	// this -> countdown();
-	this -> timer.render();
+
 	if (this -> timeSinceLastPoweUp > 2000000000)
 	{
 		new InGameItem();
@@ -50,6 +53,7 @@ void Level::update()
 	}
 	this -> countdown();
 	this -> timer->render();
+	this -> levelRunning->render();
 }
 
 void Level::countdown()
@@ -63,9 +67,12 @@ void Level::countdown()
 	}
 	if (second == 0)
 	{
-		this -> nanoSecond == 60000000000;
-		currentLvl ++;
+		this -> nanoSecond = 60000000000;
+		this -> currentLvl ++;
 		difficulty *= 1.1;
+		char str[15];
+		snprintf(str, 15, "Niveau %03d", this -> currentLvl);
+		this -> levelRunning->textUpdate(str);
 	}
 }
 

@@ -23,6 +23,7 @@ public:
 	int difficulty;
 	std::string count;
 	Text *timer;
+	Text *levelRunning;
 	void update();
 	void countdown();
 
