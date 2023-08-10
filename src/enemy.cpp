@@ -23,6 +23,7 @@ Enemy::~Enemy()
 
 void Enemy::update()
 {
+    this->checkCollisions();
     this -> timeSinceLastShot += Game::frameTime;
     if (this -> timeSinceLastShot >  1500000000 )
     {
@@ -49,4 +50,13 @@ void Enemy::shoot()
 {  
 		new Projectile(255, 0, 0, this->getX(), this->getY() + this->height, 1, this->power, 0.02f);
 		this -> timeSinceLastShot = 0;
+}
+
+void Enemy::checkCollisions()
+{
+    if (SDL_HasIntersection(&this->rect, &Player::instance->rect))
+    {
+        this->~Enemy();
+        Player::instance->lifePoints /= 2;
+    }
 }

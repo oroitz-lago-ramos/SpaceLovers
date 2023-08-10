@@ -10,6 +10,8 @@ public:
     Enemy(int power, int defense);
     ~Enemy();
     void update();
+    void checkCollisions();
+
     void die();
     void shoot();
 
