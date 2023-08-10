@@ -16,7 +16,7 @@ Text::Text(int r, int g, int b, int x, int y, int width, int height, const char 
 	  message(message), font(font)
 {
 	this->fontChoice = TTF_OpenFont(font, fontSize);
-	SDL_Surface *text = TTF_RenderText_Blended(this->fontChoice, this->message, {0, 250, 200, 255});
+	SDL_Surface *text = TTF_RenderText_Blended(this->fontChoice, this->message, (SDL_Color){(Uint8) this -> r, (Uint8) this -> g, (Uint8) this -> b, 255});
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, text);
 	SDL_FreeSurface(text);
 }
@@ -32,7 +32,7 @@ void Text::textUpdate(const char *message)
 	// {
 	this->message = message;
 	SDL_DestroyTexture(this->texture);
-	SDL_Surface *text = TTF_RenderText_Blended(this->fontChoice, this->message, (SDL_Color){255, 255, 255, 255});
+	SDL_Surface *text = TTF_RenderText_Blended(this->fontChoice, this->message, (SDL_Color){(Uint8) this -> r, (Uint8) this -> g, (Uint8) this -> b, 255});
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, text);
 	SDL_FreeSurface(text);
 	// }
