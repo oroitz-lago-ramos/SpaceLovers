@@ -22,12 +22,6 @@ public:
 
 	void takeDamage(float damage);
 
-    float lifePoints;
-    float maxLifePoints;
-    unsigned long long int timeSinceLastShot;
-    
-    void takeDamage(float damage);
-    void die();
 private:
 };
 
