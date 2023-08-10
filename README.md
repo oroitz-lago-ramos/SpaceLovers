@@ -97,7 +97,7 @@ Dans les 20 dernières secondes de chaque 10 eme level rencontre d'un boss les a
 Boosts InGame:
     - PowerUp puissance * 1.5 pendant 10 sec
     - VitessUp vitesse * 1.5 pendant 10 sec
-    - DefenseUp puissance * 1.5 pendant 10 sec
+    - DefenseUp defense * 1.5 pendant 10 sec
     - Double Projectile pendant 10 sec 
 
 Apres la mort on peut recommencer au lvl d'après n'importe quel boss vaincu

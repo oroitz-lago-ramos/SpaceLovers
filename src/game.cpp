@@ -181,6 +181,12 @@ void Game::renderLoop()
         projectile->render();
     }
 
+	for (auto powerUp : std::set<InGameItem *>(Level::powerUps))
+    {
+        powerUp->update();
+        powerUp->render();
+    }
+
 
     // A partir d'ici c'est des tests vous pouvez les enlever si ça gêne ! bisous (j'enlève l'image pour pas que ça gêne pendant les gitgit)
     // SDL_Surface image = *IMG_Load("Flamme 2.png");

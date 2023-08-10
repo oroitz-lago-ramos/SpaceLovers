@@ -16,7 +16,7 @@ public:
 
 	int power;
 private:
-	
+	void checkCollisions();	
 };
 
 #endif
