@@ -15,10 +15,13 @@ public:
 	void addRequirement(SkillNode *requirement);
 	void setPosition(int x, int y);
 	void autoLayout(int xSpacing, int ySpacing);
+	int requiredBy;
+	int checkedRequirements;
 	std::string name;
+	std::vector<SkillNode *> requirements;
+	int depth;
 
 private:
-	std::vector<SkillNode *> requirements;
 };
 
 #endif
