@@ -13,7 +13,7 @@ std::set<InGameItem *> Level::powerUps = {};
 Level* Level::instance = nullptr;
 
 Level::Level()
-	: timeSinceLastSpawn(0), nanoSecond(60000000000), timeSinceLastPoweUp(0)
+	: timeSinceLastSpawn(0), nanoSecond(60000000000), timeSinceLastPoweUp(0), currentLvl(1)
 {
 	Level::instance = this;
 	Player::instance->lifePoints = Player::instance->maxLifePoints;
@@ -59,6 +59,12 @@ void Level::countdown()
 	{
 		this -> count = std::to_string(second);
 		this -> timer.textUpdate(this -> count.c_str());
+	}
+	if (second == 0)
+	{
+		this -> nanoSecond == 60000000000;
+		currentLvl ++;
+		difficulty *= 1.1;
 	}
 }
 

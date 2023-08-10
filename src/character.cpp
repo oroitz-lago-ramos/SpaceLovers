@@ -4,6 +4,7 @@
 #include "entity.hpp"
 #include "character.hpp"
 #include "game.hpp"
+#include "level.hpp"
 
 Character::Character(int r, int g, int b, int x, int y, int width, int height, float speed, float lifePoints)
     : Entity(r, g, b, x, y, width, height),
