@@ -16,7 +16,7 @@ Level::Level()
 {
 	Level::instance = this;
 	Player::instance->lifePoints = Player::instance->maxLifePoints;
-	this -> timer = Text(255, 255, 255, Graphics::windowWidth -100, 100, 100, 75, "60", "Kichenset.otf", 32);
+	this -> timer = new Text(255, 255, 255, Graphics::windowWidth - 100, 100, 100, 75, "60", "Kichenset.otf", 24);
 }
 
 Level::~Level()
@@ -48,6 +48,8 @@ void Level::update()
 		new InGameItem();
 		this -> timeSinceLastPoweUp = 0;
 	}
+	this -> countdown();
+	this -> timer->render();
 }
 
 void Level::countdown()
@@ -57,7 +59,7 @@ void Level::countdown()
 	if (second >= 0)
 	{
 		this -> count = std::to_string(second);
-		this -> timer.textUpdate(this -> count.c_str());
+		this -> timer->textUpdate(this -> count.c_str());
 	}
 	if (second == 0)
 	{
