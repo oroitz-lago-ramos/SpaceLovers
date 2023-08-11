@@ -88,21 +88,6 @@ void InGameItem::bomb()
 	// }
 }
 
-void InGameItem::powerBoost()
-{
-	Player::instance->power = 10;
-}
-
-void InGameItem::bomb()
-{
-	for (auto enemy : std::set<Enemy *>(Level::enemies))
-	{
-		enemy->die();
-		// Level::enemies.erase(enemy);
-	}
-	std::cout << Player::instance->experience << std::endl;
-}
-
 void InGameItem::changeNumberOfProjectiles(int number)
 {
 	Player::instance->numberOfProjectiles = number;
