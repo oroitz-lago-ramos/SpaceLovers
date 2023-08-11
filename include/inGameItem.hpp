@@ -8,19 +8,19 @@
 class InGameItem : public Character
 {
 public:
-    InGameItem(/*PowerUp powerUp*/);
-    ~InGameItem();
-    void update();
-    // PowerUp powerUp;
+	InGameItem(/*PowerUp powerUp*/);
+	~InGameItem();
+	void update();
+	// PowerUp powerUp;
 private:
-    void checkCollisions();
+	void checkCollisions();
 
-    void heal();
-    void bomb();
-    void changeNumberOfProjectiles(int number);
-    void changeReloadSpeed();
-    void speedUp();
-    void powerBoost();
+	void heal();
+	void bomb();
+	void changeNumberOfProjectiles(int number);
+	void changeReloadSpeed();
+	void speedUp();
+	void powerBoost();
 };
 
 #endif
