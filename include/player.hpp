@@ -18,12 +18,8 @@ public:
 
     float experience;
 
-    
+    int numberOfProjectiles;
 private:
-
-    
-    
-    
 };
 
 #endif
