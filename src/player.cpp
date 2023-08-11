@@ -11,13 +11,17 @@ Player *Player::instance = nullptr;
 Player::Player()
 	// Pour changer la couleur on modifie les trois premiers paramètres
 	// Demander difference dans le constructeur
-	//Demander si il faut qu'il le reçoive la speed en params pour pouvoir la modifier
-	//demander pour l'ajout de power et defense (comment proceder et ou initialiser)
+	// Demander si il faut qu'il le reçoive la speed en params pour pouvoir la modifier
+	// demander pour l'ajout de power et defense (comment proceder et ou initialiser)
 	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 40, 40, 0.02f, 100)
 {
 	Player::instance = this;
-	this -> timeSinceLastShot = 0;
-	this -> experience = 0.0f;
+	this->timeSinceLastShot = 0;
+	this->experience = 0.0f;
+	this->numberOfProjectiles = 3;
+	this->power = 1;
+	this->defense = 1;
+	this->reloadSpeed = 500000000;
 }
 
 Player::~Player()
@@ -26,7 +30,7 @@ Player::~Player()
 
 void Player::update()
 {
-	this -> timeSinceLastShot += Game::frameTime;
+	this->timeSinceLastShot += Game::frameTime;
 	if (this->lifePoints <= 0)
 	{
 		this->die();
@@ -47,13 +51,31 @@ void Player::update()
 
 void Player::shoot()
 {
-	if (this -> timeSinceLastShot > 500000000)
+	if (this->timeSinceLastShot > this->reloadSpeed)
 	{
 		// new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
 		new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, 5, 0.1f, 0, -1);
 		new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, 5, 0.1f, 0.1, -1);
 		new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, 5, 0.1f, -0.1, -1);
 		this -> timeSinceLastShot = 0;
+		switch (this->numberOfProjectiles)
+		{
+		case 1:
+			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
+			break;
+
+		case 2:
+			new Projectile(0, 255, 0, this->getX() - 20, this->getY() - this->height, -1, 5, 0.1f);
+			new Projectile(0, 255, 0, this->getX() + 20, this->getY() - this->height, -1, 5, 0.1f);
+			break;
+		case 3:
+			new Projectile(0, 255, 0, this->getX() - 30, this->getY() - this->height, -1, 5, 0.1f);
+			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
+			new Projectile(0, 255, 0, this->getX() + 30, this->getY() - this->height, -1, 5, 0.1f);
+			break;
+		}
+
+		this->timeSinceLastShot = 0;
 	}
 }
 

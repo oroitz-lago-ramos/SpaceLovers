@@ -104,3 +104,5 @@ Apres la mort on peut recommencer au lvl d'après n'importe quel boss vaincu
 
 ### 10.08.23 Oroitz, Rodolphe et Anthony
 
+Ajout de differentes fonctionalités.
+
