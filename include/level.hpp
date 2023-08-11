@@ -25,6 +25,7 @@ public:
 	std::string count;
 	Text *timer;
 	Text *levelRunning;
+	Text *xpTotal;
 	void update();
 	void countdown();
 

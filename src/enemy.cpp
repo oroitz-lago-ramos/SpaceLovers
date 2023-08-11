@@ -9,11 +9,11 @@
 #include "game.hpp"
 
 Enemy::Enemy(int power, int defense)
-    : Character(255, 0, 0, rand()%Graphics::screenWidth, 10, 20, 20, 0.01, 1),
-    power(power), defense(defense)
+    : Character(255, 0, 0, rand() % Graphics::screenWidth, 10, 20, 20, 0.01, 1),
+      power(power), defense(defense)
 {
     Level::enemies.insert(this);
-    this -> timeSinceLastShot = 0;
+    this->timeSinceLastShot = 0;
 }
 
 Enemy::~Enemy()
@@ -24,33 +24,36 @@ Enemy::~Enemy()
 void Enemy::update()
 {
     this->checkCollisions();
-    this -> timeSinceLastShot += Game::frameTime;
-    if (this -> timeSinceLastShot >  1500000000 )
+    this->timeSinceLastShot += Game::frameTime;
+    if (this->timeSinceLastShot > 1500000000)
     {
-        this -> shoot();
+        this->shoot();
     }
 
     if (this->lifePoints <= 0)
     {
         this->die();
     }
-    this -> moveDown();
-    if (this -> rect.y > Graphics::screenHeight)
+    this->moveDown();
+    if (this->rect.y > Graphics::screenHeight)
     {
-        this -> ~Enemy();
+        this->~Enemy();
     }
 }
 
 void Enemy::die()
 {
-   this->~Enemy();
-   Player::instance -> experience += 1;
+    this->~Enemy();
+    Player::instance->experience += 1;
+    char strXp[30];
+    snprintf(strXp, 30, "Xp Total Généré: \n %12f", Player::instance->experience);
+    Level::instance->xpTotal->textUpdate(strXp);
 }
 
 void Enemy::shoot()
-{  
-		new Projectile(255, 0, 0, this->getX(), this->getY() + this->height, 1, this->power, 0.02f);
-		this -> timeSinceLastShot = 0;
+{
+    new Projectile(255, 0, 0, this->getX(), this->getY() + this->height, 1, this->power, 0.02f);
+    this->timeSinceLastShot = 0;
 }
 
 void Enemy::checkCollisions()
