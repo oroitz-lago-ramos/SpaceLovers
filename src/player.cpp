@@ -16,7 +16,6 @@ Player::Player()
 	Player::instance = this;
 
 	this->timeSinceLastShot = 0;
-
 	this->reloadSpeed = 500000000;
 }
 
