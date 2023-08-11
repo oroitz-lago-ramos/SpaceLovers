@@ -6,18 +6,61 @@
 #include "graphics.hpp"
 #include "enemy.hpp"
 #include "player.hpp"
+#include <set>
 
+Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed, float dirX, float dirY, bool target)
+	: Character(r, g, b, x, y, 5, 5, speed, dirX, dirY),
+	  direction(0), power(power), target(nullptr)
+{
+	if (target)
+	{
+		// Enemy *enemy = nullptr;
+		// int distance = INT_MAX;
+		// for (auto e : Level::enemies)
+		// {
+		// 	double dx = this->getX() - e->getX();
+		// 	double dy = this->getY() - e->getY();
+		// 	int currentDist = std::sqrt(dx * dx + dy * dy);
+		// 	if (currentDist < distance)
+		// 	{
+		// 		distance = currentDist;
+		// 		enemy = e;
+		// 	}
+		// }
+		// this->target = enemy;
+		this->findTarget();
+	}
+	Level::projectiles.insert(this);
+}
 Projectile::Projectile(int r, int g, int b, int x, int y, int direction, int power, float speed)
 	: Character(r, g, b, x, y, 5, 5, speed),
-	  direction(direction), power(power)
+	  direction(direction), power(power), target(nullptr)
 
 {
 	Level::projectiles.insert(this);
 }
 
+void Projectile::findTarget()
+{
+	Enemy *enemy = nullptr;
+	int distance = INT_MAX;
+	for (auto e : std::set<Enemy*>(Level::enemies))
+	{
+		double dx = this->getX() - e->getX();
+		double dy = this->getY() - e->getY();
+		int currentDist = std::sqrt(dx * dx + dy * dy);
+		if (currentDist < distance)
+		{
+			distance = currentDist;
+			enemy = e;
+		}
+	}
+	this->target = enemy;
+}
+
 Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed, float dirX, float dirY)
 	: Character(r, g, b, x, y, 5, 5, speed, dirX, dirY),
-	  direction(0), power(power)
+	  direction(0), power(power), target(nullptr)
 {
 	Level::projectiles.insert(this);
 }
@@ -29,6 +72,18 @@ Projectile::~Projectile()
 
 void Projectile::update()
 {
+
+	if (this->target)
+	{
+		// this->findTarget();
+		double dx = this->getX() - this->target->getX();
+		double dy = this->getY() - this->target->getY();
+		double angle = std::atan2(dy, dx);
+		this->dirX = -std::cos(angle);
+		this->dirY = -std::sin(angle);
+		this->target = nullptr;
+	}
+
 	if (this->direction == 1)
 		this->moveDown();
 	else if (this->direction == -1)
