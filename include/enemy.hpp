@@ -12,14 +12,14 @@ public:
     ~Enemy();
     void update();
 
-    void die();
-    void shoot();
+	void die();
+	void shoot();
 
     float xpValue;
     float shield;
 
 private:
-    void checkCollisions();
+	void checkCollisions();
 };
 
 #endif

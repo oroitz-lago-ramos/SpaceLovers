@@ -8,14 +8,14 @@
 class Button : public Entity
 {
 public:
-    Button(int r, int g, int b, int x, int y, int width, int height, std::function<void()> onClick, const char *message);
-    Button(int r, int g, int b, int x, int y, int width, int height, std::function<void()> onClick, const char *message, bool add);
-    ~Button();
+	Button(int r, int g, int b, int x, int y, int width, int height, std::function<void()> onClick, const char *message);
+	Button(int r, int g, int b, int x, int y, int width, int height, std::function<void()> onClick, const char *message, bool add);
+	~Button();
 
-    std::function<void()> onClick;
-    const char *message;
+	std::function<void()> onClick;
+	const char *message;
 
-    void text();
+	void text();
 };
 
 #endif

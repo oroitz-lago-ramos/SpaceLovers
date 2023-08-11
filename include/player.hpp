@@ -6,20 +6,20 @@
 class Player : public Character
 {
 public:
-    Player();
-    ~Player();
+	Player();
+	~Player();
 
-    static Player *instance;
+	static Player *instance;
 
-    void update();
-    void shoot();
-    void die();
-    void gainExperience(float experience);
+	void update();
+	void shoot();
+	void die();
+	void gainExperience(float experience);
 
-    float experience;
+	float experience;
 
-    int numberOfProjectiles;
-    int reloadSpeed;
+	int numberOfProjectiles;
+	int reloadSpeed;
 
 private:
 };

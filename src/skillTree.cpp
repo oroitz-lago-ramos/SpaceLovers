@@ -19,7 +19,6 @@ SkillTree::SkillTree()
 		255, 0, 0, 0, 0, 100, 50, []()
 		{ Game::currentState = MENU; SkillTree::instance->~SkillTree(); },
 		"Back", false));
-
 	// red
 	SkillNode *node1 = new SkillNode(255, 0, 0, "Node 1");
 	// green
