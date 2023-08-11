@@ -65,7 +65,6 @@ Game::Game()
 Game::~Game()
 {
 	// Destruction des boutons
-	
 }
 
 // Methode pour créer des boutons, chaque nouveau bouton doit être fait dans la méthode
@@ -195,6 +194,9 @@ void Game::renderLoop()
 		powerUp->render();
 	}
 
+	// La c'est pour afficher le timer de temps restant avant de passer au prochain level.
+	SDL_Rect countdown = {Graphics::windowWidth - 100, 100, 100, 70};
+	SDL_SetRenderDrawColor(Graphics::renderer, 0, 255, 0, 255);
 	// A partir d'ici c'est des tests vous pouvez les enlever si ça gêne ! bisous (j'enlève l'image pour pas que ça gêne pendant les gitgit)
 	// SDL_Surface image = *IMG_Load("Flamme 2.png");
 	// SDL_Texture* heartTexture = SDL_CreateTextureFromSurface(Graphics::renderer, &image);
@@ -221,10 +223,6 @@ void Game::renderLoop()
 	healthrect.w = Player::instance->lifePoints * 100 / Player::instance->maxLifePoints;
 	SDL_RenderFillRect(Graphics::renderer, &healthrect);
 	// bisous
-
-	// La c'est pour afficher le timer de temps restant avant de passer au prochain level.
-	SDL_Rect countdown = {Graphics::windowWidth - 100, 100, 100, 70};
-	SDL_SetRenderDrawColor(Graphics::renderer, 0, 255, 0, 255);
 }
 
 void Game::menuRenderLoop()
