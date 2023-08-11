@@ -17,6 +17,7 @@ private:
 
     void heal();
     void speedUp();
+    void changeNumberOfProjectiles(int number);
 };
 
 #endif

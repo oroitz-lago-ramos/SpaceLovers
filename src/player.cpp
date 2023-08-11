@@ -60,10 +60,6 @@ void Player::shoot()
 		this -> timeSinceLastShot = 0;
 		switch (this->numberOfProjectiles)
 		{
-		case 1:
-			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
-			break;
-
 		case 2:
 			new Projectile(0, 255, 0, this->getX() - 20, this->getY() - this->height, -1, 5, 0.1f);
 			new Projectile(0, 255, 0, this->getX() + 20, this->getY() - this->height, -1, 5, 0.1f);
@@ -73,8 +69,10 @@ void Player::shoot()
 			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
 			new Projectile(0, 255, 0, this->getX() + 30, this->getY() - this->height, -1, 5, 0.1f);
 			break;
+		default:
+			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
+			break;
 		}
-
 		this->timeSinceLastShot = 0;
 	}
 }
