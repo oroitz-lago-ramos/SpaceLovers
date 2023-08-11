@@ -22,7 +22,6 @@ void Entity::render()
 	SDL_RenderFillRect(Graphics::renderer, &this->rect);
 	if (this->texture != nullptr)
 	{
-		// std::cout << "This -> texture : " << this->texture << "\r";
 		SDL_RenderCopy(Graphics::renderer, this->texture, NULL, &this->rect);
 	}
 }

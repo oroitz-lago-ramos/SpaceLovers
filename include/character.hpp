@@ -7,14 +7,14 @@
 class Character : public Entity
 {
 public:
-	Character(int r, int g, int b, int x, int y, int width, int height, float speed, float lifePoints, int power, float defense);
+	Character(int r, int g, int b, int x, int y, int width, int height, float speed, float lifePoints, float power, float defense);
 	Character(int r, int g, int b, int x, int y, int width, int height, float speed);
 	~Character();
 
 	float speed;
 	float lifePoints;
 	float maxLifePoints;
-	int power;
+	float power;
 	float defense;
 
 	unsigned long long int timeSinceLastShot;

@@ -14,9 +14,7 @@ public:
     void die();
     void shoot();
 
-    float power;
     float xpValue;
-    float defense;
 
 private:
     void checkCollisions();

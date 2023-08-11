@@ -8,8 +8,8 @@
 #include "graphics.hpp"
 #include "game.hpp"
 
-Enemy::Enemy(int power, int defense, float lifePoint, float xpValue)
-    : Character(255, 0, 0, min(20,(rand() % (Graphics::screenWidth - 20))), 10, 20, 20, 0.01, lifePoint, power, defense),
+Enemy::Enemy(float power, float defense, float lifePoint, float xpValue)
+    : Character(255, 0, 0, (rand() % (Graphics::screenWidth - 40) +20), 10, 20, 20, 0.01, lifePoint, power, defense),
       xpValue(xpValue)
 {
     Level::enemies.insert(this);

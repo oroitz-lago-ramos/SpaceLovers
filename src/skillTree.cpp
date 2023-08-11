@@ -117,7 +117,6 @@ SkillTree::~SkillTree()
 
 void SkillTree::render()
 {
-	// std::cout << "rendering" << std::endl;
 	for (auto button : buttons)
 	{
 		button->render();
