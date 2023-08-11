@@ -9,7 +9,7 @@
 #include "enemy.hpp"
 #include "level.hpp"
 #include "projectile.hpp"
-#include "text.hpp"
+#include "skillTree.hpp"
 
 int Game::inputs = 0;
 bool Game::isRunning = true;
@@ -51,8 +51,13 @@ Game::Game()
 
 			// Render loop du jeu (pas du menu)
 			this->renderLoop();
+			this->eventLoop();
 
 			Level::instance->update();
+		}
+		else if (Game::currentState == SKILLTREE)
+		{
+			SkillTree::instance->render();
 		}
 
 		SDL_RenderPresent(Graphics::renderer);
@@ -61,6 +66,8 @@ Game::Game()
 
 Game::~Game()
 {
+	// Destruction des boutons
+	
 }
 
 // Methode pour créer des boutons, chaque nouveau bouton doit être fait dans la méthode
@@ -70,6 +77,11 @@ void Game::createButtons()
 		255, 255, 255, Graphics::screenWidth / 2, Graphics::screenHeight / 2, 100, 100, []()
 		{ Game::currentState = GAME; new Level(); },
 		"New game");
+
+	new Button(
+		255, 255, 255, 50, Graphics::screenHeight / 2, 100, 100, []()
+		{ Game::currentState = SKILLTREE; new SkillTree(); },
+		"Skill Tree");
 }
 
 void Game::eventLoop()
