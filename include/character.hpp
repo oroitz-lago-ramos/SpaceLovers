@@ -7,7 +7,7 @@
 class Character : public Entity
 {
 public:
-	Character(int r, int g, int b, int x, int y, int width, int height, float speed, float lifePoints, int power, float defense);
+	Character(int r, int g, int b, int x, int y, int width, int height, float speed, float lifePoints, float power, float defense);
 	Character(int r, int g, int b, int x, int y, int width, int height, float speed);
 	Character(int r, int g, int b, int x, int y, int width, int height, float speed, float dirX, float dirY);
 	~Character();
