@@ -33,7 +33,18 @@ void InGameItem::checkCollisions()
 {
     if(SDL_HasIntersection(&this->rect, &Player::instance->rect))
     {
-        this->heal();
+        /* switch (powerUp)
+        {
+        case :
+            //code ici
+            break;
+        
+        default:
+            break;
+        } */
+
+        //this->heal();
+        this->bomb();
         this->~InGameItem();
     }
 }
@@ -65,7 +76,27 @@ void InGameItem::speedUp()
     */
 }
 
+void InGameItem::powerBoost()
+{
+    Player::instance->power = 10;
+}
+
+void InGameItem::bomb()
+{
+    for (auto enemy : std::set<Enemy*>(Level::enemies))
+	{
+		enemy->die();
+        //Level::enemies.erase(enemy);
+	}
+    std::cout << Player::instance->experience << std::endl;
+}
+
 void InGameItem::changeNumberOfProjectiles(int number)
 {
     Player::instance->numberOfProjectiles = number;
+}
+
+void InGameItem::changeReloadSpeed()
+{
+
 }
