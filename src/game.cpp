@@ -144,17 +144,14 @@ void Game::keydown(SDL_Event *event)
 	if (event->key.keysym.sym == SDLK_LEFT || event->key.keysym.scancode == SDL_SCANCODE_A)
 	{
 		Game::inputs |= BUTTON_LEFT;
-		// player.update(-1);
 	}
 	else if (event->key.keysym.sym == SDLK_RIGHT || event->key.keysym.scancode == SDL_SCANCODE_D)
 	{
 		Game::inputs |= BUTTON_RIGHT;
-		// player.update(1);
 	}
 	else if (event->key.keysym.sym == SDLK_SPACE || event->key.keysym.sym == SDLK_UP || event->key.keysym.scancode == SDL_SCANCODE_W)
 	{
 		Game::inputs |= BUTTON_SHOOT;
-		// new Projectile(0, 255, 0, this->player.getX(), this->player.getY(), -1);
 	}
 }
 
@@ -163,17 +160,14 @@ void Game::keyup(SDL_Event *event)
 	if (event->key.keysym.sym == SDLK_LEFT || event->key.keysym.scancode == SDL_SCANCODE_A)
 	{
 		Game::inputs &= ~BUTTON_LEFT;
-		// player.update(-1);
 	}
 	else if (event->key.keysym.sym == SDLK_RIGHT || event->key.keysym.scancode == SDL_SCANCODE_D)
 	{
 		Game::inputs &= ~BUTTON_RIGHT;
-		// player.update(1);
 	}
 	else if (event->key.keysym.sym == SDLK_SPACE || event->key.keysym.sym == SDLK_UP || event->key.keysym.scancode == SDL_SCANCODE_W)
 	{
 		Game::inputs &= ~BUTTON_SHOOT;
-		// new Projectile(0, 255, 0, this->player.getX(), this->player.getY(), -1);
 	}
 }
 
@@ -232,9 +226,6 @@ void Game::renderLoop()
     SDL_RenderFillRect(Graphics::renderer, &healthrect);
     // bisous
 
-	// La c'est pour afficher le timer de temps restant avant de passer au prochain level.
-	SDL_Rect countdown = {Graphics::windowWidth - 100, 100, 100, 70};
-	SDL_SetRenderDrawColor(Graphics::renderer, 0, 255, 0, 255);
 }
 
 void Game::menuRenderLoop()
