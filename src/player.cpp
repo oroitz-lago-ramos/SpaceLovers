@@ -10,11 +10,14 @@ Player *Player::instance = nullptr;
 
 Player::Player()
 	// Pour changer la couleur on modifie les trois premiers paramètres
-	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 40, 40, 0.02f, 100)
+	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 40, 40, 0.02f, 100, 1, 1),
+	experience(0),numberOfProjectiles(1),
 {
 	Player::instance = this;
-	this -> timeSinceLastShot = 0;
-	this -> experience = 0.0f;
+
+	this->timeSinceLastShot = 0;
+	
+	this->reloadSpeed = 500000000;
 }
 
 Player::~Player()
@@ -23,7 +26,7 @@ Player::~Player()
 
 void Player::update()
 {
-	this -> timeSinceLastShot += Game::frameTime;
+	this->timeSinceLastShot += Game::frameTime;
 	if (this->lifePoints <= 0)
 	{
 		this->die();
@@ -44,10 +47,24 @@ void Player::update()
 
 void Player::shoot()
 {
-	if (this -> timeSinceLastShot > 500000000)
+	if (this->timeSinceLastShot > this->reloadSpeed)
 	{
-		new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
-		this -> timeSinceLastShot = 0;
+		switch (this->numberOfProjectiles)
+		{
+		case 2:
+			new Projectile(0, 255, 0, this->getX() - 20, this->getY() - this->height, -1, this->power, 0.1f);
+			new Projectile(0, 255, 0, this->getX() + 20, this->getY() - this->height, -1, this->power, 0.1f);
+			break;
+		case 3:
+			new Projectile(0, 255, 0, this->getX() - 30, this->getY() - this->height, -1, this->power, 0.1f);
+			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, this->power, 0.1f);
+			new Projectile(0, 255, 0, this->getX() + 30, this->getY() - this->height, -1, this->power, 0.1f);
+			break;
+		default:
+			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, this->power, 0.1f);
+			break;
+		}
+		this->timeSinceLastShot = 0;
 	}
 }
 

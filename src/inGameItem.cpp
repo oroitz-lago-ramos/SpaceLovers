@@ -9,7 +9,7 @@
 #include "player.hpp"
 
 InGameItem::InGameItem()
-    : Character(30, 200, 20, rand()%Graphics::screenWidth, 10, 10, 10, 0.02f, 1)
+    : Character(30, 200, 20, rand() % Graphics::screenWidth, 10, 10, 10, 0.02f)
 {
     Level::powerUps.insert(this);
 }
@@ -22,40 +22,36 @@ InGameItem::~InGameItem()
 void InGameItem::update()
 {
     this->checkCollisions();
-    /* 
-    int randNum = rand()%(3 + 1);
-    if (randNum == 1)
+    this->moveDown();
+    if (this->rect.y > Graphics::screenHeight)
     {
-        this->moveDown();
-    }
-    else if (randNum == 2)
-    {
-        this->moveLeft();
-    }
-    else if (randNum == 3)
-    {
-        this->moveRight();
-    }
-     */
-    this -> moveDown();
-    if (this -> rect.y > Graphics::screenHeight)
-    {
-        this -> ~InGameItem();
+        this->~InGameItem();
     }
 }
 
 void InGameItem::checkCollisions()
 {
-    if(SDL_HasIntersection(&this->rect, &Player::instance->rect))
+    if (SDL_HasIntersection(&this->rect, &Player::instance->rect))
     {
-        this->heal();
+        /* switch (powerUp)
+        {
+        case :
+            //code ici
+            break;
+
+        default:
+            break;
+        } */
+
+        // this->heal();
+        this->bomb();
         this->~InGameItem();
     }
 }
 
 void InGameItem::heal()
-{   
-    
+{
+
     /* int heal = 20;
     //Comment faire que ça heal max jusqu'a maxLifePoints
     if (Player::instance->lifePoints < Player::instance->maxLifePoints - heal)
@@ -63,9 +59,8 @@ void InGameItem::heal()
         Player::instance->lifePoints += 20;
     } */
 
-    //Sinon :
-        Player::instance-> lifePoints = std::min(Player::instance->lifePoints += 20, Player::instance->maxLifePoints);
-    
+    // Sinon :
+    Player::instance->lifePoints = std::min(Player::instance->lifePoints += 20, Player::instance->maxLifePoints);
 }
 
 void InGameItem::speedUp()
@@ -75,7 +70,31 @@ void InGameItem::speedUp()
     float tempSpeed = Player::instance->speed;
     while(itemTimer < Xvaleur)
     {
-        Player::instance->speed += 0.1;
+        Player::instance->speed = 0.05f;
     }
     */
+}
+
+void InGameItem::powerBoost()
+{
+    Player::instance->power = 10;
+}
+
+void InGameItem::bomb()
+{
+    for (auto enemy : std::set<Enemy *>(Level::enemies))
+    {
+        enemy->die();
+        // Level::enemies.erase(enemy);
+    }
+    std::cout << Player::instance->experience << std::endl;
+}
+
+void InGameItem::changeNumberOfProjectiles(int number)
+{
+    Player::instance->numberOfProjectiles = number;
+}
+
+void InGameItem::changeReloadSpeed()
+{
 }

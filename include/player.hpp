@@ -8,22 +8,20 @@ class Player : public Character
 public:
     Player();
     ~Player();
-    
-	static Player *instance;
 
-	void update();
+    static Player *instance;
+
+    void update();
     void shoot();
     void die();
     void gainExperience(float experience);
 
     float experience;
 
-    
-private:
+    int numberOfProjectiles;
+    int reloadSpeed;
 
-    
-    
-    
+private:
 };
 
 #endif

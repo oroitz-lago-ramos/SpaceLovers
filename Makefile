@@ -58,4 +58,4 @@ fclean: clean
 re: fclean all
 
 test: all
-	$(BIN_FOLDER)/$(TARGET).exe grille
+	$(BIN_FOLDER)/$(TARGET).exe

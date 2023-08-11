@@ -27,18 +27,20 @@ void Projectile::update()
 	else if (this->direction == -1)
 		this->moveUp();
 
-	this-> checkCollisions();
-	
+	this->checkCollisions();
+
 	if (this->rect.y > Graphics::screenHeight || this->rect.y < 0 || this->rect.x > Graphics::screenWidth || this->rect.x < 0)
 	{
 		this->~Projectile();
 	}
 }
 
+// On verifie les collision des projectiles.
+//(La première condition verifie si on touche un ennemi, la deuxième, si un ennemi nous touche).
 void Projectile::checkCollisions()
 {
 	for (auto enemy : std::set<Enemy *>(Level::enemies))
-	{	
+	{
 		if (SDL_HasIntersection(&this->rect, &enemy->rect))
 		{
 			enemy->takeDamage(this->power);

@@ -4,23 +4,22 @@
 #include <SDL2/SDL.h>
 #include "character.hpp"
 
-class Enemy:public Character
+class Enemy : public Character
 {
 public:
-    Enemy(int power, int defense, float lifePoint, float xpValue);
+    Enemy(float power, float defense, float lifePoint, float xpValue);
     ~Enemy();
     void update();
 
     void die();
     void shoot();
 
-    int power;
-    int defense;
+    float power;
     float xpValue;
+    float defense;
 
 private:
     void checkCollisions();
 };
-
 
 #endif
