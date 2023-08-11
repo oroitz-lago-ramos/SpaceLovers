@@ -26,11 +26,6 @@ public:
 
 	unsigned long long int timeSinceLastShot;
 
-	void moveUp();
-	void moveDown();
-	void moveRight();
-	void moveLeft();
-
 	void takeDamage(float damage);
 
 private:

@@ -48,24 +48,28 @@ void Player::shoot()
 {
 	if (this->timeSinceLastShot > this->reloadSpeed)
 	{
-		switch (this->numberOfProjectiles)
+		// new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
+		for (int i = 0; i < this->numberOfProjectiles; i++)
 		{
-		case 2:
-			new Projectile(0, 255, 0, this->getX() - 20, this->getY() - this->height, -1, this->power, 0.1f);
-			new Projectile(0, 255, 0, this->getX() + 20, this->getY() - this->height, -1, this->power, 0.1f);
-			break;
-		case 3:
-			new Projectile(0, 255, 0, this->getX() - 30, this->getY() - this->height, -1, this->power, 0.1f);
-			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, this->power, 0.1f);
-			new Projectile(0, 255, 0, this->getX() + 30, this->getY() - this->height, -1, this->power, 0.1f);
-			break;
-		default:
-			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, this->power, 0.1f);
-			break;
-		default:
-			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, this->power, 0.1f);
-			break;
+			new Projectile(0, 255, 0, this->getX() + 15 * i, this->getY() - this->height - 15 * i, 5, 0.1f, 0.1, -1);
+			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height - 15 * i, 5, 0.1f, 0, -1);
+			new Projectile(0, 255, 0, this->getX() - 15 * i, this->getY() - this->height - 15 * i, 5, 0.1f, -0.1, -1);
 		}
+		// switch (this->numberOfProjectiles)
+		// {
+		// case 2:
+		// 	new Projectile(0, 255, 0, this->getX() - 20, this->getY() - this->height, -1, this->power, 0.1f);
+		// 	new Projectile(0, 255, 0, this->getX() + 20, this->getY() - this->height, -1, this->power, 0.1f);
+		// 	break;
+		// case 3:
+		// 	new Projectile(0, 255, 0, this->getX() - 30, this->getY() - this->height, -1, this->power, 0.1f);
+		// 	new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, this->power, 0.1f);
+		// 	new Projectile(0, 255, 0, this->getX() + 30, this->getY() - this->height, -1, this->power, 0.1f);
+		// 	break;
+		// default:
+		// 	new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, this->power, 0.1f);
+		// 	break;
+		// }
 		this->timeSinceLastShot = 0;
 		// new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
 		new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, 5, 0.1f, 0, -1);
