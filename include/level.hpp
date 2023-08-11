@@ -17,6 +17,7 @@ public:
 	~Level();
 	static std::set<Projectile *> projectiles;
 	static std::set<Enemy *> enemies;
+	static std::set<Enemy *> bosses;
 	static std::set<InGameItem *> powerUps;
 	static Level *instance;
 	long long int nanoSecond;
@@ -31,6 +32,7 @@ public:
 
 	unsigned long long int timeSinceLastSpawn;
 	unsigned long long int timeSinceLastPoweUp;
+	unsigned long long int timeSinceLastBoss;
 };
 
 #endif

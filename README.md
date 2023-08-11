@@ -106,3 +106,16 @@ Apres la mort on peut recommencer au lvl d'après n'importe quel boss vaincu
 
 Ajout de differentes fonctionalités.
 
+### 11.08.23 Oroitz, Rodolphe et Anthony
+
+Validation de nombreuses fonctionnalités:
+    - Augmentation du niveau de difficulté toutes les 60 secondes
+    - Gain d'xp pour chaque ennemi tué
+    - Création du visuel d'un arbre de compétences
+    - Visuel plus complet de la fenetre de jeu avec timer + barre de vie + gain d'exp
+    - Boost de gain de vie, bombe et d'autres
+
+Objectif:
+    - Implementation des boss
+    - 
+
