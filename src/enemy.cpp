@@ -16,9 +16,9 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
 	this->timeSinceLastShot = 0;
 }
 
-Enemy::Enemy(float lifePoints, float power, float defense, float shield, float xpValue)
+Enemy::Enemy(float lifePoints, float power, float defense, float xpValue, float shield)
 	: Character(255, 0, 0, Graphics::screenWidth / 2, 10, 50, 30, 0.01, lifePoints, power, defense),
-	  shield(shield), xpValue(xpValue)
+	  xpValue(xpValue), shield(shield)
 {
 	Level::bosses.insert(this);
 	this->timeSinceLastShot = 0;
@@ -57,7 +57,7 @@ void Enemy::die()
 
 void Enemy::shoot()
 {
-	new Projectile(255, 0, 0, this->getX(), this->getY() + this->height, 1, this->power, 0.02f);
+	new Projectile(255, 0, 0, this->getX(), this->getY() + this->getHeight(), 1, this->power, 0.02f);
 	this->timeSinceLastShot = 0;
 }
 

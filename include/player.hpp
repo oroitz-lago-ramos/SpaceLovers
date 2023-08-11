@@ -19,7 +19,7 @@ public:
 	float experience;
 
 	int numberOfProjectiles;
-	int reloadSpeed;
+	long long int unsigned reloadSpeed;
 
 private:
 };

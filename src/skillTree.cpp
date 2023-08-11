@@ -40,11 +40,11 @@ SkillTree::SkillTree()
 	node4->addRequirement(node2);
 	node5->addRequirement(node2);
 
-	for (int i = 0; i < nodes.size(); i++)
+	for (long long unsigned int i = 0; i < nodes.size(); i++)
 	{
-		for (int j = 0; j < nodes[i]->requirements.size(); j++)
+		for (long long unsigned int j = 0; j < nodes[i]->requirements.size(); j++)
 		{
-			for (int k = 0; k < nodes.size(); k++)
+			for (long long unsigned int k = 0; k < nodes.size(); k++)
 			{
 				if (nodes[k] == nodes[i]->requirements[j])
 				{
@@ -55,7 +55,6 @@ SkillTree::SkillTree()
 	}
 	for (SkillNode *node : nodes)
 	{
-		int max = 0;
 		node->depth = this->calculateDepth(node, node, 0);
 	}
 	this->autoLayout();
@@ -80,7 +79,6 @@ void SkillTree::autoLayout()
 			  { return a->requirements.size() < b->requirements.size(); });
 	int x = 250;
 	int y = 550;
-	int nodeHeight = 100;
 	int nodeWidth = 100;
 	for (SkillNode *node : nodes)
 	{

@@ -51,16 +51,10 @@ void InGameItem::checkCollisions()
 
 void InGameItem::heal()
 {
-
-	/* int heal = 20;
-	//Comment faire que ça heal max jusqu'a maxLifePoints
-	if (Player::instance->lifePoints < Player::instance->maxLifePoints - heal)
+	if (Player::instance->lifePoints < Player::instance->maxLifePoints - 20)
 	{
 		Player::instance->lifePoints += 20;
-	} */
-
-	// Sinon :
-	Player::instance->lifePoints = std::min(Player::instance->lifePoints += 20, Player::instance->maxLifePoints);
+	}
 }
 
 void InGameItem::speedUp()

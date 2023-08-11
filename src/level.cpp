@@ -18,7 +18,7 @@ std::set<InGameItem *> Level::powerUps = {};
 Level *Level::instance = nullptr;
 
 Level::Level()
-	: timeSinceLastSpawn(0), nanoSecond(60000000000), timeSinceLastPoweUp(0), currentLvl(1), difficulty(1), timeSinceLastBoss(0)
+	: timeSinceLastSpawn(0), timeSinceLastPoweUp(0), timeSinceLastBoss(0), nanoSecond(60000000000),  currentLvl(1), difficulty(1)
 {
 	Level::instance = this;
 	Player::instance->lifePoints = Player::instance->maxLifePoints;

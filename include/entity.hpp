@@ -5,6 +5,15 @@
 
 class Entity
 {
+private:
+	int r;
+	int g;
+	int b;
+	float x;
+	float y;
+	int width;
+	int height;
+
 public:
 	Entity(int r, int g, int b, int x, int y, int width, int height);
 	~Entity();
@@ -13,18 +22,19 @@ public:
 	float getX();
 	void setY(float y);
 	float getY();
+	void setWidth(int width);
+	int getWidth();
+	void setHeight(int height);
+	int getHeight();
+	void setR(int r);
+	int getR();
+	void setG(int g);
+	int getG();
+	void setB(int b);
+	int getB();
 
-	int r;
-	int g;
-	int b;
-	int width;
-	int height;
 	SDL_Rect rect;
 	SDL_Texture *texture;
-
-private:
-	float x;
-	float y;
 };
 
 #endif

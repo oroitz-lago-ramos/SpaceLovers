@@ -20,9 +20,6 @@ public:
 	static std::set<Enemy *> bosses;
 	static std::set<InGameItem *> powerUps;
 	static Level *instance;
-	long long int nanoSecond;
-	int currentLvl;
-	float difficulty;
 	std::string count;
 	Text *timer;
 	Text *levelRunning;
@@ -30,9 +27,12 @@ public:
 	void update();
 	void countdown();
 
-	unsigned long long int timeSinceLastSpawn;
-	unsigned long long int timeSinceLastPoweUp;
-	unsigned long long int timeSinceLastBoss;
+	long long unsigned int timeSinceLastSpawn;
+	long long unsigned int timeSinceLastPoweUp;
+	long long unsigned int timeSinceLastBoss;
+	long long unsigned int nanoSecond;
+	int currentLvl;
+	float difficulty;
 };
 
 #endif

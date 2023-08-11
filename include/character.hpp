@@ -17,10 +17,10 @@ public:
 	void moveRight();
 	void moveLeft();
 	float speed;
-	float dirX;
-	float dirY;
 	float lifePoints;
 	float maxLifePoints;
+	float dirX;
+	float dirY;
 	float power;
 	float defense;
 
