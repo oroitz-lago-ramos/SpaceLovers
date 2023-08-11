@@ -15,6 +15,13 @@ Projectile::Projectile(int r, int g, int b, int x, int y, int direction, int pow
 	Level::projectiles.insert(this);
 }
 
+Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed, float dirX, float dirY)
+	: Character(r, g, b, x, y, 5, 5, speed, dirX, dirY),
+	  direction(0), power(power)
+{
+	Level::projectiles.insert(this);
+}
+
 Projectile::~Projectile()
 {
 	Level::projectiles.erase(this);
@@ -26,9 +33,11 @@ void Projectile::update()
 		this->moveDown();
 	else if (this->direction == -1)
 		this->moveUp();
+	else if (this->direction == 0)
+		this->move();
 
-	this-> checkCollisions();
-	
+	this->checkCollisions();
+
 	if (this->rect.y > Graphics::screenHeight || this->rect.y < 0 || this->rect.x > Graphics::screenWidth || this->rect.x < 0)
 	{
 		this->~Projectile();
@@ -38,7 +47,7 @@ void Projectile::update()
 void Projectile::checkCollisions()
 {
 	for (auto enemy : std::set<Enemy *>(Level::enemies))
-	{	
+	{
 		if (SDL_HasIntersection(&this->rect, &enemy->rect))
 		{
 			enemy->takeDamage(1);
