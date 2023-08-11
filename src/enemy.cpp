@@ -8,9 +8,9 @@
 #include "graphics.hpp"
 #include "game.hpp"
 
-Enemy::Enemy(int power, int defense)
-    : Character(255, 0, 0, rand() % Graphics::screenWidth, 10, 20, 20, 0.01, 1),
-      power(power), defense(defense)
+Enemy::Enemy(int power, int defense, float lifePoint, float xpValue)
+    : Character(255, 0, 0, rand() % Graphics::screenWidth, 10, 20, 20, 0.01, lifePoint),
+      power(power), defense(defense), xpValue(xpValue)
 {
     Level::enemies.insert(this);
     this->timeSinceLastShot = 0;
@@ -44,10 +44,7 @@ void Enemy::update()
 void Enemy::die()
 {
     this->~Enemy();
-    Player::instance->experience += 1;
-    char strXp[30];
-    snprintf(strXp, 30, "Xp Total Généré: \n %12f", Player::instance->experience);
-    Level::instance->xpTotal->textUpdate(strXp);
+    Player::instance->gainExperience(this->xpValue);
 }
 
 void Enemy::shoot()

@@ -50,7 +50,7 @@ void Projectile::checkCollisions()
 	{
 		if (SDL_HasIntersection(&this->rect, &enemy->rect))
 		{
-			enemy->takeDamage(1);
+			enemy->takeDamage(this->power);
 			this->~Projectile();
 
 			return;

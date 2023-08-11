@@ -58,3 +58,11 @@ void Player::die()
 {
 	Level::instance->~Level();
 }
+
+void Player::gainExperience(float experience)
+{
+	Player::instance->experience += experience;
+    char strXp[15];
+    snprintf(strXp, 15, "Xp: %07.0f", Player::instance->experience);
+    Level::instance->xpTotal->textUpdate(strXp);
+}
