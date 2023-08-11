@@ -17,8 +17,6 @@ Player::Player()
 	this->timeSinceLastShot = 0;
 	this->experience = 0.0f;
 	this->numberOfProjectiles = 1;
-	this->power = 1;
-	this->defense = 1;
 	this->reloadSpeed = 500000000;
 }
 
