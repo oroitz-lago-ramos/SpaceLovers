@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <set>
+#include <string>
 
 #include "enemy.hpp"
 #include "projectile.hpp"
