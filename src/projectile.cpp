@@ -15,6 +15,13 @@ Projectile::Projectile(int r, int g, int b, int x, int y, int direction, int pow
 	Level::projectiles.insert(this);
 }
 
+Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed, float dirX, float dirY)
+	: Character(r, g, b, x, y, 5, 5, speed, dirX, dirY),
+	  direction(0), power(power)
+{
+	Level::projectiles.insert(this);
+}
+
 Projectile::~Projectile()
 {
 	Level::projectiles.erase(this);
@@ -26,6 +33,8 @@ void Projectile::update()
 		this->moveDown();
 	else if (this->direction == -1)
 		this->moveUp();
+	else if (this->direction == 0)
+		this->move();
 
 	this->checkCollisions();
 

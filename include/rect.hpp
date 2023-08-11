@@ -7,9 +7,9 @@
 class Rect : public Entity
 {
 public:
-    Rect(int r, int g, int b, int x, int y, int width, int height);
-    ~Rect();
-    void render(bool fill);
+	Rect(int r, int g, int b, int x, int y, int width, int height);
+	~Rect();
+	void render(bool fill);
 };
 
 #endif

@@ -7,17 +7,17 @@
 class Enemy : public Character
 {
 public:
-    Enemy(float power, float defense, float lifePoint, float xpValue);
-    ~Enemy();
-    void update();
+	Enemy(float power, float defense, float lifePoint, float xpValue);
+	~Enemy();
+	void update();
 
-    void die();
-    void shoot();
+	void die();
+	void shoot();
 
-    float xpValue;
+	float xpValue;
 
 private:
-    void checkCollisions();
+	void checkCollisions();
 };
 
 #endif

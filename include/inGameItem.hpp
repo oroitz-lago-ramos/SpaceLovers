@@ -27,12 +27,12 @@ private:
     void checkCollisions();
     void powerUpAction();
 
-    void heal();
-    void bomb();
-    void changeNumberOfProjectiles(int number);
-    void changeReloadSpeed();
-    void speedUp();
-    void powerBoost();
+	void heal();
+	void bomb();
+	void changeNumberOfProjectiles(int number);
+	void changeReloadSpeed();
+	void speedUp();
+	void powerBoost();
 };
 
 #endif

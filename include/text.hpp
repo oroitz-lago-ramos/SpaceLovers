@@ -8,17 +8,17 @@
 class Text : public Entity
 {
 public:
-    Text();
-    Text(int r, int g, int b, int x, int y, int width, int height, const char *message, const char *font, int fontSize);
-    ~Text();
+	Text();
+	Text(int r, int g, int b, int x, int y, int width, int height, const char *message, const char *font, int fontSize);
+	~Text();
 
-    TTF_Font *fontChoice;
-    const char *message;
-    const char *font;
-    int fontSize;
-    SDL_Color color;
+	TTF_Font *fontChoice;
+	const char *message;
+	const char *font;
+	int fontSize;
+	SDL_Color color;
 
-    void textUpdate(const char *message);
+	void textUpdate(const char *message);
 };
 
 #endif

@@ -4,16 +4,16 @@
 
 int main()
 {
-    Game game;
-    return 0;
+	Game game;
+	return 0;
 }
 
 int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-    hInstance = hInstance;
-    hPrevInstance = hPrevInstance;
-    lpCmdLine = lpCmdLine;
-    nCmdShow = nCmdShow;
-    main();
-    return 0;
+	hInstance = hInstance;
+	hPrevInstance = hPrevInstance;
+	lpCmdLine = lpCmdLine;
+	nCmdShow = nCmdShow;
+	main();
+	return 0;
 }
