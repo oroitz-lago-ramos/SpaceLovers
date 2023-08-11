@@ -4,14 +4,14 @@
 #include <SDL2/SDL.h>
 #include "entity.hpp"
 
-//enum PowerUp {HEAL, SPEEDUP};
+// enum PowerUp {HEAL, SPEEDUP, DEFENSEUP, SHIELD, DOUBLE_PROJECTILE, RELOAD_SPEED};
 class InGameItem : public Character
 {
 public:
     InGameItem(/*PowerUp powerUp*/);
     ~InGameItem();
     void update();
-    //PowerUp powerUp;
+    // PowerUp powerUp;
 private:
     void checkCollisions();
 

@@ -47,7 +47,7 @@ void Level::update()
 		this -> timeSinceLastSpawn = 0;
 	}
 
-	if (this -> timeSinceLastPoweUp > 2000000000)
+	if (this -> timeSinceLastPoweUp > 20000000000)
 	{
 		new InGameItem();
 		this -> timeSinceLastPoweUp = 0;
