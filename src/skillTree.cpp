@@ -27,19 +27,19 @@ SkillTree::SkillTree()
 	SkillNode *node3 = new SkillNode(0, 0, 255, "Node 3");
 	SkillNode *node4 = new SkillNode(200, 200, 200, "Node 4");
 	SkillNode *node5 = new SkillNode(200, 200, 0, "Node 5");
-	
+
 	this->nodes.push_back(node1);
 	this->nodes.push_back(node2);
 	this->nodes.push_back(node3);
 	this->nodes.push_back(node4);
 	this->nodes.push_back(node5);
-	
+
 	node2->addRequirement(node1);
 	node3->addRequirement(node2);
 	// node3->addRequirement(node2);
 	node4->addRequirement(node2);
 	node5->addRequirement(node2);
-	
+
 	for (int i = 0; i < nodes.size(); i++)
 	{
 		for (int j = 0; j < nodes[i]->requirements.size(); j++)

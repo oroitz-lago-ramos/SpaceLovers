@@ -9,19 +9,19 @@
 #include "game.hpp"
 
 Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
-    : Character(200, 100, 100, (rand() % (Graphics::screenWidth - 40) + 20), 10, 20, 20, 0.01, lifePoints, power, defense),
-      xpValue(xpValue)
+	: Character(200, 100, 100, (rand() % (Graphics::screenWidth - 40) + 20), 10, 20, 20, 0.01, lifePoints, power, defense),
+	  xpValue(xpValue)
 {
 	Level::enemies.insert(this);
 	this->timeSinceLastShot = 0;
 }
 
 Enemy::Enemy(float lifePoints, float power, float defense, float shield, float xpValue)
-    : Character(255, 0, 0, Graphics::screenWidth / 2, 10, 50, 30, 0.01, lifePoints, power, defense),
-      shield(shield), xpValue(xpValue)
+	: Character(255, 0, 0, Graphics::screenWidth / 2, 10, 50, 30, 0.01, lifePoints, power, defense),
+	  shield(shield), xpValue(xpValue)
 {
-    Level::bosses.insert(this);
-    this->timeSinceLastShot = 0;
+	Level::bosses.insert(this);
+	this->timeSinceLastShot = 0;
 }
 
 Enemy::~Enemy()
