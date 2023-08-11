@@ -7,7 +7,7 @@
 class Enemy : public Character
 {
 public:
-    Enemy(int power, int defense, float lifePoint, float xpValue);
+    Enemy(float power, float defense, float lifePoint, float xpValue);
     ~Enemy();
     void update();
 
