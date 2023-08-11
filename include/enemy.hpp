@@ -15,7 +15,7 @@ public:
     void shoot();
 
     int power;
-    int defense;
+    float defense;
 private:
     void checkCollisions();
 };

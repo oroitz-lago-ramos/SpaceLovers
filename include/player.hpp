@@ -18,6 +18,9 @@ public:
     float experience;
 
     int numberOfProjectiles;
+    int power;
+    float defense;
+    int reloadSpeed;
 private:
 };
 
