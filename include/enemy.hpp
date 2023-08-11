@@ -7,7 +7,8 @@
 class Enemy : public Character
 {
 public:
-    Enemy(float power, float defense, float lifePoint, float xpValue);
+    Enemy(float lifePoints, float power, float defense, float xpValue);
+    Enemy(float lifePoints, float power, float defense, float shield, float xpValue);
     ~Enemy();
     void update();
 
@@ -15,6 +16,7 @@ public:
     void shoot();
 
     float xpValue;
+    float shield;
 
 private:
     void checkCollisions();
