@@ -65,6 +65,11 @@ void Player::shoot()
 			break;
 		}
 		this->timeSinceLastShot = 0;
+		// new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
+		new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, 5, 0.1f, 0, -1);
+		new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, 5, 0.1f, 0.1, -1);
+		new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, 5, 0.1f, -0.1, -1);
+		this->timeSinceLastShot = 0;
 	}
 }
 
