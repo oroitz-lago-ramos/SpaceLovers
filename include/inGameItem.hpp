@@ -16,8 +16,11 @@ private:
     void checkCollisions();
 
     void heal();
-    void speedUp();
+    void bomb();
     void changeNumberOfProjectiles(int number);
+    void changeReloadSpeed();
+    void speedUp();
+    void powerBoost();    
 };
 
 #endif
