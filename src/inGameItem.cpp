@@ -22,21 +22,6 @@ InGameItem::~InGameItem()
 void InGameItem::update()
 {
     this->checkCollisions();
-    /* 
-    int randNum = rand()%(3 + 1);
-    if (randNum == 1)
-    {
-        this->moveDown();
-    }
-    else if (randNum == 2)
-    {
-        this->moveLeft();
-    }
-    else if (randNum == 3)
-    {
-        this->moveRight();
-    }
-     */
     this -> moveDown();
     if (this -> rect.y > Graphics::screenHeight)
     {
@@ -78,4 +63,9 @@ void InGameItem::speedUp()
         Player::instance->speed += 0.1;
     }
     */
+}
+
+void InGameItem::changeNumberOfProjectiles(int number)
+{
+    Player::instance->numberOfProjectiles = number;
 }
