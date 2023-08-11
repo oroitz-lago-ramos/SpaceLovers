@@ -10,13 +10,13 @@ Player *Player::instance = nullptr;
 
 Player::Player()
 	// Pour changer la couleur on modifie les trois premiers paramètres
-	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 40, 40, 0.02f, 100, 1, 1)
+	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 40, 40, 0.02f, 100, 1, 1),
+	experience(0),numberOfProjectiles(1),
 {
 	Player::instance = this;
 
 	this->timeSinceLastShot = 0;
-	this->experience = 0.0f;
-	this->numberOfProjectiles = 1;
+	
 	this->reloadSpeed = 500000000;
 }
 
