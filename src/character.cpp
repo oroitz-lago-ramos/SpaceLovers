@@ -6,7 +6,7 @@
 #include "game.hpp"
 #include "level.hpp"
 
-Character::Character(int r, int g, int b, int x, int y, int width, int height, float speed, float lifePoints, int power, float defense)
+Character::Character(int r, int g, int b, int x, int y, int width, int height, float speed, float lifePoints, float power, float defense)
     : Entity(r, g, b, x, y, width, height),
       speed(speed), lifePoints(lifePoints), maxLifePoints(lifePoints), power(power), defense(defense)
 {
