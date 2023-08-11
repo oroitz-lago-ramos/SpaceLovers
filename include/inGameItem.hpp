@@ -20,7 +20,7 @@ private:
     void changeNumberOfProjectiles(int number);
     void changeReloadSpeed();
     void speedUp();
-    void powerBoost();    
+    void powerBoost();
 };
 
 #endif

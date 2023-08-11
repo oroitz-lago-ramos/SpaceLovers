@@ -11,13 +11,14 @@ public:
 	Projectile(int r, int g, int b, int x, int y, int direction, int power, float speed);
 	Projectile(int r, int g, int b, int x, int y, int power, float speed, float dirX, float dirY);
 	~Projectile();
-	
+
 	void update();
 	int direction;
 
 	int power;
+
 private:
-	void checkCollisions();	
+	void checkCollisions();
 };
 
 #endif

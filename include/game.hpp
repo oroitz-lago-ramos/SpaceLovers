@@ -8,23 +8,23 @@
 #include "graphics.hpp"
 #include "player.hpp"
 
-enum GameState 
+enum GameState
 {
     MENU,
     GAME,
-	SKILLTREE
+    SKILLTREE
 };
 
 class Game
 {
 public:
-	static int inputs;
+    static int inputs;
     static bool isRunning;
     static unsigned int frameTime;
     static GameState currentState;
     Game();
     ~Game();
-    
+
 private:
     Graphics graphics;
     Player player;
