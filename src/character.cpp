@@ -20,7 +20,7 @@ Character::Character(int r, int g, int b, int x, int y, int width, int height, f
 
 Character::Character(int r, int g, int b, int x, int y, int width, int height, float speed, float dirX, float dirY)
 	: Entity(r, g, b, x, y, width, height),
-	speed(speed), lifePoints(1), maxLifePoints(1), dirX(dirX), dirY(dirY)
+	  speed(speed), lifePoints(1), maxLifePoints(1), dirX(dirX), dirY(dirY)
 {
 }
 
