@@ -16,9 +16,10 @@ Player::Player()
 	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 40, 40, 0.02f, 100)
 {
 	Player::instance = this;
+	
 	this->timeSinceLastShot = 0;
 	this->experience = 0.0f;
-	this->numberOfProjectiles = 3;
+	this->numberOfProjectiles = 1;
 	this->power = 1;
 	this->defense = 1;
 	this->reloadSpeed = 500000000;
@@ -61,16 +62,16 @@ void Player::shoot()
 		switch (this->numberOfProjectiles)
 		{
 		case 2:
-			new Projectile(0, 255, 0, this->getX() - 20, this->getY() - this->height, -1, 5, 0.1f);
-			new Projectile(0, 255, 0, this->getX() + 20, this->getY() - this->height, -1, 5, 0.1f);
+			new Projectile(0, 255, 0, this->getX() - 20, this->getY() - this->height, -1, this->power, 0.1f);
+			new Projectile(0, 255, 0, this->getX() + 20, this->getY() - this->height, -1, this->power, 0.1f);
 			break;
 		case 3:
-			new Projectile(0, 255, 0, this->getX() - 30, this->getY() - this->height, -1, 5, 0.1f);
-			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
-			new Projectile(0, 255, 0, this->getX() + 30, this->getY() - this->height, -1, 5, 0.1f);
+			new Projectile(0, 255, 0, this->getX() - 30, this->getY() - this->height, -1, this->power, 0.1f);
+			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, this->power, 0.1f);
+			new Projectile(0, 255, 0, this->getX() + 30, this->getY() - this->height, -1, this->power, 0.1f);
 			break;
 		default:
-			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
+			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, this->power, 0.1f);
 			break;
 		}
 		this->timeSinceLastShot = 0;

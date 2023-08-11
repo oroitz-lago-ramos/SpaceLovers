@@ -44,6 +44,8 @@ void Projectile::update()
 	}
 }
 
+//On verifie les collision des projectiles.
+//(La première condition verifie si on touche un ennemi, la deuxième, si un ennemi nous touche).
 void Projectile::checkCollisions()
 {
 	for (auto enemy : std::set<Enemy *>(Level::enemies))

@@ -29,10 +29,8 @@ public:
 	void update();
 	void countdown();
 
-
 	unsigned long long int timeSinceLastSpawn;
 	unsigned long long int timeSinceLastPoweUp;
 };
-
 
 #endif
