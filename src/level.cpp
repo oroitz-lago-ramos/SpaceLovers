@@ -11,7 +11,7 @@
 std::set<Projectile *> Level::projectiles = {};
 std::set<Enemy *> Level::enemies = {};
 std::set<InGameItem *> Level::powerUps = {};
-Level* Level::instance = nullptr;
+Level *Level::instance = nullptr;
 
 Level::Level()
 	: timeSinceLastSpawn(0), nanoSecond(60000000000), timeSinceLastPoweUp(0), currentLvl(1)
@@ -19,18 +19,18 @@ Level::Level()
 	Level::instance = this;
 	Player::instance->lifePoints = Player::instance->maxLifePoints;
 	char str[15];
-	snprintf(str, 15, "Niveau %03d", this -> currentLvl);
-	this -> timer = new Text(0, 250, 200, Graphics::windowWidth - 100, 200, 100, 75, "60", "Kichenset.otf", 24);
-	this -> levelRunning = new Text(0, 250, 200 ,Graphics::windowWidth -100, 100, 150, 75, str, "Kichenset.otf", 24);
+	snprintf(str, 15, "Niveau %03d", this->currentLvl);
+	this->timer = new Text(0, 250, 200, Graphics::windowWidth - 100, 200, 100, 75, "60", "Kichenset.otf", 24);
+	this->levelRunning = new Text(0, 250, 200, Graphics::windowWidth - 100, 100, 150, 75, str, "Kichenset.otf", 24);
 }
 
 Level::~Level()
 {
-	for (auto projectile : std::set<Projectile*>(this->projectiles))
+	for (auto projectile : std::set<Projectile *>(this->projectiles))
 	{
 		projectiles.erase(projectile);
 	}
-	for (auto enemy : std::set<Enemy*>(this->enemies))
+	for (auto enemy : std::set<Enemy *>(this->enemies))
 	{
 		enemies.erase(enemy);
 	}
@@ -39,22 +39,22 @@ Level::~Level()
 
 void Level::update()
 {
-	this -> timeSinceLastSpawn += Game::frameTime;
-	this -> timeSinceLastPoweUp += Game::frameTime;
-	if (this -> timeSinceLastSpawn > 2000000000)
+	this->timeSinceLastSpawn += Game::frameTime;
+	this->timeSinceLastPoweUp += Game::frameTime;
+	if (this->timeSinceLastSpawn > 2000000000)
 	{
 		new Enemy(10, 10);
-		this -> timeSinceLastSpawn = 0;
+		this->timeSinceLastSpawn = 0;
 	}
 
-	if (this -> timeSinceLastPoweUp > 20000000000)
+	if (this->timeSinceLastPoweUp > 20000000000)
 	{
 		new InGameItem();
-		this -> timeSinceLastPoweUp = 0;
+		this->timeSinceLastPoweUp = 0;
 	}
-	this -> countdown();
-	this -> timer->render();
-	this -> levelRunning->render();
+	this->countdown();
+	this->timer->render();
+	this->levelRunning->render();
 }
 
 void Level::countdown()
@@ -63,17 +63,16 @@ void Level::countdown()
 	int second = Level::nanoSecond / 1000000000;
 	if (second >= 0)
 	{
-		this -> count = std::to_string(second);
-		this -> timer->textUpdate(this -> count.c_str());
+		this->count = std::to_string(second);
+		this->timer->textUpdate(this->count.c_str());
 	}
 	if (second == 0)
 	{
-		this -> nanoSecond = 60000000000;
-		this -> currentLvl ++;
+		this->nanoSecond = 60000000000;
+		this->currentLvl++;
 		difficulty *= 1.1;
 		char str[15];
-		snprintf(str, 15, "Niveau %03d", this -> currentLvl);
-		this -> levelRunning->textUpdate(str);
+		snprintf(str, 15, "Niveau %03d", this->currentLvl);
+		this->levelRunning->textUpdate(str);
 	}
 }
-

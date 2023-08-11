@@ -12,8 +12,8 @@ public:
 	SkillTree();
 	~SkillTree();
 	static SkillTree *instance;
-	static std::set<Button*> buttons;
-	std::vector<SkillNode*> nodes;
+	static std::set<Button *> buttons;
+	std::vector<SkillNode *> nodes;
 	void autoLayout();
 
 	int calculateDepth(SkillNode *node, SkillNode *current, int maxDepth);

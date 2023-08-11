@@ -8,10 +8,10 @@ class Player : public Character
 public:
     Player();
     ~Player();
-    
-	static Player *instance;
 
-	void update();
+    static Player *instance;
+
+    void update();
     void shoot();
     void die();
 
@@ -21,6 +21,7 @@ public:
     int power;
     float defense;
     int reloadSpeed;
+
 private:
 };
 
