@@ -11,12 +11,12 @@ Player *Player::instance = nullptr;
 Player::Player()
 	// Pour changer la couleur on modifie les trois premiers paramètres
 	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 40, 40, 0.02f, 100, 10, 10),
-	experience(0),numberOfProjectiles(1)
+	  experience(0), numberOfProjectiles(1)
 {
 	Player::instance = this;
 
 	this->timeSinceLastShot = 0;
-	
+
 	this->reloadSpeed = 500000000;
 }
 
@@ -76,7 +76,7 @@ void Player::die()
 void Player::gainExperience(float experience)
 {
 	Player::instance->experience += experience;
-    char strXp[15];
-    snprintf(strXp, 15, "Xp: %07.0f", Player::instance->experience);
-    Level::instance->xpTotal->textUpdate(strXp);
+	char strXp[15];
+	snprintf(strXp, 15, "Xp: %07.0f", Player::instance->experience);
+	Level::instance->xpTotal->textUpdate(strXp);
 }
