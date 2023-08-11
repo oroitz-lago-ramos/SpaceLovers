@@ -19,6 +19,7 @@ SkillTree::SkillTree()
 		255, 0, 0, 0, 0, 100, 50, []()
 		{ Game::currentState = MENU; SkillTree::instance->~SkillTree(); },
 		"Back", false));
+
 	// red
 	SkillNode *node1 = new SkillNode(255, 0, 0, "Node 1");
 	// green
@@ -107,7 +108,7 @@ void SkillTree::autoLayout()
 SkillTree::~SkillTree()
 {
 	Game::currentState = MENU;
-	for (auto button : std::set<Button*>(this->buttons))
+	for (auto button : std::set<Button *>(this->buttons))
 	{
 		this->buttons.erase(button);
 		button->~Button();
@@ -116,6 +117,7 @@ SkillTree::~SkillTree()
 
 void SkillTree::render()
 {
+	// std::cout << "rendering" << std::endl;
 	for (auto button : buttons)
 	{
 		button->render();
@@ -139,7 +141,7 @@ void SkillTree::render()
 		{
 			Game::isRunning = false;
 		}
-		if (event.type == SDL_MOUSEBUTTONDOWN)
+		else if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
 			const SDL_Point point = {event.button.x, event.button.y};
 
