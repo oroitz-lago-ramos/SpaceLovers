@@ -70,7 +70,7 @@ void InGameItem::speedUp()
     float tempSpeed = Player::instance->speed;
     while(itemTimer < Xvaleur)
     {
-        Player::instance->speed += 0.1;
+        Player::instance->speed = 0.05f;
     }
     */
 }
