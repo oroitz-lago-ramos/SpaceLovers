@@ -64,7 +64,7 @@ void Player::shoot()
 			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, this->power, 0.1f);
 			break;
 		default:
-			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
+			new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, this->power, 0.1f);
 			break;
 		}
 		this->timeSinceLastShot = 0;
