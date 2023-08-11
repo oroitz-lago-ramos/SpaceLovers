@@ -21,7 +21,7 @@ public:
 	static Level *instance;
 	long long int nanoSecond;
 	int currentLvl;
-	int difficulty;
+	float difficulty;
 	std::string count;
 	Text *timer;
 	Text *levelRunning;

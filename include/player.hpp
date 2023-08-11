@@ -14,6 +14,7 @@ public:
 	void update();
     void shoot();
     void die();
+    void gainExperience(float experience);
 
     float experience;
 
