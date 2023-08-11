@@ -1,4 +1,6 @@
 #include <SDL2/SDL.h>
+#include <iostream>
+#include <stdio.h>
 
 #include "level.hpp"
 #include "enemy.hpp"
@@ -11,10 +13,14 @@ std::set<InGameItem *> Level::powerUps = {};
 Level* Level::instance = nullptr;
 
 Level::Level()
-	: timeSinceLastSpawn(0), timeSinceLastPoweUp(0)
+	: timeSinceLastSpawn(0), nanoSecond(60000000000), timeSinceLastPoweUp(0), currentLvl(1)
 {
 	Level::instance = this;
 	Player::instance->lifePoints = Player::instance->maxLifePoints;
+	char str[15];
+	snprintf(str, 15, "Niveau %03d", this -> currentLvl);
+	this -> timer = new Text(0, 250, 200, Graphics::windowWidth - 100, 200, 100, 75, "60", "Kichenset.otf", 24);
+	this -> levelRunning = new Text(0, 250, 200 ,Graphics::windowWidth -100, 100, 150, 75, str, "Kichenset.otf", 24);
 }
 
 Level::~Level()
@@ -39,24 +45,34 @@ void Level::update()
 		new Enemy(10, 10);
 		this -> timeSinceLastSpawn = 0;
 	}
+
 	if (this -> timeSinceLastPoweUp > 2000000000)
 	{
 		new InGameItem();
 		this -> timeSinceLastPoweUp = 0;
 	}
+	this -> countdown();
+	this -> timer->render();
+	this -> levelRunning->render();
 }
 
-// void Level::render()
-// {
-// 	for (auto enemy : std::set<Enemy *>(Level::enemies))
-//     {
-//         enemy->update();
-//         enemy->render();
-//     }
+void Level::countdown()
+{
+	this->nanoSecond -= Game::frameTime;
+	int second = Level::nanoSecond / 1000000000;
+	if (second >= 0)
+	{
+		this -> count = std::to_string(second);
+		this -> timer->textUpdate(this -> count.c_str());
+	}
+	if (second == 0)
+	{
+		this -> nanoSecond = 60000000000;
+		this -> currentLvl ++;
+		difficulty *= 1.1;
+		char str[15];
+		snprintf(str, 15, "Niveau %03d", this -> currentLvl);
+		this -> levelRunning->textUpdate(str);
+	}
+}
 
-//     for (auto projectile : std::set<Projectile *>(Level::projectiles))
-//     {
-//         projectile->update();
-//         projectile->render();
-//     }
-// }

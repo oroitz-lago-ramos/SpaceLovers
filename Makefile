@@ -23,6 +23,7 @@ inGameItem.cpp 	\
 player.cpp 	\
 level.cpp 	\
 projectile.cpp 	\
+text.cpp 	\
 
 
 SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS_RAW))

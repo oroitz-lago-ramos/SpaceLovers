@@ -20,7 +20,6 @@ Game::Game()
 {
 	// Appel de la méthode de création des boutons
 	this->createButtons();
-
 	srand(time(NULL));
 	auto start = chrono::steady_clock::now();
 
@@ -29,9 +28,13 @@ Game::Game()
 		auto end = chrono::steady_clock::now();
 		frameTime = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
 		start = end;
+
 		this->eventLoop();
+
 		SDL_SetRenderDrawColor(Graphics::renderer, 30, 30, 30, 30);
 		SDL_RenderClear(Graphics::renderer);
+		SDL_SetRenderDrawColor(Graphics::renderer, 255, 255, 255, 255);
+		SDL_RenderDrawLine(Graphics::renderer, Graphics::screenWidth, 0, Graphics::screenWidth, Graphics::screenHeight);
 
 		if (Game::currentState == MENU)
 		{
@@ -215,6 +218,10 @@ void Game::renderLoop()
     healthrect.w = Player::instance->lifePoints * 100 / Player::instance->maxLifePoints;
     SDL_RenderFillRect(Graphics::renderer, &healthrect);
     // bisous
+
+	// La c'est pour afficher le timer de temps restant avant de passer au prochain level.
+	SDL_Rect countdown = {Graphics::windowWidth - 100, 100, 100, 70};
+	SDL_SetRenderDrawColor(Graphics::renderer, 0, 255, 0, 255);
 }
 
 void Game::menuRenderLoop()
