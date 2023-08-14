@@ -27,6 +27,10 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue, float 
 	{
 		this->attacks.push_back(new Attack(this, 0));
 	}
+	if (flags & ATTACKSWEEP)
+	{
+		this->attacks.push_back(new Attack(this, 1));
+	}
 }
 
 Enemy::~Enemy()
@@ -42,7 +46,7 @@ void Enemy::update()
 {
 	this->checkCollisions();
 	this->timeSinceLastShot += Game::frameTime;
-	if (this->timeSinceLastShot > 1500000000)
+	if (!(this->flags & ISBOSS) && this->timeSinceLastShot > 1500000000)
 	{
 		this->shoot();
 	}
@@ -51,7 +55,30 @@ void Enemy::update()
 	{
 		this->die();
 	}
-	this->moveDown();
+	if (this->flags & ISBOSS && this->getY() >= Graphics::screenHeight / 5)
+	{
+		static int rightOrLeft = rand()%2;
+		if (rightOrLeft == 1)
+		{
+			this->moveRight();
+		}
+		else
+		{
+			this->moveLeft();
+		}
+		if (this->getX()>= Graphics::screenWidth)
+		{
+			rightOrLeft = 0;
+		}
+		if (this->getX()<= 0)
+		{
+			rightOrLeft = 1;
+		}
+	}
+	else
+	{
+		this->moveDown();
+	}
 	if (this->rect.y > Graphics::screenHeight)
 	{
 		this->~Enemy();
