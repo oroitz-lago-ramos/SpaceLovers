@@ -1,4 +1,5 @@
 #include <iostream>
+#include "SDL2/SDL_image.h"
 
 #include "player.hpp"
 #include "graphics.hpp"
@@ -14,7 +15,8 @@ Player::Player()
 	  experience(0), numberOfProjectiles(1)
 {
 	Player::instance = this;
-
+	SDL_Surface *player = IMG_Load("assets/player.png");
+	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, player);
 	this->timeSinceLastShot = 0;
 	this->reloadSpeed = 500000000;
 }

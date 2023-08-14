@@ -1,6 +1,7 @@
 #include <iostream>
 #include "functional"
 #include <SDL2/SDL.h>
+#include "SDL2/SDL_image.h"
 
 #include "enemy.hpp"
 #include "level.hpp"
@@ -13,6 +14,8 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
 	: Character(200, 100, 100, (rand() % (Graphics::screenWidth - 40) + 20), 10, 20, 20, 0.01, lifePoints, power, defense),
 	  xpValue(xpValue)
 {
+	SDL_Surface *enemy = IMG_Load("assets/ennemies.png");
+	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, enemy);
 	Level::enemies.insert(this);
 	this->timeSinceLastShot = 0;
 }
@@ -21,6 +24,8 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue, float 
 	: Character(255, 0, 0, Graphics::screenWidth / 2, 10, 50, 30, 0.01, lifePoints, power, defense),
 	  xpValue(xpValue), shield(shield), flags(flags)
 {
+	SDL_Surface *boss = IMG_Load("assets/boss.png");
+	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, boss);
 	Level::enemies.insert(this);
 	this->timeSinceLastShot = 0;
 	if (flags & ATTACKLASER)
