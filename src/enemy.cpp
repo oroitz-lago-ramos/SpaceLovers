@@ -21,7 +21,7 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue, float 
 	: Character(255, 0, 0, Graphics::screenWidth / 2, 10, 50, 30, 0.01, lifePoints, power, defense),
 	  xpValue(xpValue), shield(shield), flags(flags)
 {
-	Level::bosses.insert(this);
+	Level::enemies.insert(this);
 	this->timeSinceLastShot = 0;
 	if (flags & ATTACKLASER)
 	{
@@ -32,6 +32,10 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue, float 
 Enemy::~Enemy()
 {
 	Level::enemies.erase(this);
+	for (Attack *attack : this->attacks)
+	{
+		attack->~Attack();
+	}
 }
 
 void Enemy::update()
@@ -52,7 +56,7 @@ void Enemy::update()
 	{
 		this->~Enemy();
 	}
-	for (Attack* attack : this->attacks)
+	for (Attack *attack : this->attacks)
 	{
 		attack->update();
 	}

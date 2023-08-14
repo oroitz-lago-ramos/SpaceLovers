@@ -13,12 +13,11 @@
 
 std::set<Projectile *> Level::projectiles = {};
 std::set<Enemy *> Level::enemies = {};
-std::set<Enemy *> Level::bosses = {};
 std::set<InGameItem *> Level::powerUps = {};
 Level *Level::instance = nullptr;
 
 Level::Level()
-	: timeSinceLastSpawn(0), timeSinceLastPoweUp(0), timeSinceLastBoss(0), nanoSecond(60000000000),  currentLvl(1), difficulty(1)
+	: timeSinceLastSpawn(0), timeSinceLastPoweUp(0), timeSinceLastBoss(0), nanoSecond(60000000000), currentLvl(1), difficulty(1)
 {
 	Level::instance = this;
 	Player::instance->lifePoints = Player::instance->maxLifePoints;
@@ -40,10 +39,6 @@ Level::~Level()
 	for (auto enemy : std::set<Enemy *>(this->enemies))
 	{
 		enemies.erase(enemy);
-	}
-	for (auto enemy : std::set<Enemy *>(this->bosses))
-	{
-		bosses.erase(enemy);
 	}
 	Game::currentState = MENU;
 }
