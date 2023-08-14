@@ -63,7 +63,7 @@ void Level::update()
 
 	if (this->timeSinceLastPoweUp > 2000000000)
 	{
-		new InGameItem(HEAL);
+		new InGameItem(rand()%NUMBER_OF_BOOST);
 		this->timeSinceLastPoweUp = 0;
 	}
 	this->countdown();

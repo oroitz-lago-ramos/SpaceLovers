@@ -8,7 +8,7 @@
 #include "level.hpp"
 #include "player.hpp"
 
-InGameItem::InGameItem(PowerUp powerUp)
+InGameItem::InGameItem(int powerUp)
 	: Character(30, 200, 20, rand() % Graphics::screenWidth, 10, 10, 10, 0.02f),
 	  powerUp(powerUp)
 {
@@ -34,25 +34,8 @@ void InGameItem::checkCollisions()
 {
 	if (SDL_HasIntersection(&this->rect, &Player::instance->rect))
 	{
-		this->powerUpAction();
+		(this->*boostFonctions[this->powerUp])();
 		this->~InGameItem();
-	}
-}
-
-void InGameItem::powerUpAction()
-{
-	switch (this->powerUp)
-	{
-	case HEAL:
-		this->heal();
-		break;
-
-	case BOMB:
-		this->bomb();
-		break;
-
-	default:
-		break;
 	}
 }
 
