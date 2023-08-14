@@ -1,6 +1,6 @@
 #ifndef INGAMEITEM_HPP
 #define INGAMEITEM_HPP
-#define NUMBER_OF_BOOST 5
+#define NUMBER_OF_BOOST 1
 
 #include <SDL2/SDL.h>
 #include "entity.hpp"
@@ -28,15 +28,15 @@ public:
 	~InGameItem();
 	void update();
 	int powerUp;
-	myfunc boostFonctions[NUMBER_OF_BOOST] = {&InGameItem::heal,&InGameItem::bomb,&InGameItem::changeReloadSpeed,&InGameItem::speedUp,&InGameItem::powerBoost};
-
+	//myfunc boostFonctions[NUMBER_OF_BOOST] = {&InGameItem::heal,&InGameItem::bomb,&InGameItem::changeReloadSpeed,&InGameItem::speedUp,&InGameItem::powerBoost};
+	myfunc boostFonctions[NUMBER_OF_BOOST] = {&InGameItem::changeNumberOfProjectiles};
 
 private:
 	void checkCollisions();
 
 	void heal();
 	void bomb();
-	void changeNumberOfProjectiles(int number);
+	void changeNumberOfProjectiles();
 	void changeReloadSpeed();
 	void speedUp();
 	void powerBoost();

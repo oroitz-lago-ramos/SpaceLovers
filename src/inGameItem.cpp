@@ -1,6 +1,5 @@
 #include <iostream>
 #include <SDL2/SDL.h>
-#include <algorithm>
 
 #include "entity.hpp"
 #include "graphics.hpp"
@@ -68,12 +67,12 @@ void InGameItem::bomb()
 	}
 }
 
-void InGameItem::changeNumberOfProjectiles(int number)
+void InGameItem::changeNumberOfProjectiles()
 {
-	Player::instance->numberOfProjectiles = number;
+	Player::instance->numberOfProjectiles += rand()% 2 + 1;
 }
 
 void InGameItem::changeReloadSpeed()
 {
-	Player::instance->reloadSpeed = 100000;
+	Player::instance->reloadSpeed = 10000000;
 }
