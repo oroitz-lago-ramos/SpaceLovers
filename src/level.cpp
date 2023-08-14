@@ -41,6 +41,7 @@ Level::~Level()
 		enemies.erase(enemy);
 	}
 	Game::currentState = MENU;
+	Game::inputs = 0;
 }
 
 void Level::update()
@@ -57,7 +58,7 @@ void Level::update()
 
 	if (this->timeSinceLastBoss > 2000000000)
 	{
-		new Enemy(20 * this->difficulty, 20 * this->difficulty, 20 * this->difficulty, 10 * this->difficulty, 20 * this->difficulty, ISBOSS | ATTACKLASER);
+		new Enemy(20 * this->difficulty, 20 * this->difficulty, 20 * this->difficulty, 10 * this->difficulty, 20 * this->difficulty, ISBOSS | (1 << (rand()%2+1)));
 		this->timeSinceLastBoss = 0;
 	}
 
