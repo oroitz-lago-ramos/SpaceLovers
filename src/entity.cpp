@@ -47,3 +47,55 @@ float Entity::getY()
 {
 	return this->y;
 }
+
+void Entity::setWidth(int width)
+{
+	this->width = width;
+	this->rect.w = width;
+}
+
+int Entity::getWidth()
+{
+	return this->width;
+}
+
+void Entity::setHeight(int height)
+{
+	this->height = height;
+	this->rect.h = height;
+}
+
+int Entity::getHeight()
+{
+	return this->height;
+}
+
+void Entity::setR(int r)
+{
+	this->r = r;
+}
+
+int Entity::getR()
+{
+	return this->r;
+}
+
+void Entity::setG(int g)
+{
+	this->g = g;
+}
+
+int Entity::getG()
+{
+	return this->g;
+}
+
+void Entity::setB(int b)
+{
+	this->b = b;
+}
+
+int Entity::getB()
+{
+	return this->b;
+}

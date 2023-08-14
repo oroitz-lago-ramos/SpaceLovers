@@ -62,8 +62,8 @@ void SkillNode::autoLayout(int xSpacing, int ySpacing)
 		{
 			levelNodeCount[level] = 0;
 		}
-		int xPos = levelNodeCount[level] * (width + xSpacing);
-		int yPos = level * (height + ySpacing);
+		int xPos = levelNodeCount[level] * (this->getWidth() + xSpacing);
+		int yPos = level * (this->getHeight() + ySpacing);
 		pair.first->setPosition(xPos, yPos);
 		++levelNodeCount[level];
 	}

@@ -11,7 +11,7 @@ Rect::Rect(int r, int g, int b, int x, int y, int width, int height)
 }
 void Rect::render(bool fill)
 {
-	SDL_SetRenderDrawColor(Graphics::renderer, this->r, this->g, this->b, 255);
+	SDL_SetRenderDrawColor(Graphics::renderer, this->getR(), this->getG(), this->getB(), 255);
 	if (fill)
 	{
 		SDL_RenderFillRect(Graphics::renderer, &rect);
