@@ -68,7 +68,7 @@ void InGameItem::heal()
 
 void InGameItem::speedUp()
 {
-	Player::instance->speed += 0.02f
+	Player::instance->speed += 0.02f;
 	// ou Player::instance->speed = a qqchse
 }
 
