@@ -49,6 +49,7 @@ void InGameItem::powerUpAction()
 
 	case BOMB:
 		this->bomb();
+		break;
 
 	default:
 		break;
@@ -58,32 +59,22 @@ void InGameItem::powerUpAction()
 void InGameItem::heal()
 {
 
-	/* int heal = 20;
-	//Comment faire que ça heal max jusqu'a maxLifePoints
+	int heal = 20;
 	if (Player::instance->lifePoints < Player::instance->maxLifePoints - heal)
 	{
 		Player::instance->lifePoints += 20;
-	} */
-
-	// Sinon :
-	Player::instance->lifePoints = std::min(Player::instance->lifePoints += 20, Player::instance->maxLifePoints);
+	}
 }
 
 void InGameItem::speedUp()
 {
-	/* Comment faire les 10 secondes?
-	this-> itemTimer = 0;
-	float tempSpeed = Player::instance->speed;
-	while(itemTimer < Xvaleur)
-	{
-		Player::instance->speed = 0.05f;
-	}
-	*/
+	Player::instance->speed += 0.02f
+	// ou Player::instance->speed = a qqchse
 }
 
 void InGameItem::powerBoost()
 {
-	Player::instance->power = 10;
+	Player::instance->power += 10;
 }
 
 void InGameItem::bomb()
@@ -101,4 +92,5 @@ void InGameItem::changeNumberOfProjectiles(int number)
 
 void InGameItem::changeReloadSpeed()
 {
+	Player::instance->reloadSpeed = 100000;
 }

@@ -6,26 +6,26 @@
 
 enum PowerUp
 {
-    HEAL,
-    SPEED_UP,
-    DEFENSE_UP,
-    SHIELD,
-    DOUBLE_PROJECTILE,
-    RELOAD_SPEED,
-    BOMB
+	HEAL,
+	SPEED_UP,
+	DEFENSE_UP,
+	SHIELD,
+	DOUBLE_PROJECTILE,
+	RELOAD_SPEED,
+	BOMB
 };
 
 class InGameItem : public Character
 {
 public:
-    InGameItem(PowerUp powerUp);
-    ~InGameItem();
-    void update();
-    PowerUp powerUp;
+	InGameItem(PowerUp powerUp);
+	~InGameItem();
+	void update();
+	PowerUp powerUp;
 
 private:
-    void checkCollisions();
-    void powerUpAction();
+	void checkCollisions();
+	void powerUpAction();
 
 	void heal();
 	void bomb();
@@ -33,6 +33,8 @@ private:
 	void changeReloadSpeed();
 	void speedUp();
 	void powerBoost();
+
+	// void (*fonctions[])();
 };
 
 #endif
