@@ -7,6 +7,7 @@
 #include "enemy.hpp"
 #include "player.hpp"
 #include <set>
+#include <climits>
 
 Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed, float dirX, float dirY, bool target)
 	: Character(r, g, b, x, y, 5, 5, speed, dirX, dirY),

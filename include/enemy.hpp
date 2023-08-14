@@ -1,14 +1,20 @@
 #ifndef ENEMY_HPP
 #define ENEMY_HPP
 
+#define ISBOSS 1
+#define ATTACKLASER 2
+#define ATTACKSWEEP 4
+
 #include <SDL2/SDL.h>
+#include <vector>
 #include "character.hpp"
+#include "attack.hpp"
 
 class Enemy : public Character
 {
 public:
 	Enemy(float lifePoints, float power, float defense, float xpValue);
-	Enemy(float lifePoints, float power, float defense, float xpValue, float shield);
+	Enemy(float lifePoints, float power, float defense, float xpValue, float shield, int flags);
 	~Enemy();
 	void update();
 
@@ -17,9 +23,12 @@ public:
 
 	float xpValue;
 	float shield;
+	int flags;
+	std::vector<Attack *> attacks;
 
 private:
 	void checkCollisions();
 };
+
 
 #endif

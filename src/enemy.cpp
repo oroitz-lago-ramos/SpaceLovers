@@ -7,6 +7,7 @@
 #include "character.hpp"
 #include "graphics.hpp"
 #include "game.hpp"
+#include <vector>
 
 Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
 	: Character(200, 100, 100, (rand() % (Graphics::screenWidth - 40) + 20), 10, 20, 20, 0.01, lifePoints, power, defense),
@@ -16,12 +17,16 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
 	this->timeSinceLastShot = 0;
 }
 
-Enemy::Enemy(float lifePoints, float power, float defense, float xpValue, float shield)
+Enemy::Enemy(float lifePoints, float power, float defense, float xpValue, float shield, int flags)
 	: Character(255, 0, 0, Graphics::screenWidth / 2, 10, 50, 30, 0.01, lifePoints, power, defense),
-	  xpValue(xpValue), shield(shield)
+	  xpValue(xpValue), shield(shield), flags(flags)
 {
 	Level::bosses.insert(this);
 	this->timeSinceLastShot = 0;
+	if (flags & ATTACKLASER)
+	{
+		this->attacks.push_back(new Attack(this, 0));
+	}
 }
 
 Enemy::~Enemy()
@@ -46,6 +51,10 @@ void Enemy::update()
 	if (this->rect.y > Graphics::screenHeight)
 	{
 		this->~Enemy();
+	}
+	for (attack:attacks)
+	{
+		attack->update();
 	}
 }
 

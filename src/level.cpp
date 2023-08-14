@@ -60,9 +60,9 @@ void Level::update()
 		this->timeSinceLastSpawn = 0;
 	}
 
-	if (this->timeSinceLastBoss > 58000000000)
+	if (this->timeSinceLastBoss > 2000000000)
 	{
-		new Enemy(20 * this->difficulty, 20 * this->difficulty, 20 * this->difficulty, 10 * this->difficulty, 20 * this->difficulty);
+		new Enemy(20 * this->difficulty, 20 * this->difficulty, 20 * this->difficulty, 10 * this->difficulty, 20 * this->difficulty, ISBOSS | ATTACKLASER);
 		this->timeSinceLastBoss = 0;
 	}
 
