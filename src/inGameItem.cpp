@@ -1,11 +1,13 @@
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <functional>
 
 #include "entity.hpp"
 #include "graphics.hpp"
 #include "inGameItem.hpp"
 #include "level.hpp"
 #include "player.hpp"
+#include "game.hpp"
 
 InGameItem::InGameItem(int powerUp)
 	: Character(30, 200, 20, rand() % Graphics::screenWidth, 10, 10, 10, 0.02f),
@@ -50,8 +52,18 @@ void InGameItem::heal()
 
 void InGameItem::speedUp()
 {
-	Player::instance->speed += 0.02f;
-	// ou Player::instance->speed = a qqchse
+	std::cout << "JE pends speedup" << std::endl;
+	PlayerBoost boost;
+	boost.powerUpDuration = 10000000000;
+	boost.timeSincePowerUpStart = 0;
+	boost.onEnd = [](){ Player::instance->speed -= 0.5f; std::cout << "Je perds vitesse" << std::endl;};
+
+	/* Player::instance->playerBoost.push_back((PlayerBoost){10000000000ull,0ull, []()
+		{ Player::instance->speed -= 0.5f; std::cout << "Je perds vitesse" << std::endl;}
+		}); */
+	Player::instance->playerBoost.push_back(boost);
+	Player::instance->speed += 0.5f;
+	std::cout << Player::instance->speed << std::endl;
 }
 
 void InGameItem::powerBoost()
@@ -69,7 +81,7 @@ void InGameItem::bomb()
 
 void InGameItem::changeNumberOfProjectiles()
 {
-	Player::instance->numberOfProjectiles += rand()% 2 + 1;
+	Player::instance->numberOfProjectiles += rand() % 2 + 1;
 }
 
 void InGameItem::changeReloadSpeed()

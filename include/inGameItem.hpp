@@ -10,27 +10,27 @@
 enum PowerUp
 {
 	HEAL,
-	SPEED_UP,
-	DEFENSE_UP,
-	SHIELD,
-	DOUBLE_PROJECTILE,
+	BOMB,
 	RELOAD_SPEED,
-	BOMB
+	SPEED_UP,
+	POWER_BOOST,
+	MULTIPLE_PROJECTILE,
+
+	// DEFENSE_UP,
+	// SHIELD,
 };
-
-
 
 class InGameItem : public Character
 {
 	typedef void (InGameItem::*myfunc)();
+
 public:
 	InGameItem(int powerUp);
 	~InGameItem();
 	void update();
 	int powerUp;
-	//myfunc boostFonctions[NUMBER_OF_BOOST] = {&InGameItem::heal,&InGameItem::bomb,&InGameItem::changeReloadSpeed,&InGameItem::speedUp,&InGameItem::powerBoost};
-	myfunc boostFonctions[NUMBER_OF_BOOST] = {&InGameItem::changeNumberOfProjectiles};
-
+	//myfunc boostFonctions[NUMBER_OF_BOOST] = {&InGameItem::heal, &InGameItem::bomb, &InGameItem::changeReloadSpeed, &InGameItem::speedUp, &InGameItem::powerBoost, &InGameItem::changeNumberOfProjectiles};
+	myfunc boostFonctions[1] = {&InGameItem::speedUp};
 private:
 	void checkCollisions();
 
