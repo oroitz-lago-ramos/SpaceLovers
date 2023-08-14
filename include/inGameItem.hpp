@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include "entity.hpp"
+#include "character.hpp"
 
 // enum PowerUp {HEAL, SPEEDUP, DEFENSEUP, SHIELD, DOUBLE_PROJECTILE, RELOAD_SPEED, BOMB};
 class InGameItem : public Character

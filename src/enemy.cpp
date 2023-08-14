@@ -52,7 +52,7 @@ void Enemy::update()
 	{
 		this->~Enemy();
 	}
-	for (attack:attacks)
+	for (Attack* attack : this->attacks)
 	{
 		attack->update();
 	}

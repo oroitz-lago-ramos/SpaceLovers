@@ -10,6 +10,8 @@
 #include "character.hpp"
 #include "attack.hpp"
 
+class Attack;
+
 class Enemy : public Character
 {
 public:
@@ -29,6 +31,5 @@ public:
 private:
 	void checkCollisions();
 };
-
 
 #endif
