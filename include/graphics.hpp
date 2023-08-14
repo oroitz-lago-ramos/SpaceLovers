@@ -4,7 +4,6 @@
 #include <set>
 
 #include "button.hpp"
-#include "enemy.hpp"
 
 class Graphics
 {

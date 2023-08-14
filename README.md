@@ -119,3 +119,6 @@ Objectif:
     - Implementation des boss
     - 
 
+### 14.08.2023 Rodolphe, Anthony
+
+Travail sur les déplacements du boss et ses coméptences, début de texturage du jeu.

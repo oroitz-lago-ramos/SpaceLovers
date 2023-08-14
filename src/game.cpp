@@ -182,12 +182,6 @@ void Game::renderLoop()
 		enemy->render();
 	}
 
-	for (auto enemy : std::set<Enemy *>(Level::bosses))
-	{
-		enemy->update();
-		enemy->render();
-	}
-
 	for (auto projectile : std::set<Projectile *>(Level::projectiles))
 	{
 		projectile->update();
