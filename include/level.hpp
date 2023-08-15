@@ -23,6 +23,7 @@ public:
 	Text *timer;
 	Text *levelRunning;
 	Text *xpTotal;
+	Text *fps;
 	void update();
 	void countdown();
 	void initPlayer();

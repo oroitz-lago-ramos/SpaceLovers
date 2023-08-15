@@ -27,6 +27,9 @@ Level::Level()
 	this->timer = new Text(0, 250, 200, Graphics::windowWidth - 100, 200, 100, 75, "60", "Kichenset.otf", 24);
 	this->levelRunning = new Text(0, 250, 200, Graphics::windowWidth - 100, 100, 150, 75, str, "Kichenset.otf", 24);
 	this->xpTotal = new Text(0, 250, 200, Graphics::windowWidth - 100, Graphics::screenHeight - 150, 150, 75, strXp, "Kichenset.otf", 24);
+	char strFps[15];
+	snprintf(strFps, 15, "Fps: %04d", 1000000000 / Game::frameTime);
+	this->fps = new Text(0, 250, 200, Graphics::windowWidth - 100, Graphics::screenHeight - 100, 150, 75, strFps, "Kichenset.otf", 24);
 	this->initPlayer();
 }
 
@@ -71,6 +74,10 @@ void Level::update()
 	this->timer->render();
 	this->levelRunning->render();
 	this->xpTotal->render();
+	char strFps[15];
+	snprintf(strFps, 15, "Fps: %04d", 1000000000 / Game::frameTime);
+	this->fps->textUpdate(strFps);
+	this->fps->render();
 }
 
 void Level::countdown()
