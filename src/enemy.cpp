@@ -18,6 +18,9 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
 	this->maxShield = 0;
 	SDL_Surface *enemy = IMG_Load("assets/ennemies.png");
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, enemy);
+	SDL_FreeSurface(enemy);
+	SDL_SetTextureBlendMode(this->texture, SDL_BLENDMODE_BLEND);
+
 	Level::enemies.insert(this);
 	this->timeSinceLastShot = 0;
 }
@@ -28,6 +31,8 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue, float 
 {
 	SDL_Surface *boss = IMG_Load("assets/boss.png");
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, boss);
+	SDL_FreeSurface(boss);
+	SDL_SetTextureBlendMode(this->texture, SDL_BLENDMODE_BLEND);
 	Level::enemies.insert(this);
 	this->timeSinceLastShot = 0;
 	if (flags & ATTACKLASER)

@@ -18,6 +18,8 @@ Player::Player()
 	Player::instance = this;
 	SDL_Surface *player = IMG_Load("assets/player.png");
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, player);
+	SDL_FreeSurface(player);
+	SDL_SetTextureBlendMode(this->texture, SDL_BLENDMODE_BLEND);
 	this->timeSinceLastShot = 0;
 	this->reloadSpeed = 500000000;
 }
