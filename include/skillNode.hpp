@@ -3,8 +3,34 @@
 
 #include <vector>
 #include <string>
+#include <functional>
 
 #include "entity.hpp"
+#include "text.hpp"
+
+#define NUMBER_OF_SKILLS 3
+
+#pragma once
+
+typedef struct s_pair
+{
+	int id;
+	int level;
+} t_pair;
+
+typedef struct s_skill
+{
+	int id;
+	int level;
+	int maxLevel;
+	t_pair requirements;
+	std::function<void()> effect;
+	std::string name;
+	std::string description;
+	std::vector<int> costs;
+} skill;
+
+extern skill __skills[NUMBER_OF_SKILLS];
 
 class SkillNode : public Entity
 {
@@ -19,7 +45,9 @@ public:
 	std::string name;
 	int requiredBy;
 	int depth;
+	int id;
 	int checkedRequirements;
+	Text *text;
 
 private:
 };

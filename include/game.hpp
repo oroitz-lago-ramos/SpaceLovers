@@ -7,6 +7,15 @@
 
 #include "graphics.hpp"
 #include "player.hpp"
+#include "skillNode.hpp"
+
+#include <vector>
+
+typedef struct save
+{
+	float experience;
+	std::vector<t_pair> skills;
+} Save;
 
 enum GameState
 {
@@ -38,6 +47,10 @@ private:
 	void keyup(SDL_Event *event);
 	void renderLoop();
 	void menuRenderLoop();
+	bool loadGame();
+	void saveGame();
 };
+
+void initializeSkills();
 
 #endif

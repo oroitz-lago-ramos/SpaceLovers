@@ -7,6 +7,7 @@
 #include "button.hpp"
 #include "game.hpp"
 #include "graphics.hpp"
+#include "text.hpp"
 
 std::set<Button *> SkillTree::buttons = {};
 SkillTree *SkillTree::instance = nullptr;
@@ -20,25 +21,26 @@ SkillTree::SkillTree()
 		{ Game::currentState = MENU; SkillTree::instance->~SkillTree(); },
 		"Back", false));
 	// red
-	SkillNode *node1 = new SkillNode(255, 0, 0, "Node 1");
-	// green
-	SkillNode *node2 = new SkillNode(0, 255, 0, "Node 2");
-	// blue
-	SkillNode *node3 = new SkillNode(0, 0, 255, "Node 3");
-	SkillNode *node4 = new SkillNode(200, 200, 200, "Node 4");
-	SkillNode *node5 = new SkillNode(200, 200, 0, "Node 5");
+	// SkillNode *node1 = new SkillNode(255, 0, 0, "Node 1");
+	// // green
+	// SkillNode *node2 = new SkillNode(0, 255, 0, "Node 2");
+	// // blue
+	// SkillNode *node3 = new SkillNode(0, 0, 255, "Node 3");
+	// SkillNode *node4 = new SkillNode(200, 200, 200, "Node 4");
+	// SkillNode *node5 = new SkillNode(200, 200, 0, "Node 5");
 
-	this->nodes.push_back(node1);
-	this->nodes.push_back(node2);
-	this->nodes.push_back(node3);
-	this->nodes.push_back(node4);
-	this->nodes.push_back(node5);
+	// this->nodes.push_back(node1);
+	// this->nodes.push_back(node2);
+	// this->nodes.push_back(node3);
+	// this->nodes.push_back(node4);
+	// this->nodes.push_back(node5);
 
-	node2->addRequirement(node1);
-	node3->addRequirement(node2);
+	// node2->addRequirement(node1);
 	// node3->addRequirement(node2);
-	node4->addRequirement(node2);
-	node5->addRequirement(node2);
+	// // node3->addRequirement(node2);
+	// node4->addRequirement(node2);
+	// node5->addRequirement(node2);
+	this->getNodes();
 
 	for (long long unsigned int i = 0; i < nodes.size(); i++)
 	{
@@ -58,6 +60,10 @@ SkillTree::SkillTree()
 		node->depth = this->calculateDepth(node, node, 0);
 	}
 	this->autoLayout();
+	for (SkillNode *node : nodes)
+	{
+		node->text = new Text(0, 255, 0, node->getX(), node->getY(), node->getWidth(), node->getHeight(), node->name.c_str(), "Kichenset.otf", 64);
+	}
 }
 
 int SkillTree::calculateDepth(SkillNode *node, SkillNode *current, int maxDepth)
@@ -132,6 +138,7 @@ void SkillTree::render()
 	for (auto node : nodes)
 	{
 		node->render();
+		node->text->render();
 	}
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
@@ -150,6 +157,41 @@ void SkillTree::render()
 				{
 					button->onClick();
 					break;
+				}
+			}
+			for (auto *node : this->nodes)
+			{
+				if (SDL_PointInRect(&point, &node->rect))
+				{
+					std::cout << "Node clicked" << std::endl;
+					// node->onClick();
+					if (__skills[node->id].level < __skills[node->id].maxLevel){
+						__skills[node->id].level++;
+						std::cout << "Skill level: " << __skills[node->id].level << std::endl;}
+					break;
+				}
+			}
+		}
+	}
+}
+
+void SkillTree::getNodes()
+{
+	for (long long unsigned int i = 0; i < sizeof(__skills) / sizeof(skill); i++)
+	{
+		SkillNode *node = new SkillNode(255, 0, 0, __skills[i].name);
+		node->id = __skills[i].id;
+		this->nodes.push_back(node);
+	}
+	for (long long unsigned int i = 0; i < sizeof(__skills) / sizeof(skill); i++)
+	{
+		if (__skills[i].requirements.id != -1)
+		{
+			for (long long unsigned int j = 0; j < sizeof(__skills) / sizeof(skill); j++)
+			{
+				if (__skills[i].requirements.id == __skills[j].id)
+				{
+					this->nodes[i]->addRequirement(this->nodes[j]);
 				}
 			}
 		}

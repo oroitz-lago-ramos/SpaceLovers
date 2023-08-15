@@ -20,7 +20,6 @@ Level::Level()
 	: timeSinceLastSpawn(0), timeSinceLastPoweUp(0), timeSinceLastBoss(0), nanoSecond(60000000000), currentLvl(1), difficulty(1)
 {
 	Level::instance = this;
-	Player::instance->lifePoints = Player::instance->maxLifePoints;
 	char str[15];
 	snprintf(str, 15, "Niveau %03d", this->currentLvl);
 	char strXp[15];
@@ -28,6 +27,7 @@ Level::Level()
 	this->timer = new Text(0, 250, 200, Graphics::windowWidth - 100, 200, 100, 75, "60", "Kichenset.otf", 24);
 	this->levelRunning = new Text(0, 250, 200, Graphics::windowWidth - 100, 100, 150, 75, str, "Kichenset.otf", 24);
 	this->xpTotal = new Text(0, 250, 200, Graphics::windowWidth - 100, Graphics::screenHeight - 150, 150, 75, strXp, "Kichenset.otf", 24);
+	this->initPlayer();
 }
 
 Level::~Level()
@@ -91,4 +91,31 @@ void Level::countdown()
 		snprintf(str, 15, "Niveau %03d", this->currentLvl);
 		this->levelRunning->textUpdate(str);
 	}
+}
+
+void Level::initPlayer()
+{
+	// __skills[0].level = 5;
+	// HERE SET BASE STATS
+	Player::instance->maxLifePoints = 100;
+	Player::instance->power = 10;
+	Player::instance->power = 10;
+	Player::instance->speed = 0.02f;
+	Player::instance->reloadSpeed = 500000000;
+	Player::instance->setX(Graphics::windowWidth / 2 - Player::instance->getWidth() / 2);
+	Player::instance->setY(Graphics::screenHeight - Player::instance->getHeight() - 50);
+
+	// HERE APPLY PASSIVE SKILLS
+	for (auto skill : __skills)
+	{
+		for (int i = 0; i < skill.level; i++)
+		{
+			skill.effect();
+		}
+	}
+
+	std::cout << Player::instance->power << std::endl;
+
+	// HERE DO THE REST
+	Player::instance->lifePoints = Player::instance->maxLifePoints;
 }
