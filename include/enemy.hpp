@@ -24,7 +24,6 @@ public:
 	void shoot();
 
 	float xpValue;
-	float shield;
 	int flags;
 	std::vector<Attack *> attacks;
 

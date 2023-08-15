@@ -12,6 +12,12 @@ Character::Character(int r, int g, int b, int x, int y, int width, int height, f
 {
 }
 
+Character::Character(int r, int g, int b, int x, int y, int width, int height, float speed, float lifePoints, float power, float defense, float shield)
+	: Entity(r, g, b, x, y, width, height),
+	  speed(speed), lifePoints(lifePoints), maxLifePoints(lifePoints), power(power), defense(defense), shield(shield)
+{
+}
+
 Character::Character(int r, int g, int b, int x, int y, int width, int height, float speed, float dirX, float dirY)
 	: Entity(r, g, b, x, y, width, height),
 	  speed(speed), lifePoints(1), maxLifePoints(1), dirX(dirX), dirY(dirY)
@@ -56,5 +62,16 @@ void Character::moveLeft()
 
 void Character::takeDamage(float damage)
 {
+	if(this->shield > 0)
+	{
+		this->shield -= damage;
+		if(damage > this->shield)
+		{
+			damage = damage - this->shield;
+			this->lifePoints -= damage;
+		}
+
+	}
 	this->lifePoints -= damage;
+
 }

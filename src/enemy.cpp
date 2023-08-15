@@ -21,8 +21,8 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
 }
 
 Enemy::Enemy(float lifePoints, float power, float defense, float xpValue, float shield, int flags)
-	: Character(255, 0, 0, Graphics::screenWidth / 2, 10, 50, 30, 0.01, lifePoints, power, defense),
-	  xpValue(xpValue), shield(shield), flags(flags)
+	: Character(255, 0, 0, Graphics::screenWidth / 2, 10, 50, 30, 0.01, lifePoints, power, defense, shield),
+	  xpValue(xpValue), flags(flags)
 {
 	SDL_Surface *boss = IMG_Load("assets/boss.png");
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, boss);

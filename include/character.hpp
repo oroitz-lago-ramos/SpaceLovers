@@ -8,6 +8,7 @@ class Character : public Entity
 {
 public:
 	Character(int r, int g, int b, int x, int y, int width, int height, float speed, float lifePoints, float power, float defense);
+	Character(int r, int g, int b, int x, int y, int width, int height, float speed, float lifePoints, float power, float defense, float shield);
 	Character(int r, int g, int b, int x, int y, int width, int height, float speed);
 	Character(int r, int g, int b, int x, int y, int width, int height, float speed, float dirX, float dirY);
 	~Character();
@@ -23,6 +24,7 @@ public:
 	float dirY;
 	float power;
 	float defense;
+	float shield;
 
 	unsigned long long int timeSinceLastShot;
 
