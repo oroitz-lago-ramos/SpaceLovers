@@ -11,11 +11,12 @@
 #include <climits>
 
 Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed, float dirX, float dirY, bool target)
-	: Character(r, g, b, x, y, 5, 5, speed, dirX, dirY),
+	: Character(r, g, b, x, y, 15, 15, speed, dirX, dirY),
 	  direction(0), power(power), target(nullptr)
 {
 	SDL_Surface *projectile = IMG_Load("assets/flame1.png");
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, projectile);
+	SDL_FreeSurface(projectile);
 	if (target)
 	{
 		// Enemy *enemy = nullptr;
@@ -37,12 +38,13 @@ Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed
 	Level::projectiles.insert(this);
 }
 Projectile::Projectile(int r, int g, int b, int x, int y, int direction, int power, float speed)
-	: Character(r, g, b, x, y, 5, 5, speed),
+	: Character(r, g, b, x, y, 15, 15, speed),
 	  direction(direction), power(power), target(nullptr)
 
 {
 	SDL_Surface *projectile = IMG_Load("assets/flame1.png");
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, projectile);
+	SDL_FreeSurface(projectile);
 	Level::projectiles.insert(this);
 }
 
@@ -65,11 +67,12 @@ void Projectile::findTarget()
 }
 
 Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed, float dirX, float dirY)
-	: Character(r, g, b, x, y, 5, 5, speed, dirX, dirY),
+	: Character(r, g, b, x, y, 15, 15, speed, dirX, dirY),
 	  direction(0), power(power), target(nullptr)
 {
 	SDL_Surface *projectile = IMG_Load("assets/flame1.png");
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, projectile);
+	SDL_FreeSurface(projectile);
 	Level::projectiles.insert(this);
 }
 

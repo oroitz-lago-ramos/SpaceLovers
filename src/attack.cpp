@@ -1,5 +1,5 @@
 #include <SDL2/SDL.h>
-
+#include "SDL2/SDL_image.h"
 #include "attack.hpp"
 #include "enemy.hpp"
 #include "graphics.hpp"
@@ -35,14 +35,17 @@ Attack::~Attack()
 
 void Attack::laser()
 {
+    SDL_Surface *laserBeam = IMG_Load("assets/laser.png");
+    SDL_Texture *laserTexture = SDL_CreateTextureFromSurface(Graphics::renderer, laserBeam);
+    SDL_FreeSurface(laserBeam);
     Rect *laser = new Rect(255, 0, 0, this->enemy->getX(),
                            (Graphics::screenHeight - this->enemy->getY()) / 2 + this->enemy->getY(),
                            this->enemy->getWidth() / 2, Graphics::screenHeight - this->enemy->getY());
+    SDL_RenderCopy(Graphics::renderer, laserTexture, NULL, &laser->rect);
     if (SDL_HasIntersection(&laser->rect, &Player::instance->rect))
     {
         Player::instance->takeDamage(this->enemy->power * this->multiplier);
     }
-    laser->render(true);
 }
 
 void Attack::sweep()

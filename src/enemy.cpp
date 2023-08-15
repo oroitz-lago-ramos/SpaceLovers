@@ -11,7 +11,7 @@
 #include <vector>
 
 Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
-	: Character(200, 100, 100, (rand() % (Graphics::screenWidth - 40) + 20), 10, 20, 20, 0.01, lifePoints, power, defense),
+	: Character(200, 100, 100, (rand() % (Graphics::screenWidth - 40) + 20), 10, 40, 40, 0.01, lifePoints, power, defense),
 	  xpValue(xpValue), flags(0)
 {
 	this->shield = 0;
@@ -26,7 +26,7 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
 }
 
 Enemy::Enemy(float lifePoints, float power, float defense, float xpValue, float shield, int flags)
-	: Character(255, 0, 0, Graphics::screenWidth / 2, 10, 50, 30, 0.01, lifePoints, power, defense, shield),
+	: Character(255, 0, 0, Graphics::screenWidth / 2, 10, 70, 50, 0.01, lifePoints, power, defense, shield),
 	  xpValue(xpValue), flags(flags)
 {
 	SDL_Surface *boss = IMG_Load("assets/boss.png");
@@ -78,11 +78,11 @@ void Enemy::update()
 		{
 			this->moveLeft();
 		}
-		if (this->getX() >= Graphics::screenWidth)
+		if (this->getX() >= Graphics::screenWidth - 35)
 		{
 			rightOrLeft = 0;
 		}
-		if (this->getX() <= 0)
+		if (this->getX() <= 0 + 35)
 		{
 			rightOrLeft = 1;
 		}
