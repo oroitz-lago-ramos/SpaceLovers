@@ -27,13 +27,12 @@ Player::~Player()
 void Player::update()
 {
 	this->timeSinceLastShot += Game::frameTime;
-	for (auto i = this->playerBoost.begin(); i != this->playerBoost.end();)
+	for (auto i = this->playerBoost.begin(); i != this->playerBoost.end(); i++)
 	{
 		i->timeSincePowerUpStart += Game::frameTime;
 		if (i->timeSincePowerUpStart >= i->powerUpDuration)
 		{
 			i->onEnd();
-			std::cout << Game::frameTime << std::endl;
 			this->playerBoost.erase(i);
 		}
 	}

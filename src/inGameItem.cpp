@@ -53,17 +53,10 @@ void InGameItem::heal()
 void InGameItem::speedUp()
 {
 	std::cout << "JE pends speedup" << std::endl;
-	PlayerBoost boost;
-	boost.powerUpDuration = 10000000000;
-	boost.timeSincePowerUpStart = 0;
-	boost.onEnd = [](){ Player::instance->speed -= 0.5f; std::cout << "Je perds vitesse" << std::endl;};
 
-	/* Player::instance->playerBoost.push_back((PlayerBoost){10000000000ull,0ull, []()
-		{ Player::instance->speed -= 0.5f; std::cout << "Je perds vitesse" << std::endl;}
-		}); */
-	Player::instance->playerBoost.push_back(boost);
-	Player::instance->speed += 0.5f;
-	std::cout << Player::instance->speed << std::endl;
+	Player::instance->playerBoost.push_back((PlayerBoost){10000000000ull, 0ull, []()
+														  { Player::instance->speed -= 0.02f; }});
+	Player::instance->speed += 0.02f;
 }
 
 void InGameItem::powerBoost()
