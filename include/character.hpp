@@ -26,6 +26,10 @@ public:
 	float power;
 	float defense;
 	float shield;
+	float shieldColor;
+	float maxShield;
+	unsigned long long int asTakeDamage;
+	bool isPlayer;
 
 	unsigned long long int timeSinceLastShot;
 

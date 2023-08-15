@@ -15,6 +15,7 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
 	  xpValue(xpValue), flags(0)
 {
 	this->shield = 0;
+	this->maxShield = 0;
 	SDL_Surface *enemy = IMG_Load("assets/ennemies.png");
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, enemy);
 	Level::enemies.insert(this);
@@ -63,7 +64,7 @@ void Enemy::update()
 	}
 	if (this->flags & ISBOSS && this->getY() >= Graphics::screenHeight / 5)
 	{
-		static int rightOrLeft = rand()%2;
+		static int rightOrLeft = rand() % 2;
 		if (rightOrLeft == 1)
 		{
 			this->moveRight();
@@ -72,11 +73,11 @@ void Enemy::update()
 		{
 			this->moveLeft();
 		}
-		if (this->getX()>= Graphics::screenWidth)
+		if (this->getX() >= Graphics::screenWidth)
 		{
 			rightOrLeft = 0;
 		}
-		if (this->getX()<= 0)
+		if (this->getX() <= 0)
 		{
 			rightOrLeft = 1;
 		}

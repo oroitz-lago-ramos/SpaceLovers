@@ -97,7 +97,7 @@ void Level::initPlayer()
 {
 	// __skills[0].level = 5;
 	// HERE SET BASE STATS
-	Player::instance->shield = 0;
+	Player::instance->maxShield = 0;
 	Player::instance->maxLifePoints = 100;
 	Player::instance->power = 10;
 	Player::instance->defense = 10;
@@ -118,4 +118,5 @@ void Level::initPlayer()
 
 	// HERE DO THE REST
 	Player::instance->lifePoints = Player::instance->maxLifePoints;
+	Player::instance->shield = Player::instance->maxShield;
 }
