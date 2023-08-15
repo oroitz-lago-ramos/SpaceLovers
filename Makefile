@@ -28,6 +28,7 @@ skillNode.cpp \
 skillTree.cpp \
 rect.cpp 	\
 attack.cpp 	\
+skills.cpp 	\
 
 
 SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS_RAW))
