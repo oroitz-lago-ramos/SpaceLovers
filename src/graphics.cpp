@@ -2,6 +2,7 @@
 #include "graphics.hpp"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
 
 int Graphics::windowWidth = 1000;
 int Graphics::screenWidth = 800;
@@ -19,6 +20,7 @@ Graphics::Graphics()
 	Graphics::window = SDL_CreateWindow("C++", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, this->windowWidth, this->screenHeight, SDL_WINDOW_SHOWN);
 	Graphics::renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
 	TTF_Init();
+	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 	SDL_SetRenderDrawBlendMode(Graphics::renderer, SDL_BLENDMODE_BLEND);
 }
 
@@ -30,6 +32,7 @@ Graphics::~Graphics()
 	}
 	SDL_DestroyRenderer(Graphics::renderer);
 	SDL_DestroyWindow(Graphics::window);
+	IMG_Quit();
 	TTF_Quit();
 	SDL_Quit();
 }

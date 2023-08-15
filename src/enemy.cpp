@@ -17,6 +17,9 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
 	this->shield = 0;
 	SDL_Surface *enemy = IMG_Load("assets/ennemies.png");
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, enemy);
+	SDL_FreeSurface(enemy);
+	SDL_SetTextureBlendMode(this->texture, SDL_BLENDMODE_BLEND);
+
 	Level::enemies.insert(this);
 	this->timeSinceLastShot = 0;
 }
@@ -27,6 +30,8 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue, float 
 {
 	SDL_Surface *boss = IMG_Load("assets/boss.png");
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, boss);
+	SDL_FreeSurface(boss);
+	SDL_SetTextureBlendMode(this->texture, SDL_BLENDMODE_BLEND);
 	Level::enemies.insert(this);
 	this->timeSinceLastShot = 0;
 	if (flags & ATTACKLASER)
@@ -63,7 +68,7 @@ void Enemy::update()
 	}
 	if (this->flags & ISBOSS && this->getY() >= Graphics::screenHeight / 5)
 	{
-		static int rightOrLeft = rand()%2;
+		static int rightOrLeft = rand() % 2;
 		if (rightOrLeft == 1)
 		{
 			this->moveRight();
@@ -72,11 +77,11 @@ void Enemy::update()
 		{
 			this->moveLeft();
 		}
-		if (this->getX()>= Graphics::screenWidth)
+		if (this->getX() >= Graphics::screenWidth)
 		{
 			rightOrLeft = 0;
 		}
-		if (this->getX()<= 0)
+		if (this->getX() <= 0)
 		{
 			rightOrLeft = 1;
 		}
