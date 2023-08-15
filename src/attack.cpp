@@ -42,6 +42,7 @@ void Attack::laser()
                            (Graphics::screenHeight - this->enemy->getY()) / 2 + this->enemy->getY(),
                            this->enemy->getWidth() / 2, Graphics::screenHeight - this->enemy->getY());
     SDL_RenderCopy(Graphics::renderer, laserTexture, NULL, &laser->rect);
+	SDL_DestroyTexture(laserTexture);
     if (SDL_HasIntersection(&laser->rect, &Player::instance->rect))
     {
         Player::instance->takeDamage(this->enemy->power * this->multiplier);

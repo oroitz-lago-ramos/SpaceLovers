@@ -19,20 +19,6 @@ Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed
 	SDL_FreeSurface(projectile);
 	if (target)
 	{
-		// Enemy *enemy = nullptr;
-		// int distance = INT_MAX;
-		// for (auto e : Level::enemies)
-		// {
-		// 	double dx = this->getX() - e->getX();
-		// 	double dy = this->getY() - e->getY();
-		// 	int currentDist = std::sqrt(dx * dx + dy * dy);
-		// 	if (currentDist < distance)
-		// 	{
-		// 		distance = currentDist;
-		// 		enemy = e;
-		// 	}
-		// }
-		// this->target = enemy;
 		this->findTarget();
 	}
 	Level::projectiles.insert(this);
@@ -52,7 +38,7 @@ void Projectile::findTarget()
 {
 	Enemy *enemy = nullptr;
 	int distance = INT_MAX;
-	for (auto e : std::set<Enemy*>(Level::enemies))
+	for (auto e : std::set<Enemy *>(Level::enemies))
 	{
 		double dx = this->getX() - e->getX();
 		double dy = this->getY() - e->getY();
@@ -127,6 +113,8 @@ void Projectile::checkCollisions()
 	if (SDL_HasIntersection(&this->rect, &Player::instance->rect))
 	{
 		Player::instance->takeDamage(this->power);
+		// std::cout << "Player hit" << std::endl;
+		// std::cout << Player::instance->lifePoints << std::endl;
 		this->~Projectile();
 
 		return;

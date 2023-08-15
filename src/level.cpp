@@ -100,7 +100,6 @@ void Level::countdown()
 
 void Level::initPlayer()
 {
-	// __skills[0].level = 5;
 	// HERE SET BASE STATS
 	Player::instance->maxShield = 0;
 	Player::instance->maxLifePoints = 100;

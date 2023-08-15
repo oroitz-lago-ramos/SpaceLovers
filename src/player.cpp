@@ -30,6 +30,7 @@ Player::~Player()
 
 void Player::update()
 {
+	this->asTakeDamage += Game::frameTime;
 	this->timeSinceLastShot += Game::frameTime;
 	if (this->lifePoints <= 0)
 	{

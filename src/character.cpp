@@ -62,12 +62,10 @@ void Character::moveLeft()
 
 void Character::takeDamage(float damage)
 {
-	this->asTakeDamage += Game::frameTime;
-	if (this->asTakeDamage < 150000000 && this->isPlayer)
+	if (this->isPlayer && this->asTakeDamage < 150000000)
 	{
 		return;
 	}
-
 	if (this->shield > 0)
 	{
 		this->shield -= damage;

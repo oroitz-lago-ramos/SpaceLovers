@@ -57,6 +57,7 @@ Enemy::~Enemy()
 void Enemy::update()
 {
 	this->checkCollisions();
+	this->asTakeDamage += Game::frameTime;
 	this->timeSinceLastShot += Game::frameTime;
 	if (!(this->flags & ISBOSS) && this->timeSinceLastShot > 1500000000)
 	{
