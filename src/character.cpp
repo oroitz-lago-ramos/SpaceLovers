@@ -62,16 +62,23 @@ void Character::moveLeft()
 
 void Character::takeDamage(float damage)
 {
-	if(this->shield > 0)
+	if (this->shield > 0)
 	{
 		this->shield -= damage;
-		if(damage > this->shield)
+		if (damage > this->shield)
 		{
 			damage = damage - this->shield;
 			this->lifePoints -= damage;
 		}
-
 	}
 	this->lifePoints -= damage;
+}
 
+void Character::renderShield()
+{
+	if (this->shield > 0)
+	{
+		SDL_SetRenderDrawColor(Graphics::renderer, 0, 0, 200, 75);
+		SDL_RenderFillCircle(Graphics::renderer, this->getX(), this->getY(), this->getWidth() * 1.1);
+	}
 }

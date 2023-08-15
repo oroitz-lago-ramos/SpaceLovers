@@ -179,11 +179,13 @@ void Game::renderLoop()
 	// Affichage du joueur
 	this->player.update();
 	this->player.render();
+	this->player.renderShield();
 
 	for (auto enemy : std::set<Enemy *>(Level::enemies))
 	{
 		enemy->update();
 		enemy->render();
+		enemy->renderShield();
 	}
 
 	for (auto projectile : std::set<Projectile *>(Level::projectiles))

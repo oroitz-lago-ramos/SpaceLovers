@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include "entity.hpp"
+#include "circle.hpp"
 
 class Character : public Entity
 {
@@ -28,6 +29,7 @@ public:
 
 	unsigned long long int timeSinceLastShot;
 
+	void renderShield();
 	void takeDamage(float damage);
 
 private:

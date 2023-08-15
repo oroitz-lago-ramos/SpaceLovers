@@ -12,8 +12,9 @@
 
 Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
 	: Character(200, 100, 100, (rand() % (Graphics::screenWidth - 40) + 20), 10, 20, 20, 0.01, lifePoints, power, defense),
-	  xpValue(xpValue)
+	  xpValue(xpValue), flags(0)
 {
+	this->shield = 0;
 	SDL_Surface *enemy = IMG_Load("assets/ennemies.png");
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, enemy);
 	Level::enemies.insert(this);

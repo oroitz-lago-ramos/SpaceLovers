@@ -19,6 +19,7 @@ Graphics::Graphics()
 	Graphics::window = SDL_CreateWindow("C++", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, this->windowWidth, this->screenHeight, SDL_WINDOW_SHOWN);
 	Graphics::renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
 	TTF_Init();
+	SDL_SetRenderDrawBlendMode(Graphics::renderer, SDL_BLENDMODE_BLEND);
 }
 
 Graphics::~Graphics()
