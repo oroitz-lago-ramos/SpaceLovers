@@ -163,8 +163,6 @@ void SkillTree::render()
 			{
 				if (SDL_PointInRect(&point, &node->rect))
 				{
-					std::cout << "Node clicked" << std::endl;
-					// node->onClick();
 					if (__skills[node->id].level < __skills[node->id].maxLevel){
 						__skills[node->id].level++;
 						std::cout << "Skill level: " << __skills[node->id].level << std::endl;}

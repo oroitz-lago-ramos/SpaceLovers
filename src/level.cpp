@@ -99,7 +99,7 @@ void Level::initPlayer()
 	// HERE SET BASE STATS
 	Player::instance->maxLifePoints = 100;
 	Player::instance->power = 10;
-	Player::instance->power = 10;
+	Player::instance->defense = 10;
 	Player::instance->speed = 0.02f;
 	Player::instance->reloadSpeed = 500000000;
 	Player::instance->setX(Graphics::windowWidth / 2 - Player::instance->getWidth() / 2);
@@ -114,7 +114,6 @@ void Level::initPlayer()
 		}
 	}
 
-	std::cout << Player::instance->power << std::endl;
 
 	// HERE DO THE REST
 	Player::instance->lifePoints = Player::instance->maxLifePoints;
