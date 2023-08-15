@@ -25,6 +25,7 @@ public:
 	Text *xpTotal;
 	void update();
 	void countdown();
+	void initPlayer();
 
 	long long unsigned int timeSinceLastSpawn;
 	long long unsigned int timeSinceLastPoweUp;

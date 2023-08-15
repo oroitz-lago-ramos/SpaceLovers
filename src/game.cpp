@@ -2,6 +2,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <chrono>
+#include <fstream>
+#include <sstream>
 
 #include "button.hpp"
 #include "graphics.hpp"
@@ -10,6 +12,7 @@
 #include "level.hpp"
 #include "projectile.hpp"
 #include "skillTree.hpp"
+#include "skillNode.hpp"
 #include "rect.hpp"
 
 int Game::inputs = 0;
@@ -24,7 +27,7 @@ Game::Game()
 	this->createButtons();
 	srand(time(NULL));
 	auto start = chrono::steady_clock::now();
-
+	this->loadGame();
 	while (Game::isRunning)
 	{
 		auto end = chrono::steady_clock::now();
@@ -64,6 +67,7 @@ Game::Game()
 
 Game::~Game()
 {
+	this->saveGame();
 	// Destruction des boutons
 }
 
@@ -175,11 +179,13 @@ void Game::renderLoop()
 	// Affichage du joueur
 	this->player.update();
 	this->player.render();
+	this->player.renderShield();
 
 	for (auto enemy : std::set<Enemy *>(Level::enemies))
 	{
 		enemy->update();
 		enemy->render();
+		enemy->renderShield();
 	}
 
 	for (auto projectile : std::set<Projectile *>(Level::projectiles))
@@ -223,4 +229,66 @@ void Game::menuRenderLoop()
 	{
 		button->render();
 	}
+}
+
+void Game::saveGame()
+{
+	Save saveData;
+	saveData.experience = Player::instance->experience;
+	for (int i = 0; i < NUMBER_OF_SKILLS; ++i)
+	{
+		t_pair saveSkill;
+		saveSkill.id = i;
+		saveSkill.level = __skills[i].level;
+		saveData.skills.push_back(saveSkill);
+	}
+	std::ofstream outFile("save.dat", std::ios::binary | std::ios::out);
+	if (outFile.is_open())
+	{
+		outFile.write(reinterpret_cast<const char *>(&saveData.experience), sizeof(float));
+		int numSkills = saveData.skills.size();
+		outFile.write(reinterpret_cast<const char *>(&numSkills), sizeof(int));
+		for (const t_pair &skill : saveData.skills)
+		{
+			outFile.write(reinterpret_cast<const char *>(&skill), sizeof(t_pair));
+		}
+
+		outFile.close();
+	}
+	else
+	{
+		std::cerr << "Failed to open file for writing." << std::endl;
+	}
+}
+
+bool Game::loadGame()
+{
+	Save saveData;
+
+	std::ifstream inFile("save.dat", std::ios::binary | std::ios::in);
+
+	if (inFile.is_open())
+	{
+		inFile.read(reinterpret_cast<char *>(&saveData.experience), sizeof(float));
+		int numSkills;
+		inFile.read(reinterpret_cast<char *>(&numSkills), sizeof(int));
+		saveData.skills.resize(numSkills);
+		for (int i = 0; i < numSkills; ++i)
+		{
+			inFile.read(reinterpret_cast<char *>(&saveData.skills[i]), sizeof(t_pair));
+		}
+		inFile.close();
+		if (!saveData.skills.empty())
+		{
+			for (auto p : saveData.skills)
+			{
+				__skills[p.id].level = p.level;
+			}
+		}
+	}
+	else
+	{
+		std::cerr << "Failed to open file for reading." << std::endl;
+	}
+	return true;
 }

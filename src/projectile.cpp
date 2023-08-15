@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include "SDL2/SDL_image.h"
 #include <iostream>
 #include "character.hpp"
 #include "projectile.hpp"
@@ -13,6 +14,8 @@ Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed
 	: Character(r, g, b, x, y, 5, 5, speed, dirX, dirY),
 	  direction(0), power(power), target(nullptr)
 {
+	SDL_Surface *projectile = IMG_Load("assets/flame1.png");
+	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, projectile);
 	if (target)
 	{
 		// Enemy *enemy = nullptr;
@@ -38,6 +41,8 @@ Projectile::Projectile(int r, int g, int b, int x, int y, int direction, int pow
 	  direction(direction), power(power), target(nullptr)
 
 {
+	SDL_Surface *projectile = IMG_Load("assets/flame1.png");
+	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, projectile);
 	Level::projectiles.insert(this);
 }
 
@@ -63,6 +68,8 @@ Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed
 	: Character(r, g, b, x, y, 5, 5, speed, dirX, dirY),
 	  direction(0), power(power), target(nullptr)
 {
+	SDL_Surface *projectile = IMG_Load("assets/flame1.png");
+	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, projectile);
 	Level::projectiles.insert(this);
 }
 

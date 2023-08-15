@@ -5,6 +5,7 @@
 
 #include "button.hpp"
 #include "skillNode.hpp"
+#include "text.hpp"
 
 class SkillTree
 {
@@ -19,6 +20,7 @@ public:
 	int calculateDepth(SkillNode *node, SkillNode *current, int maxDepth);
 
 	void render();
+	void getNodes();
 };
 
 #endif

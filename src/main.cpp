@@ -4,6 +4,7 @@
 
 int main()
 {
+	initializeSkills();
 	Game game;
 	return 0;
 }

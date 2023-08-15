@@ -28,6 +28,8 @@ skillNode.cpp \
 skillTree.cpp \
 rect.cpp 	\
 attack.cpp 	\
+skills.cpp 	\
+circle.cpp 	\
 
 
 SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS_RAW))
