@@ -33,6 +33,7 @@ public:
 	long long unsigned int nanoSecond;
 	int currentLvl;
 	float difficulty;
+	int boardLevel;
 };
 
 #endif

@@ -174,7 +174,15 @@ void Game::keyup(SDL_Event *event)
 
 void Game::renderLoop()
 {
-	// Créer le rendu graphique de chaque bouton
+
+	char str[30];
+	snprintf(str, 30, "assets/space/spaceLevel%d.gif", Level::instance->boardLevel);
+	SDL_Surface *spaceLevel1 = IMG_Load(str);
+	SDL_Texture *background = SDL_CreateTextureFromSurface(Graphics::renderer, spaceLevel1);
+	SDL_FreeSurface(spaceLevel1);
+	SDL_Rect backRect = {0, 0, Graphics::screenWidth, Graphics::screenHeight};
+	SDL_RenderCopy(Graphics::renderer, background, NULL, &backRect);
+	SDL_DestroyTexture(background);
 
 	// Affichage du joueur
 	this->player.update();
