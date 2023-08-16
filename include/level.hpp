@@ -23,6 +23,7 @@ public:
 	Text *timer;
 	Text *levelRunning;
 	Text *xpTotal;
+	Text *fps;
 	void update();
 	void countdown();
 	void initPlayer();
@@ -33,6 +34,7 @@ public:
 	long long unsigned int nanoSecond;
 	int currentLvl;
 	float difficulty;
+	int boardLevel;
 };
 
 #endif

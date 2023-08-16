@@ -35,6 +35,7 @@ public:
 
 	SDL_Rect rect;
 	SDL_Texture *texture;
+	bool destroyTexture;
 };
 
 #endif
