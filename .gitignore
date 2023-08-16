@@ -5,6 +5,7 @@ save.dat
 desktop.ini
 SDL2.dll
 SDL2_ttf.dll
+SDL2_image.dll
 
 # Object files
 *.o
