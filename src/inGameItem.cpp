@@ -13,16 +13,17 @@ typedef void (*myfunc)();
 void heal()
 {
 	int heal = 20;
-	if (Player::instance->lifePoints < Player::instance->maxLifePoints - heal)
+	Player::instance->lifePoints += heal;
+	if (Player::instance->lifePoints > Player::instance->maxLifePoints)
 	{
-		Player::instance->lifePoints += 20;
+		Player::instance->lifePoints = Player::instance->maxLifePoints;
 	}
 }
 
 void statsBoost()
 {
 	Player::instance->playerBoost.insert(new PlayerBoost(10000000000ull, 0ull, []()
-														  { Player::instance->power -= 10;
+														 { Player::instance->power -= 10;
 														  	Player::instance->speed -= 0.02f; }));
 	Player::instance->power += 10;
 	Player::instance->speed += 0.02f;
@@ -31,7 +32,7 @@ void statsBoost()
 void changeNumberOfProjectiles()
 {
 	Player::instance->playerBoost.insert(new PlayerBoost(10000000000ull, 0ull, []()
-														  { Player::instance->numberOfProjectiles = 1; }));
+														 { Player::instance->numberOfProjectiles = 1; }));
 	Player::instance->numberOfProjectiles += rand() % 2 + 1;
 }
 
