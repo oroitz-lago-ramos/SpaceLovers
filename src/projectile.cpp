@@ -14,9 +14,8 @@ Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed
 	: Character(r, g, b, x, y, 15, 15, speed, dirX, dirY),
 	  direction(0), power(power), target(nullptr)
 {
-	SDL_Surface *projectile = IMG_Load("assets/flame1.png");
-	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, projectile);
-	SDL_FreeSurface(projectile);
+	this->destroyTexture = false;
+	this->texture = Graphics::textures[PROJECTILE];
 	if (target)
 	{
 		this->findTarget();
@@ -28,9 +27,8 @@ Projectile::Projectile(int r, int g, int b, int x, int y, int direction, int pow
 	  direction(direction), power(power), target(nullptr)
 
 {
-	SDL_Surface *projectile = IMG_Load("assets/flame1.png");
-	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, projectile);
-	SDL_FreeSurface(projectile);
+	this->destroyTexture = false;
+	this->texture = Graphics::textures[PROJECTILE];
 	Level::projectiles.insert(this);
 }
 
@@ -56,9 +54,8 @@ Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed
 	: Character(r, g, b, x, y, 15, 15, speed, dirX, dirY),
 	  direction(0), power(power), target(nullptr)
 {
-	SDL_Surface *projectile = IMG_Load("assets/flame1.png");
-	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, projectile);
-	SDL_FreeSurface(projectile);
+	this->destroyTexture = false;
+	this->texture = Graphics::textures[PROJECTILE];
 	Level::projectiles.insert(this);
 }
 
