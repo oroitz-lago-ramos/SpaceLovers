@@ -7,6 +7,7 @@
 #include "game.hpp"
 #include "projectile.hpp"
 #include "level.hpp"
+#include "playerBoost.hpp"
 
 Player *Player::instance = nullptr;
 
@@ -32,14 +33,10 @@ void Player::update()
 {
 	this->asTakeDamage += Game::frameTime;
 	this->timeSinceLastShot += Game::frameTime;
-	for (auto i = this->playerBoost.begin(); i != this->playerBoost.end(); i++)
+	for (PlayerBoost *boost : this->playerBoost)
 	{
-		i->timeSincePowerUpStart += Game::frameTime;
-		if (i->timeSincePowerUpStart >= i->powerUpDuration)
-		{
-			i->onEnd();
-			this->playerBoost.erase(i);
-		}
+		if (boost->update() == false)
+			this->playerBoost.erase(boost);
 	}
 	if (this->lifePoints <= 0)
 	{

@@ -2,16 +2,10 @@
 #define PLAYER_HPP
 
 #include <functional>
+#include <set>
 
 #include "character.hpp"
-
-typedef struct PlayerBoost
-{
-	long long unsigned int powerUpDuration;
-	long long unsigned int timeSincePowerUpStart;
-
-	std::function<void()> onEnd;
-} PlayerBoost;
+#include "playerBoost.hpp"
 
 class Player : public Character
 {
@@ -31,7 +25,7 @@ public:
 	int numberOfProjectiles;
 	long long int unsigned reloadSpeed;
 
-	std::vector<PlayerBoost> playerBoost;
+	std::set<PlayerBoost *> playerBoost;
 
 private:
 };

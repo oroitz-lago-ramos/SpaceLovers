@@ -30,6 +30,7 @@ rect.cpp 	\
 attack.cpp 	\
 skills.cpp 	\
 circle.cpp 	\
+playerBoost.cpp \
 
 
 SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS_RAW))
