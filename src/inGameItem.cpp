@@ -12,7 +12,7 @@ InGameItem::InGameItem()
 	: Character(30, 200, 20, rand() % Graphics::screenWidth, 10, 40, 40, 0.02f)
 {
 	this->destroyTexture = false;
-	this->texture = Graphics::boosts[2];
+	this->texture = Graphics::boosts[this->powerUp];
 	SDL_SetTextureBlendMode(this->texture, SDL_BLENDMODE_BLEND);
 	Level::powerUps.insert(this);
 }
