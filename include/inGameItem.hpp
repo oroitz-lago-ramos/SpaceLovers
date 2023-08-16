@@ -1,27 +1,34 @@
 #ifndef INGAMEITEM_HPP
 #define INGAMEITEM_HPP
+#define NUMBER_OF_BOOST 4
 
 #include <SDL2/SDL.h>
 #include "entity.hpp"
 #include "character.hpp"
+#include <iostream>
 
-// enum PowerUp {HEAL, POWERUP, MULTI_PROJECTILES, BOMB};
+enum PowerUp
+{
+	HEAL,
+	STATS_BOOST,
+	MULTIPLE_PROJECTILE,
+	BOMB
+};
+
 class InGameItem : public Character
 {
+	typedef void (*myfunc)();
+
 public:
-	InGameItem(/*PowerUp powerUp*/);
+	InGameItem(int powerUp);
 	~InGameItem();
 	void update();
-	// PowerUp powerUp;
+	int powerUp;
+	static myfunc boostFonctions[NUMBER_OF_BOOST];
+	myfunc go;
+
 private:
 	void checkCollisions();
-
-	void heal();
-	void bomb();
-	void changeNumberOfProjectiles(int number);
-	void changeReloadSpeed();
-	void speedUp();
-	void powerBoost();
 };
 
 #endif

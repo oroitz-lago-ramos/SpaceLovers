@@ -1,7 +1,11 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
+#include <functional>
+#include <set>
+
 #include "character.hpp"
+#include "playerBoost.hpp"
 
 class Player : public Character
 {
@@ -20,6 +24,8 @@ public:
 
 	int numberOfProjectiles;
 	long long int unsigned reloadSpeed;
+
+	std::set<PlayerBoost *> playerBoost;
 
 private:
 };
