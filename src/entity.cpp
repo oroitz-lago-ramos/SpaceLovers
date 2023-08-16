@@ -7,13 +7,14 @@
 
 Entity::Entity(int r, int g, int b, int x, int y, int width, int height)
 	: r(r), g(g), b(b), x(x), y(y), width(width), height(height), rect({x - width / 2, y - height / 2, width, height}),
-	  texture(nullptr)
+	  texture(nullptr), destroyTexture(true)
 {
 }
 
 Entity::~Entity()
 {
-	SDL_DestroyTexture(this->texture);
+	if (this -> destroyTexture == true)
+		SDL_DestroyTexture(this->texture);
 }
 
 void Entity::render()

@@ -17,7 +17,7 @@ std::set<InGameItem *> Level::powerUps = {};
 Level *Level::instance = nullptr;
 
 Level::Level()
-	: timeSinceLastSpawn(0), timeSinceLastPoweUp(0), timeSinceLastBoss(0), nanoSecond(60000000000), currentLvl(1), difficulty(1)
+	: timeSinceLastSpawn(0), timeSinceLastPoweUp(0), timeSinceLastBoss(0), nanoSecond(30000000000), currentLvl(1), difficulty(1), boardLevel(1)
 {
 	Level::instance = this;
 	char str[15];
@@ -27,6 +27,9 @@ Level::Level()
 	this->timer = new Text(0, 250, 200, Graphics::windowWidth - 100, 200, 100, 75, "60", "Kichenset.otf", 24);
 	this->levelRunning = new Text(0, 250, 200, Graphics::windowWidth - 100, 100, 150, 75, str, "Kichenset.otf", 24);
 	this->xpTotal = new Text(0, 250, 200, Graphics::windowWidth - 100, Graphics::screenHeight - 150, 150, 75, strXp, "Kichenset.otf", 24);
+	char strFps[15];
+	snprintf(strFps, 15, "Fps: %04d", 1000000000 / Game::frameTime);
+	this->fps = new Text(0, 250, 200, Graphics::windowWidth - 100, Graphics::screenHeight - 100, 150, 75, strFps, "Kichenset.otf", 24);
 	this->initPlayer();
 }
 
@@ -56,13 +59,13 @@ void Level::update()
 		this->timeSinceLastSpawn = 0;
 	}
 
-	if (this->timeSinceLastBoss > 2000000000)
+	if (this->timeSinceLastBoss > 27000000000)
 	{
 		new Enemy(20 * this->difficulty, 20 * this->difficulty, 20 * this->difficulty, 10 * this->difficulty, 20 * this->difficulty, ISBOSS | (1 << (rand()%2+1)));
 		this->timeSinceLastBoss = 0;
 	}
 
-	if (this->timeSinceLastPoweUp > 2000000000)
+	if (this->timeSinceLastPoweUp > 10000000000)
 	{
 		new InGameItem();
 		this->timeSinceLastPoweUp = 0;
@@ -71,6 +74,10 @@ void Level::update()
 	this->timer->render();
 	this->levelRunning->render();
 	this->xpTotal->render();
+	char strFps[15];
+	snprintf(strFps, 15, "Fps: %04d", 1000000000 / Game::frameTime);
+	this->fps->textUpdate(strFps);
+	this->fps->render();
 }
 
 void Level::countdown()
@@ -84,8 +91,13 @@ void Level::countdown()
 	}
 	if (second == 0)
 	{
-		this->nanoSecond = 60000000000;
+		this->nanoSecond = 30000000000;
 		this->currentLvl++;
+		this->boardLevel++;
+		if(this->boardLevel > 10)
+		{
+			this->boardLevel = 1;
+		}
 		this->difficulty *= 1.1;
 		char str[15];
 		snprintf(str, 15, "Niveau %03d", this->currentLvl);
@@ -95,7 +107,6 @@ void Level::countdown()
 
 void Level::initPlayer()
 {
-	// __skills[0].level = 5;
 	// HERE SET BASE STATS
 	Player::instance->maxShield = 0;
 	Player::instance->maxLifePoints = 100;

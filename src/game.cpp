@@ -96,7 +96,8 @@ void Game::eventLoop()
 		}
 		else if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
-			this->mousebuttondown(&event);
+			if (this->currentState == MENU)
+				this->mousebuttondown(&event);
 		}
 		else if (event.type == SDL_KEYDOWN)
 		{
@@ -174,7 +175,8 @@ void Game::keyup(SDL_Event *event)
 
 void Game::renderLoop()
 {
-	// Créer le rendu graphique de chaque bouton
+	SDL_Rect backRect = {0, 0, Graphics::screenWidth, Graphics::screenHeight};
+	SDL_RenderCopy(Graphics::renderer, Graphics::backgrounds[Level::instance->boardLevel - 1], NULL, &backRect);
 
 	// Affichage du joueur
 	this->player.update();
@@ -216,11 +218,14 @@ void Game::renderLoop()
 
 	Rect *rect = new Rect(0, 255, 0, Graphics::windowWidth - 100, Graphics::screenHeight - 50, 152, 32);
 	rect->render(true);
+	delete rect;
 	rect = new Rect(30, 30, 30, Graphics::windowWidth - 100, Graphics::screenHeight - 50, 150, 30);
 	rect->render(true);
+	delete rect;
 	float lifePointsPercents = Player::instance->lifePoints / Player::instance->maxLifePoints;
 	rect = new Rect(250 - 100 * lifePointsPercents, 150 * lifePointsPercents, 150 * lifePointsPercents, Graphics::windowWidth - 100, Graphics::screenHeight - 50, lifePointsPercents * 150, 30);
 	rect->render(true);
+	delete rect;
 }
 
 void Game::menuRenderLoop()
