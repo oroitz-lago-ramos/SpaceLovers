@@ -1,4 +1,5 @@
 #include <iostream>
+#include <functional>
 #include "SDL2/SDL_image.h"
 
 #include "player.hpp"
@@ -6,6 +7,7 @@
 #include "game.hpp"
 #include "projectile.hpp"
 #include "level.hpp"
+#include "playerBoost.hpp"
 
 Player *Player::instance = nullptr;
 
@@ -31,6 +33,11 @@ void Player::update()
 {
 	this->asTakeDamage += Game::frameTime;
 	this->timeSinceLastShot += Game::frameTime;
+	for (PlayerBoost *boost : this->playerBoost)
+	{
+		if (boost->update() == false)
+			this->playerBoost.erase(boost);
+	}
 	if (this->lifePoints <= 0)
 	{
 		this->die();
@@ -54,33 +61,12 @@ void Player::shoot()
 	if (this->timeSinceLastShot > this->reloadSpeed)
 	{
 		// new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
-		this->numberOfProjectiles = 3;
 		for (int i = 0; i < this->numberOfProjectiles; i++)
 		{
 			new Projectile(0, 255, 0, this->getX() + 10 * (i + 1), this->getY() - this->getHeight() - 15 * i, 5, 0.1f, 0.2, -1, true);
 			new Projectile(0, 255, 0, this->getX(), this->getY() - this->getHeight() - 15 * i, 5, 0.1f, 0, -1, true);
 			new Projectile(0, 255, 0, this->getX() - 10 * (i + 1), this->getY() - this->getHeight() - 15 * i, 5, 0.1f, -0.2, -1, true);
 		}
-		// switch (this->numberOfProjectiles)
-		// {
-		// case 2:
-		// 	new Projectile(0, 255, 0, this->getX() - 20, this->getY() - this->height, -1, this->power, 0.1f);
-		// 	new Projectile(0, 255, 0, this->getX() + 20, this->getY() - this->height, -1, this->power, 0.1f);
-		// 	break;
-		// case 3:
-		// 	new Projectile(0, 255, 0, this->getX() - 30, this->getY() - this->height, -1, this->power, 0.1f);
-		// 	new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, this->power, 0.1f);
-		// 	new Projectile(0, 255, 0, this->getX() + 30, this->getY() - this->height, -1, this->power, 0.1f);
-		// 	break;
-		// default:
-		// 	new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, this->power, 0.1f);
-		// 	break;
-		// }
-		// this->timeSinceLastShot = 0;
-		// // new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, -1, 5, 0.1f);
-		// new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, 5, 0.1f, 0, -1);
-		// new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, 5, 0.1f, 0.1, -1);
-		// new Projectile(0, 255, 0, this->getX(), this->getY() - this->height, 5, 0.1f, -0.1, -1);
 		this->timeSinceLastShot = 0;
 	}
 }

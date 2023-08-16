@@ -30,4 +30,9 @@ void initializeSkills()
 						  "Fortitude",
 						  "Increases max health by 15% per level",
 						  {100, 500, 1000, 5000, 10000}};
+	__skills[4] = (skill){4,0,5, {2, 5}, []()
+							{ Player::instance->speed += 0.01f;},
+							"Vitessitude",
+							"Increases the speed by 0.01",
+							{600000,4444444,2727272}};
 }

@@ -9,7 +9,7 @@ BIN_FOLDER := .
 
 SDL_INCLUDE := -I./include
 
-CFLAGS := -Wall -Wextra -flto -O1 -I$(INCLUDE_FOLDER) -I$(PREREQUISITES_FOLDER) -I$(SDL_INCLUDE) -MMD
+CFLAGS := -g -Wall -Wextra -flto -O1 -I$(INCLUDE_FOLDER) -I$(PREREQUISITES_FOLDER) -I$(SDL_INCLUDE) -MMD
 LDFLAGS := -L./lib/
 
 SRCS_RAW := main.cpp \
@@ -30,6 +30,7 @@ rect.cpp 	\
 attack.cpp 	\
 skills.cpp 	\
 circle.cpp 	\
+playerBoost.cpp \
 
 
 SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS_RAW))
