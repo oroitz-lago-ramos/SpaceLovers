@@ -29,17 +29,19 @@ public:
 	~InGameItem();
 	void update();
 	int powerUp;
+	static myfunc boostFonctions[NUMBER_OF_BOOST];
+	myfunc go;
 	//myfunc boostFonctions[NUMBER_OF_BOOST] = {&InGameItem::heal, &InGameItem::bomb, &InGameItem::changeReloadSpeed, &InGameItem::speedUp, &InGameItem::powerBoost, &InGameItem::changeNumberOfProjectiles};
-	myfunc boostFonctions[1] = {&InGameItem::speedUp};
+
 private:
 	void checkCollisions();
 
-	void heal();
-	void bomb();
-	void changeNumberOfProjectiles();
-	void changeReloadSpeed();
-	void speedUp();
-	void powerBoost();
+	static void heal();
+	static void bomb();
+	static void changeNumberOfProjectiles();
+	static void changeReloadSpeed();
+	static void speedUp();
+	static void powerBoost();
 
 	// void (*fonctions[])();
 };

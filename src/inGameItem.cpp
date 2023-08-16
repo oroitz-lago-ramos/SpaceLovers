@@ -8,11 +8,14 @@
 #include "level.hpp"
 #include "player.hpp"
 #include "game.hpp"
+typedef void (InGameItem::*myfunc)();
 
+myfunc InGameItem::boostFonctions[NUMBER_OF_BOOST] = {&InGameItem::speedUp};
 InGameItem::InGameItem(int powerUp)
 	: Character(30, 200, 20, rand() % Graphics::screenWidth, 10, 10, 10, 0.02f),
 	  powerUp(powerUp)
 {
+	this->go = InGameItem::boostFonctions[powerUp];
 	Level::powerUps.insert(this);
 }
 
@@ -33,10 +36,17 @@ void InGameItem::update()
 
 void InGameItem::checkCollisions()
 {
+	// std::cout << "methode" << std::endl;
 	if (SDL_HasIntersection(&this->rect, &Player::instance->rect))
 	{
-		(this->*boostFonctions[this->powerUp])();
+		std::cout << this->powerUp << std::endl;
+		std::cout << (void *)(this->*boostFonctions[this->powerUp]) << std::endl;
+
+		// (this->*boostFonctions[this->powerUp])();
+		(this->*go)();
+		std::cout << "ligne 40 lets goooo" << std::endl;
 		this->~InGameItem();
+		std::cout << "La fonction check collisions est finie" << std::endl;
 	}
 }
 
@@ -61,7 +71,9 @@ void InGameItem::speedUp()
 
 void InGameItem::powerBoost()
 {
-	Player::instance->power += 10;
+	Player::instance->playerBoost.push_back((PlayerBoost){10000000000ull, 0ull, []()
+														  { Player::instance->power -= 10; }});
+		Player::instance->power += 10;
 }
 
 void InGameItem::bomb()
@@ -74,10 +86,15 @@ void InGameItem::bomb()
 
 void InGameItem::changeNumberOfProjectiles()
 {
+	Player::instance->playerBoost.push_back((PlayerBoost){10000000000ull, 0ull, []()
+														  { Player::instance->numberOfProjectiles = 1; }});
 	Player::instance->numberOfProjectiles += rand() % 2 + 1;
 }
 
 void InGameItem::changeReloadSpeed()
 {
-	Player::instance->reloadSpeed = 10000000;
+	std::cout << "Je lance la fonction reload speed" << std::endl;
+	Player::instance->playerBoost.push_back((PlayerBoost){10000000000ull, 0ull, []()
+														  { Player::instance->reloadSpeed += 250000000; std::cout << "Je remet mon reload speed a zero" << std::endl;}});
+	Player::instance->reloadSpeed -= 250000000;
 }
