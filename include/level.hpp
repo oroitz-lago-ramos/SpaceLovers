@@ -12,6 +12,9 @@
 
 class Level
 {
+private:
+	int currentLvl;
+
 public:
 	Level();
 	~Level();
@@ -32,9 +35,10 @@ public:
 	long long unsigned int timeSinceLastPoweUp;
 	long long unsigned int timeSinceLastBoss;
 	long long unsigned int nanoSecond;
-	int currentLvl;
 	float difficulty;
 	int boardLevel;
+	void setCurrentLvl(int currentLvl);
+	int getCurrentLvl();
 };
 
 #endif

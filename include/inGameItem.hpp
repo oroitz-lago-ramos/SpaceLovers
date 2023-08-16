@@ -5,7 +5,7 @@
 #include "entity.hpp"
 #include "character.hpp"
 
-// enum PowerUp {HEAL, SPEEDUP, DEFENSEUP, SHIELD, DOUBLE_PROJECTILE, RELOAD_SPEED, BOMB};
+// enum PowerUp {HEAL, POWERUP, MULTI_PROJECTILES, BOMB};
 class InGameItem : public Character
 {
 public:

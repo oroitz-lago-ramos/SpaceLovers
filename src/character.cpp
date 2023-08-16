@@ -85,9 +85,9 @@ void Character::renderShield()
 	{
 		return;
 	}
-	this->shieldColor = this->shield / this->maxShield * 100;
 	if (this->shield > 0)
 	{
+		this->shieldColor = this->shield / this->maxShield * 100;
 		SDL_SetRenderDrawColor(Graphics::renderer, this->shieldColor, this->shieldColor, this->shieldColor, 100);
 		SDL_RenderFillCircle(Graphics::renderer, this->getX(), this->getY(), this->getWidth() / 1.7);
 	}

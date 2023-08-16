@@ -27,6 +27,7 @@ public:
 	static std::set<Button *> buttons;
 	static SDL_Texture *textures[5];
 	static SDL_Texture *backgrounds[10];
+	static SDL_Texture *boosts[4];
 };
 
 #endif

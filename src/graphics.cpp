@@ -12,6 +12,7 @@ SDL_Window *Graphics::window = nullptr;
 SDL_Renderer *Graphics::renderer = nullptr;
 SDL_Texture *Graphics::textures[] = {};
 SDL_Texture *Graphics::backgrounds[] = {};
+SDL_Texture *Graphics::boosts[] = {};
 // Initialisation d'un tableau de bouton à 0
 std::set<Button *> Graphics::buttons = {};
 
@@ -45,6 +46,14 @@ Graphics::Graphics()
 		SDL_Surface *spaceLevel1 = IMG_Load(str);
 		Graphics::backgrounds[i] = SDL_CreateTextureFromSurface(Graphics::renderer, spaceLevel1);
 		SDL_FreeSurface(spaceLevel1);
+	}
+	for (int i = 0; i <=3; i++)
+	{
+		char boost[20];
+		snprintf(boost, 20, "assets/boost%d.png", i + 1);
+		SDL_Surface *boost1 = IMG_Load(boost);
+		Graphics::boosts[i] = SDL_CreateTextureFromSurface(Graphics::renderer, boost1);
+		SDL_FreeSurface(boost1);
 	}
 }
 

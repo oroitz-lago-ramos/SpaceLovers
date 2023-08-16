@@ -21,7 +21,7 @@ Level::Level()
 {
 	Level::instance = this;
 	char str[15];
-	snprintf(str, 15, "Niveau %03d", this->currentLvl);
+	snprintf(str, 15, "Niveau %03d", this->getCurrentLvl());
 	char strXp[15];
 	snprintf(strXp, 15, "Xp: %07.0f", Player::instance->experience);
 	this->timer = new Text(0, 250, 200, Graphics::windowWidth - 100, 200, 100, 75, "60", "Kichenset.otf", 24);
@@ -58,10 +58,10 @@ void Level::update()
 		new Enemy(1 * this->difficulty, 1 * this->difficulty, 1 * this->difficulty, 1 * this->difficulty);
 		this->timeSinceLastSpawn = 0;
 	}
-
-	if (this->timeSinceLastBoss > 27000000000)
+	
+	if (this->timeSinceLastBoss > 26500000000)
 	{
-		new Enemy(20 * this->difficulty, 20 * this->difficulty, 20 * this->difficulty, 10 * this->difficulty, 20 * this->difficulty, ISBOSS | (1 << (rand()%2+1)));
+		new Enemy(20 * this->difficulty, 20 * this->difficulty, 20 * this->difficulty, 10 * this->difficulty, 20 * this->difficulty, ISBOSS | (1 << (rand() % 2 + 1)));
 		this->timeSinceLastBoss = 0;
 	}
 
@@ -92,15 +92,15 @@ void Level::countdown()
 	if (second == 0)
 	{
 		this->nanoSecond = 30000000000;
-		this->currentLvl++;
+		this->setCurrentLvl(this->getCurrentLvl() + 1);
 		this->boardLevel++;
-		if(this->boardLevel > 10)
+		if (this->boardLevel > 10)
 		{
 			this->boardLevel = 1;
 		}
 		this->difficulty *= 1.1;
 		char str[15];
-		snprintf(str, 15, "Niveau %03d", this->currentLvl);
+		snprintf(str, 15, "Niveau %03d", this->getCurrentLvl());
 		this->levelRunning->textUpdate(str);
 	}
 }
@@ -126,8 +126,18 @@ void Level::initPlayer()
 		}
 	}
 
-
 	// HERE DO THE REST
 	Player::instance->lifePoints = Player::instance->maxLifePoints;
 	Player::instance->shield = Player::instance->maxShield;
+}
+
+void Level::setCurrentLvl(int currentLvl)
+{
+	this->currentLvl = currentLvl;
+	this->timeSinceLastBoss = 0;
+}
+
+int Level::getCurrentLvl()
+{
+	return this->currentLvl;
 }
