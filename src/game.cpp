@@ -283,6 +283,7 @@ bool Game::loadGame()
 			inFile.read(reinterpret_cast<char *>(&saveData.skills[i]), sizeof(t_pair));
 		}
 		inFile.close();
+		Player::instance->experience = saveData.experience;
 		if (!saveData.skills.empty())
 		{
 			for (auto p : saveData.skills)
