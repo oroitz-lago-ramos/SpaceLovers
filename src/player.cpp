@@ -8,6 +8,7 @@
 #include "projectile.hpp"
 #include "level.hpp"
 #include "playerBoost.hpp"
+#include "rect.hpp"
 
 Player *Player::instance = nullptr;
 
@@ -36,7 +37,15 @@ void Player::update()
 	for (PlayerBoost *boost : this->playerBoost)
 	{
 		if (boost->update() == false)
+		{
 			this->playerBoost.erase(boost);
+		}
+		else
+		{
+			Rect *rect = new Rect(0, 0, 0, Graphics::windowWidth - 100, Graphics::screenHeight - 200, 50, 50);
+			SDL_RenderCopy(Graphics::renderer, Graphics::boosts[boost->powerUp], NULL, &rect->rect);
+			delete rect;
+		}
 	}
 	if (this->lifePoints <= 0)
 	{
