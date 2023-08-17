@@ -24,7 +24,7 @@ void statsBoost()
 {
 	Player::instance->playerBoost.insert(new PlayerBoost(10000000000ull, 0ull, []()
 														 { Player::instance->power -= 10;
-														  	Player::instance->speed -= 0.02f; }));
+														  	Player::instance->speed -= 0.02f; }, 1));
 	Player::instance->power += 10;
 	Player::instance->speed += 0.02f;
 }
@@ -32,8 +32,8 @@ void statsBoost()
 void changeNumberOfProjectiles()
 {
 	Player::instance->playerBoost.insert(new PlayerBoost(10000000000ull, 0ull, []()
-														 { Player::instance->numberOfProjectiles = 1; }));
-	Player::instance->numberOfProjectiles += rand() % 2 + 1;
+														 { Player::instance->numberOfProjectiles = 1; }, 2));
+	Player::instance->numberOfProjectiles += 1;
 }
 
 void bomb()
@@ -58,9 +58,6 @@ InGameItem::InGameItem(int powerUp)
 	SDL_SetTextureBlendMode(this->texture, SDL_BLENDMODE_BLEND);
 	this->go = InGameItem::boostFonctions[powerUp];
 	Level::powerUps.insert(this);
-	this->destroyTexture = false;
-	this->texture = Graphics::boosts[this->powerUp];
-	SDL_SetTextureBlendMode(this->texture, SDL_BLENDMODE_BLEND);
 }
 
 InGameItem::~InGameItem()

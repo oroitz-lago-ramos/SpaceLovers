@@ -9,6 +9,7 @@
 #include "projectile.hpp"
 #include "level.hpp"
 #include "playerBoost.hpp"
+#include "rect.hpp"
 
 Player *Player::instance = nullptr;
 
@@ -37,7 +38,15 @@ void Player::update()
 	for (PlayerBoost *boost : std::set<PlayerBoost *>(this->playerBoost))
 	{
 		if (boost->update() == false)
+		{
 			this->playerBoost.erase(boost);
+		}
+		else
+		{
+			Rect *rect = new Rect(0, 0, 0, Graphics::windowWidth - 100, Graphics::screenHeight - 200, 50, 50);
+			SDL_RenderCopy(Graphics::renderer, Graphics::boosts[boost->powerUp], NULL, &rect->rect);
+			delete rect;
+		}
 	}
 	if (this->lifePoints <= 0)
 	{
@@ -65,7 +74,7 @@ void Player::shoot()
 		for (int i = 0; i < this->numberOfProjectiles; i++)
 		{
 			// new Projectile(0, 255, 0, this->getX() + 10 * (i + 1), this->getY() - this->getHeight() - 15 * i, 5, 0.1f, 0.2, -1, true);
-			new Projectile(0, 255, 0, this->getX(), this->getY() - this->getHeight() - 15 * i, 5, 0.1f, 0, -1, true);
+			new Projectile(0, 255, 0, this->getX(), this->getY() - this->getHeight() - 15 * i, 5, 0.1f, 0, -1, false);
 			// new Projectile(0, 255, 0, this->getX() - 10 * (i + 1), this->getY() - this->getHeight() - 15 * i, 5, 0.1f, -0.2, -1, true);
 		}
 		this->timeSinceLastShot = 0;

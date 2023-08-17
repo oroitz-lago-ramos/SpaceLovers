@@ -7,13 +7,14 @@
 class PlayerBoost
 {
 public:
-    PlayerBoost(long long unsigned int powerUpDuration, long long unsigned int timeSincePowerUpStart, std::function<void()> onEnd);
+    PlayerBoost(long long unsigned int powerUpDuration, long long unsigned int timeSincePowerUpStart, std::function<void()> onEnd, int powerUp);
     ~PlayerBoost();
 
     long long unsigned int powerUpDuration;
     long long unsigned int timeSincePowerUpStart;
 
     std::function<void()> onEnd;
+    int powerUp;
 
     bool update();
 };
