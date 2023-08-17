@@ -49,7 +49,7 @@ myfunc InGameItem::boostFonctions[NUMBER_OF_BOOST] = {
 	&changeNumberOfProjectiles,
 	&bomb};
 InGameItem::InGameItem(int powerUp)
-	: Character(30, 200, 20, rand() % Graphics::screenWidth, 10, 10, 10, 0.02f),
+	: Character(30, 200, 20, rand() % Graphics::screenWidth, 10, 40, 40, 0.02f),
 	  powerUp(powerUp)
 {
 	this->destroyTexture = false;

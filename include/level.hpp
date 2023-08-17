@@ -12,8 +12,6 @@
 
 class Level
 {
-private:
-	int currentLvl;
 
 public:
 	Level();
@@ -39,6 +37,9 @@ public:
 	int boardLevel;
 	void setCurrentLvl(int currentLvl);
 	int getCurrentLvl();
+	
+private:
+	int currentLvl;
 };
 
 #endif
