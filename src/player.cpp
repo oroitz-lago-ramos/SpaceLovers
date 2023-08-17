@@ -40,12 +40,17 @@ void Player::update()
 		if (boost->update() == false)
 		{
 			this->playerBoost.erase(boost);
+			Level::instance->secondLeft->textUpdate("");
 		}
 		else
 		{
-			Rect *rect = new Rect(0, 0, 0, Graphics::windowWidth - 100, Graphics::screenHeight - 200, 50, 50);
+			int secondLeft = boost->boostLeft / 1000000000;
+			Rect *rect = new Rect(0, 0, 0, Graphics::screenWidth +30, Graphics::screenHeight - 200, 40, 40);
 			SDL_RenderCopy(Graphics::renderer, Graphics::boosts[boost->powerUp], NULL, &rect->rect);
 			delete rect;
+			char str[20];
+			snprintf(str, 20, "%02dsecondes", secondLeft);
+			Level::instance->secondLeft->textUpdate(str);
 		}
 	}
 	if (this->lifePoints <= 0)
@@ -83,12 +88,13 @@ void Player::shoot()
 
 void Player::die()
 {
-	Level::instance->~Level();
+	Game::currentState = GAMEOVER;
 }
 
 void Player::gainExperience(float experience)
 {
 	Player::instance->experience += experience;
+	Level::instance->xpEarned += experience;
 	char strXp[15];
 	snprintf(strXp, 15, "Xp: %07.0f", Player::instance->experience);
 	Level::instance->xpTotal->textUpdate(strXp);

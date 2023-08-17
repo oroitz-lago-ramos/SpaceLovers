@@ -25,6 +25,7 @@ public:
 	Text *levelRunning;
 	Text *xpTotal;
 	Text *fps;
+	Text *secondLeft;
 	void update();
 	void countdown();
 	void initPlayer();
@@ -37,6 +38,8 @@ public:
 	int boardLevel;
 	void setCurrentLvl(int currentLvl);
 	int getCurrentLvl();
+	int enemyKilled;
+	float xpEarned;
 	
 private:
 	int currentLvl;

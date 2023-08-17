@@ -15,6 +15,8 @@ SDL_Texture *Graphics::backgrounds[] = {};
 SDL_Texture *Graphics::boosts[] = {};
 // Initialisation d'un tableau de bouton à 0
 std::set<Button *> Graphics::buttons = {};
+TTF_Font *Graphics::font = nullptr;
+TTF_Font *Graphics::bigFont = nullptr;
 
 Graphics::Graphics()
 {
@@ -47,7 +49,7 @@ Graphics::Graphics()
 		Graphics::backgrounds[i] = SDL_CreateTextureFromSurface(Graphics::renderer, spaceLevel1);
 		SDL_FreeSurface(spaceLevel1);
 	}
-	for (int i = 0; i <=3; i++)
+	for (int i = 0; i <= 3; i++)
 	{
 		char boost[20];
 		snprintf(boost, 20, "assets/boost%d.png", i + 1);
@@ -55,6 +57,8 @@ Graphics::Graphics()
 		Graphics::boosts[i] = SDL_CreateTextureFromSurface(Graphics::renderer, boost1);
 		SDL_FreeSurface(boost1);
 	}
+	Graphics::font = TTF_OpenFont("Kichenset.otf", 32);
+	Graphics::bigFont = TTF_OpenFont("Kichenset.otf", 128);
 }
 
 Graphics::~Graphics()
@@ -73,6 +77,8 @@ Graphics::~Graphics()
 	}
 	SDL_DestroyRenderer(Graphics::renderer);
 	SDL_DestroyWindow(Graphics::window);
+	TTF_CloseFont(Graphics::font);
+	TTF_CloseFont(Graphics::bigFont);
 	IMG_Quit();
 	TTF_Quit();
 	SDL_Quit();

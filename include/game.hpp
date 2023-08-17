@@ -21,7 +21,8 @@ enum GameState
 {
 	MENU,
 	GAME,
-	SKILLTREE
+	SKILLTREE,
+	GAMEOVER
 };
 
 class Game

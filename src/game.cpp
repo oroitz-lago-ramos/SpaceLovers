@@ -14,6 +14,7 @@
 #include "skillTree.hpp"
 #include "skillNode.hpp"
 #include "rect.hpp"
+#include "text.hpp"
 
 int Game::inputs = 0;
 bool Game::isRunning = true;
@@ -35,8 +36,6 @@ Game::Game()
 		start = end;
 		SDL_SetRenderDrawColor(Graphics::renderer, 30, 30, 30, 30);
 		SDL_RenderClear(Graphics::renderer);
-		SDL_SetRenderDrawColor(Graphics::renderer, 255, 255, 255, 255);
-		SDL_RenderDrawLine(Graphics::renderer, Graphics::screenWidth, 0, Graphics::screenWidth, Graphics::screenHeight);
 
 		if (Game::currentState == MENU)
 		{
@@ -59,6 +58,35 @@ Game::Game()
 		else if (Game::currentState == SKILLTREE)
 		{
 			SkillTree::instance->render();
+		}
+		else if (Game::currentState == GAMEOVER)
+		{
+			Text *gameOver = new Text(0, 250, 200, Graphics::windowWidth / 2, 75, Graphics::windowWidth - 200, 150, "Game Over", Graphics::bigFont);
+			gameOver->render();
+			delete gameOver;
+			char levelStr[35];
+			snprintf(levelStr, 35, "Vous avez atteint le level %d", Level::instance->getCurrentLvl());
+			Text *level = new Text (0, 250, 200, Graphics::windowWidth / 2, 225, Graphics::windowWidth - 200, 150, levelStr, Graphics::bigFont);
+			level->render();
+			delete level;
+			char enemyKilled[30];
+			snprintf(enemyKilled, 30, "Vous avez vaincu %d ennemis!", Level::instance->enemyKilled);
+			Text *enemyKill = new Text (0, 250, 200, Graphics::windowWidth / 2, 375, Graphics::windowWidth - 200, 150, enemyKilled, Graphics::bigFont);
+			enemyKill->render();
+			delete enemyKill;
+			char xpEarned[30];
+			snprintf(xpEarned, 30, "Pour un total de %d xp!", (int)Level::instance->xpEarned);
+			Text *xpEarn = new Text (0, 250, 200, Graphics::windowWidth / 2, 525, Graphics::windowWidth - 200, 150, xpEarned, Graphics::bigFont);
+			xpEarn->render();
+			delete xpEarn;
+			static long long unsigned int gameReturn = 0;
+			gameReturn += this->frameTime;
+			if (gameReturn >= 5000000000)
+			{
+				Level::instance->~Level();
+				gameReturn = 0;
+			}
+
 		}
 
 		SDL_RenderPresent(Graphics::renderer);
@@ -177,6 +205,8 @@ void Game::renderLoop()
 {
 	SDL_Rect backRect = {0, 0, Graphics::screenWidth, Graphics::screenHeight};
 	SDL_RenderCopy(Graphics::renderer, Graphics::backgrounds[Level::instance->boardLevel - 1], NULL, &backRect);
+	SDL_SetRenderDrawColor(Graphics::renderer, 255, 255, 255, 255);
+	SDL_RenderDrawLine(Graphics::renderer, Graphics::screenWidth, 0, Graphics::screenWidth, Graphics::screenHeight);
 
 	// Affichage du joueur
 	this->player.update();

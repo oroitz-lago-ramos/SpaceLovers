@@ -79,7 +79,6 @@ void InGameItem::checkCollisions()
 {
 	if (SDL_HasIntersection(&this->rect, &Player::instance->rect))
 	{
-		std::cout << this->powerUp << std::endl;
 		(*this->go)();
 		this->~InGameItem();
 	}

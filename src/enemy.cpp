@@ -103,6 +103,7 @@ void Enemy::update()
 
 void Enemy::die()
 {
+	Level::instance->enemyKilled++;
 	this->~Enemy();
 	Player::instance->gainExperience(this->xpValue);
 }

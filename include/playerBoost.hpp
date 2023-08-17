@@ -15,6 +15,7 @@ public:
 
     std::function<void()> onEnd;
     int powerUp;
+    long long unsigned int boostLeft;
 
     bool update();
 };

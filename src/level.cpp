@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <set>
 #include <iostream>
-#include <stdio.h>
 #include <set>
 
 #include "level.hpp"
@@ -17,19 +16,20 @@ std::set<InGameItem *> Level::powerUps = {};
 Level *Level::instance = nullptr;
 
 Level::Level()
-	: timeSinceLastSpawn(0), timeSinceLastPoweUp(0), timeSinceLastBoss(0), nanoSecond(30000000000), difficulty(1), boardLevel(1), currentLvl(1)
+	: timeSinceLastSpawn(0), timeSinceLastPoweUp(0), timeSinceLastBoss(0), nanoSecond(30000000000), difficulty(1), boardLevel(1), enemyKilled(0), xpEarned(0), currentLvl(1)
 {
 	Level::instance = this;
 	char str[15];
 	snprintf(str, 15, "Niveau %03d", this->getCurrentLvl());
 	char strXp[15];
 	snprintf(strXp, 15, "Xp: %07.0f", Player::instance->experience);
-	this->timer = new Text(0, 250, 200, Graphics::windowWidth - 100, 200, 100, 75, "60", "Kichenset.otf", 24);
-	this->levelRunning = new Text(0, 250, 200, Graphics::windowWidth - 100, 100, 150, 75, str, "Kichenset.otf", 24);
-	this->xpTotal = new Text(0, 250, 200, Graphics::windowWidth - 100, Graphics::screenHeight - 150, 150, 75, strXp, "Kichenset.otf", 24);
+	this->timer = new Text(0, 250, 200, Graphics::windowWidth - 100, 200, 100, 75, "60", Graphics::font);
+	this->levelRunning = new Text(0, 250, 200, Graphics::windowWidth - 100, 100, 150, 75, str, Graphics::font);
+	this->xpTotal = new Text(0, 250, 200, Graphics::windowWidth - 100, Graphics::screenHeight - 150, 150, 75, strXp, Graphics::font);
+	this->secondLeft = new Text(0, 250, 200, Graphics::windowWidth - 75, Graphics::screenHeight - 200, 150, 50, "", Graphics::font);
 	char strFps[15];
 	snprintf(strFps, 15, "Fps: %04d", 1000000000 / Game::frameTime);
-	this->fps = new Text(0, 250, 200, Graphics::windowWidth - 100, Graphics::screenHeight - 100, 150, 75, strFps, "Kichenset.otf", 24);
+	this->fps = new Text(0, 250, 200, Graphics::windowWidth - 100, Graphics::screenHeight - 100, 150, 75, strFps, Graphics::font);
 	this->initPlayer();
 }
 
@@ -78,6 +78,7 @@ void Level::update()
 	snprintf(strFps, 15, "Fps: %04d", 1000000000 / Game::frameTime);
 	this->fps->textUpdate(strFps);
 	this->fps->render();
+	this->secondLeft->render();
 }
 
 void Level::countdown()

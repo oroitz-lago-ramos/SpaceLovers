@@ -9,14 +9,12 @@ class Text : public Entity
 {
 public:
 	Text();
-	Text(int r, int g, int b, int x, int y, int width, int height, const char *message, const char *font, int fontSize);
+	Text(int r, int g, int b, int x, int y, int width, int height, const char *message, TTF_Font *font);
 	~Text();
 
-	TTF_Font *fontChoice;
-	const char *message;
-	const char *font;
-	int fontSize;
+	char *message;
 	SDL_Color color;
+	TTF_Font *fontChoice;
 
 	void textUpdate(const char *message);
 };

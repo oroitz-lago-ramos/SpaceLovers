@@ -62,7 +62,7 @@ SkillTree::SkillTree()
 	this->autoLayout();
 	for (SkillNode *node : nodes)
 	{
-		node->text = new Text(0, 255, 0, node->getX(), node->getY(), node->getWidth(), node->getHeight(), node->name.c_str(), "Kichenset.otf", 64);
+		node->text = new Text(0, 255, 0, node->getX(), node->getY(), node->getWidth(), node->getHeight(), node->name.c_str(), Graphics::font);
 	}
 }
 

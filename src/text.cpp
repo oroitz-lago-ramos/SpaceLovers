@@ -11,11 +11,11 @@ Text::Text()
 {
 }
 
-Text::Text(int r, int g, int b, int x, int y, int width, int height, const char *message, const char *font, int fontSize)
+Text::Text(int r, int g, int b, int x, int y, int width, int height, const char *message, TTF_Font *font)
 	: Entity(30, 30, 30, x, y, width, height),
-	  message(message), font(font), color({(Uint8)r, (Uint8)g, (Uint8)b, 255})
+	  color({(Uint8)r, (Uint8)g, (Uint8)b, 255}), fontChoice(font)
 {
-	this->fontChoice = TTF_OpenFont(font, fontSize);
+	this->message = strdup(message);
 	SDL_Surface *text = TTF_RenderText_Blended(this->fontChoice, this->message, this->color);
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, text);
 	SDL_FreeSurface(text);
@@ -23,12 +23,17 @@ Text::Text(int r, int g, int b, int x, int y, int width, int height, const char 
 
 Text::~Text()
 {
-	TTF_CloseFont(this->fontChoice);
+	free(this->message);
 }
 
 void Text::textUpdate(const char *message)
 {
-	this->message = message;
+	if (strcmp(this->message, message) == 0)
+	{
+		return;
+	}
+	free(this->message);
+	this->message = strdup(message);
 	SDL_DestroyTexture(this->texture);
 	SDL_Surface *text = TTF_RenderText_Blended(this->fontChoice, this->message, this->color);
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, text);

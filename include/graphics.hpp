@@ -2,6 +2,7 @@
 #define GRAPHICS_HPP
 #include <SDL2/SDL.h>
 #include <set>
+#include <SDL2/SDL_ttf.h>
 
 #include "button.hpp"
 
@@ -28,6 +29,8 @@ public:
 	static SDL_Texture *textures[5];
 	static SDL_Texture *backgrounds[10];
 	static SDL_Texture *boosts[4];
+	static TTF_Font *font;
+	static TTF_Font *bigFont;
 };
 
 #endif
