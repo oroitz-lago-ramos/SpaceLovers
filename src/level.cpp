@@ -65,7 +65,7 @@ void Level::update()
 		this->timeSinceLastBoss = 0;
 	}
 
-	if (this->timeSinceLastPoweUp > 1000000000)
+	if (this->timeSinceLastPoweUp > 20000000000)
 	{
 		new InGameItem(rand()%NUMBER_OF_BOOST);
 		this->timeSinceLastPoweUp = 0;
