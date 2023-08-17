@@ -17,7 +17,7 @@ std::set<InGameItem *> Level::powerUps = {};
 Level *Level::instance = nullptr;
 
 Level::Level()
-	: timeSinceLastSpawn(0), timeSinceLastPoweUp(0), timeSinceLastBoss(0), nanoSecond(30000000000), currentLvl(1), difficulty(1), boardLevel(1)
+	: timeSinceLastSpawn(0), timeSinceLastPoweUp(0), timeSinceLastBoss(0), nanoSecond(30000000000), difficulty(1), boardLevel(1), currentLvl(1)
 {
 	Level::instance = this;
 	char str[15];
@@ -65,7 +65,7 @@ void Level::update()
 		this->timeSinceLastBoss = 0;
 	}
 
-	if (this->timeSinceLastPoweUp > 10000000000)
+	if (this->timeSinceLastPoweUp > 1000000000)
 	{
 		new InGameItem(rand()%NUMBER_OF_BOOST);
 		this->timeSinceLastPoweUp = 0;

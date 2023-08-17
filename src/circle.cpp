@@ -1,7 +1,7 @@
 #include "Graphics.hpp"
 #include <SDL2/sdl.h>
 
-int SDL_RenderDrawCircle(SDL_Renderer *renderer, int x, int y, int radius)
+int SDL_RenderDrawCircle(int x, int y, int radius)
 {
 	int offsetx, offsety, d;
 	int status;
@@ -49,7 +49,7 @@ int SDL_RenderDrawCircle(SDL_Renderer *renderer, int x, int y, int radius)
 	return status;
 }
 
-int SDL_RenderFillCircle(SDL_Renderer *renderer, int x, int y, int radius)
+int SDL_RenderFillCircle(int x, int y, int radius)
 {
 	int offsetx, offsety, d;
 	int status;

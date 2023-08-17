@@ -53,6 +53,9 @@ InGameItem::InGameItem(int powerUp)
 	: Character(30, 200, 20, rand() % Graphics::screenWidth, 10, 40, 40, 0.02f),
 	  powerUp(powerUp)
 {
+	this->destroyTexture = false;
+	this->texture = Graphics::boosts[this->powerUp];
+	SDL_SetTextureBlendMode(this->texture, SDL_BLENDMODE_BLEND);
 	this->go = InGameItem::boostFonctions[powerUp];
 	Level::powerUps.insert(this);
 	this->destroyTexture = false;
