@@ -64,7 +64,7 @@ void Player::shoot()
 		for (int i = 0; i < this->numberOfProjectiles; i++)
 		{
 			// new Projectile(0, 255, 0, this->getX() + 10 * (i + 1), this->getY() - this->getHeight() - 15 * i, 5, 0.1f, 0.2, -1, true);
-			new Projectile(0, 255, 0, this->getX(), this->getY() - this->getHeight() - 15 * i, 5, 0.1f, 0, -1, true);
+			new Projectile(0, 255, 0, this->getX(), this->getY() - this->getHeight() - 15 * i, 5, 0.1f, 0, -1, false);
 			// new Projectile(0, 255, 0, this->getX() - 10 * (i + 1), this->getY() - this->getHeight() - 15 * i, 5, 0.1f, -0.2, -1, true);
 		}
 		this->timeSinceLastShot = 0;

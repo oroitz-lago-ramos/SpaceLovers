@@ -33,7 +33,7 @@ void changeNumberOfProjectiles()
 {
 	Player::instance->playerBoost.insert(new PlayerBoost(10000000000ull, 0ull, []()
 														 { Player::instance->numberOfProjectiles = 1; }));
-	Player::instance->numberOfProjectiles += rand() % 2 + 1;
+	Player::instance->numberOfProjectiles += 1;
 }
 
 void bomb()
