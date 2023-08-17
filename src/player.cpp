@@ -1,4 +1,5 @@
 #include <iostream>
+#include <set>
 #include <functional>
 #include "SDL2/SDL_image.h"
 
@@ -33,7 +34,7 @@ void Player::update()
 {
 	this->asTakeDamage += Game::frameTime;
 	this->timeSinceLastShot += Game::frameTime;
-	for (PlayerBoost *boost : this->playerBoost)
+	for (PlayerBoost *boost : std::set<PlayerBoost *>(this->playerBoost))
 	{
 		if (boost->update() == false)
 			this->playerBoost.erase(boost);
