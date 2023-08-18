@@ -12,6 +12,14 @@
 
 #pragma once
 
+enum SkillState
+{
+	SPEED = 0,
+	POWER = 1,
+	DEFENSE = 2,
+	INGAMEITEM = 3
+};
+
 typedef struct s_pair
 {
 	int id;
@@ -28,6 +36,7 @@ typedef struct s_skill
 	std::string name;
 	std::string description;
 	std::vector<int> costs;
+	SkillState tree;
 } skill;
 
 extern skill __skills[NUMBER_OF_SKILLS];
