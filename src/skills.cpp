@@ -41,12 +41,12 @@ void initializeSkills()
 							"MEGASTRENGTH",
 							"GIT GUD",
 							{100, 500, 1000, 5000, 10000}, POWER};
-	__skills[6] = (skill){6, 0, 5, {4, 3}, []()
+	__skills.push_back((skill){6, 0, 5, {4, 3}, []()
 							{ Player::instance->projectileSpeed += 0.01f;},
 							"Lucky Luke",
 							"La competence pour tirer plus vite que son ombre",
 							{100, 500, 1000, 5000, 10000}, SPEED};
-	__skills[7] = (skill){7, 0, 2, {6, 3}, []()
+	__skills.push_back((skill){7, 0, 2, {6, 3}, []()
 							{ Player::instance->pierce += 1;},
 							"Une pierre deux coups",
 							"Une brochette d'ennemis au bout du fusil",
