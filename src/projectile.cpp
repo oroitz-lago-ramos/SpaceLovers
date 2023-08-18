@@ -10,9 +10,9 @@
 #include <set>
 #include <climits>
 
-Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed, float dirX, float dirY, bool target)
+Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed, float dirX, float dirY, bool target, int pierce)
 	: Character(r, g, b, x, y, 15, 15, speed, dirX, dirY),
-	  direction(0), power(power), target(nullptr)
+	  direction(0), power(power), target(nullptr), pierce(pierce), targetHit({nullptr, nullptr}), hits(0)
 {
 	this->destroyTexture = false;
 	this->texture = Graphics::textures[PROJECTILE];
@@ -101,8 +101,22 @@ void Projectile::checkCollisions()
 	{
 		if (SDL_HasIntersection(&this->rect, &enemy->rect))
 		{
-			enemy->takeDamage(this->power);
-			this->~Projectile();
+			bool shouldHit = true;
+			for (int i = 0; i < this->pierce; i++)
+			{
+				if (enemy == this->targetHit[i])
+					shouldHit = false;
+			}
+			if (shouldHit == true)
+			{
+				enemy->takeDamage(this->power);
+				this->targetHit[hits] = enemy;
+				this->hits++;
+			}
+			if (this->pierce < this->hits)
+			{
+				this->~Projectile();
+			}
 
 			return;
 		}

@@ -8,7 +8,7 @@
 #include "entity.hpp"
 #include "text.hpp"
 
-#define NUMBER_OF_SKILLS 6
+#define NUMBER_OF_SKILLS 8
 
 #pragma once
 

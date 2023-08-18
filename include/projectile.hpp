@@ -11,7 +11,7 @@ class Projectile : public Character
 public:
 	Projectile(int r, int g, int b, int x, int y, int direction, int power, float speed);
 	Projectile(int r, int g, int b, int x, int y, int power, float speed, float dirX, float dirY);
-	Projectile(int r, int g, int b, int x, int y, int power, float speed, float dirX, float dirY, bool target);
+	Projectile(int r, int g, int b, int x, int y, int power, float speed, float dirX, float dirY, bool target, int pierce);
 	~Projectile();
 
 	void update();
@@ -19,6 +19,9 @@ public:
 
 	int power;
 	Enemy *target;
+	int pierce;
+	Enemy *targetHit[2];
+	int hits;
 
 private:
 	void checkCollisions();

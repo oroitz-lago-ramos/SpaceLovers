@@ -24,6 +24,8 @@ public:
 
 	int numberOfProjectiles;
 	long long int unsigned reloadSpeed;
+	float projectileSpeed;
+	int pierce;
 
 	std::set<PlayerBoost *> playerBoost;
 
