@@ -84,8 +84,8 @@ void SkillTree::autoLayout()
 	{
 		std::sort(nodes[i].begin(), nodes[i].end(), [](SkillNode *a, SkillNode *b)
 				  { return a->requirements.size() < b->requirements.size(); });
-		int x = 250;
-		int y = 550;
+		int x = 50;
+		int y = 350;
 		int nodeWidth = 100;
 		for (SkillNode *node : nodes[i])
 		{
@@ -94,18 +94,18 @@ void SkillTree::autoLayout()
 			{
 				node->setY(y);
 				node->setX(x);
-				x += nodeWidth + 175;
+				y += nodeWidth + 175;
 			}
 			else
 			{
-				node->setY(y - node->depth * 150);
+				node->setX(x + node->depth * 150);
 				for (SkillNode *req : node->requirements)
 				{
-					int minx = req->getX();
-					minx -= (150 * (req->requiredBy - 1)) / 2;
-					minx += 150 * req->checkedRequirements;
+					int miny = req->getY();
+					miny -= (150 * (req->requiredBy - 1)) / 2;
+					miny += 150 * req->checkedRequirements;
 
-					node->setX(minx);
+					node->setY(miny);
 					req->checkedRequirements++;
 				}
 			}
