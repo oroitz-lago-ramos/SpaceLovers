@@ -13,6 +13,7 @@ std::set<Button *> SkillTree::buttons = {};
 SkillTree *SkillTree::instance = nullptr;
 
 SkillTree::SkillTree()
+	: selectedSkill(nullptr), totalExp(nullptr)
 {
 	SkillTree::instance = this;
 	Game::currentState = SKILLTREE;
@@ -20,28 +21,10 @@ SkillTree::SkillTree()
 		255, 0, 0, 0, 0, 100, 50, []()
 		{ Game::currentState = MENU; SkillTree::instance->~SkillTree(); },
 		"Back", false));
-	// red
-	// SkillNode *node1 = new SkillNode(255, 0, 0, "Node 1");
-	// // green
-	// SkillNode *node2 = new SkillNode(0, 255, 0, "Node 2");
-	// // blue
-	// SkillNode *node3 = new SkillNode(0, 0, 255, "Node 3");
-	// SkillNode *node4 = new SkillNode(200, 200, 200, "Node 4");
-	// SkillNode *node5 = new SkillNode(200, 200, 0, "Node 5");
-
-	// this->nodes.push_back(node1);
-	// this->nodes.push_back(node2);
-	// this->nodes.push_back(node3);
-	// this->nodes.push_back(node4);
-	// this->nodes.push_back(node5);
-
-	// node2->addRequirement(node1);
-	// node3->addRequirement(node2);
-	// // node3->addRequirement(node2);
-	// node4->addRequirement(node2);
-	// node5->addRequirement(node2);
 	this->getNodes();
-
+	char *exp = new char[100];
+	sprintf(exp, "Exp: %d", (int)Player::instance->experience);
+	this->totalExp = new Text(0, 250, 200, RIGHTPANELCENTERX, 50, 100, 50, exp, "Kichenset.otf", 64);
 	for (long long unsigned int i = 0; i < nodes.size(); i++)
 	{
 		for (long long unsigned int j = 0; j < nodes[i]->requirements.size(); j++)
@@ -119,6 +102,11 @@ SkillTree::~SkillTree()
 		this->buttons.erase(button);
 		button->~Button();
 	}
+	for (auto node : this->nodes)
+	{
+		node->~SkillNode();
+	}
+	delete this->totalExp;
 }
 
 void SkillTree::render()
@@ -141,6 +129,7 @@ void SkillTree::render()
 		node->text->render();
 	}
 	SDL_Event event;
+	this->renderRightPanel();
 	while (SDL_PollEvent(&event))
 	{
 		if (event.type == SDL_QUIT)
@@ -163,9 +152,12 @@ void SkillTree::render()
 			{
 				if (SDL_PointInRect(&point, &node->rect))
 				{
-					if (__skills[node->id].level < __skills[node->id].maxLevel){
-						__skills[node->id].level++;
-						std::cout << "Skill level: " << __skills[node->id].level << std::endl;}
+					this->selectedSkill = &__skills[node->id];
+					// if (__skills[node->id].level < __skills[node->id].maxLevel && Player::instance->experience >= __skills[node->id].costs[__skills[node->id].level])
+					// {
+					// 	// Player::instance->experience -= __skills[node->id].costs[__skills[node->id].level];
+					// 	// __skills[node->id].level++;
+					// }
 					break;
 				}
 			}
@@ -194,4 +186,15 @@ void SkillTree::getNodes()
 			}
 		}
 	}
+}
+
+void SkillTree::renderRightPanel()
+{
+	this->totalExp->render();
+	if (this->selectedSkill == nullptr)
+		return;
+
+	Text *skillName = new Text(0, 255, 0, RIGHTPANELCENTERX, 100, 100, 50, this->selectedSkill->name, "Kichenset.otf", 64);
+
+	char skillLevel[10];
 }

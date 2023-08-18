@@ -7,6 +7,8 @@
 #include "skillNode.hpp"
 #include "text.hpp"
 
+#define RIGHTPANELCENTERX Graphics::screenWidth + (Graphics::windowWidth - Graphics::screenWidth) / 2
+
 class SkillTree
 {
 public:
@@ -15,12 +17,16 @@ public:
 	static SkillTree *instance;
 	static std::set<Button *> buttons;
 	std::vector<SkillNode *> nodes;
+
+	skill *selectedSkill;
+	Text *totalExp;
 	void autoLayout();
 
 	int calculateDepth(SkillNode *node, SkillNode *current, int maxDepth);
 
 	void render();
 	void getNodes();
+	void renderRightPanel();
 };
 
 #endif
