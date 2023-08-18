@@ -40,15 +40,15 @@ void initializeSkills()
 							{ Player::instance->power *= 1.25;},
 							"MEGASTRENGTH",
 							"GIT GUD",
-							{100, 500, 1000, 5000, 10000}, POWER};
-	__skills.push_back((skill){6, 0, 5, {4, 3}, []()
+							{100, 500, 1000, 5000, 10000}, POWER});
+	__skills.push_back((skill){6, 0, 5, {{4, 3}}, []()
 							{ Player::instance->projectileSpeed += 0.01f;},
 							"Lucky Luke",
 							"La competence pour tirer plus vite que son ombre",
-							{100, 500, 1000, 5000, 10000}, SPEED};
-	__skills.push_back((skill){7, 0, 2, {6, 3}, []()
+							{100, 500, 1000, 5000, 10000}, SPEED});
+	__skills.push_back((skill){7, 0, 2, {{6, 3}}, []()
 							{ Player::instance->pierce += 1;},
 							"Une pierre deux coups",
 							"Une brochette d'ennemis au bout du fusil",
-							{100, 500, 1000, 5000, 10000}, SPEED};
+							{100, 500, 1000, 5000, 10000}, SPEED});
 }

@@ -270,7 +270,7 @@ void Game::saveGame()
 {
 	Save saveData;
 	saveData.experience = Player::instance->experience;
-	for (int i = 0; i < NUMBER_OF_SKILLS; ++i)
+	for (long long unsigned int i = 0; i < __skills.size(); ++i)
 	{
 		t_pair saveSkill;
 		saveSkill.id = i;

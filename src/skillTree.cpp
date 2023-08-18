@@ -196,7 +196,7 @@ void SkillTree::render()
 
 void SkillTree::getNodes()
 {
-	for (long long unsigned int i = 0; i < NUMBER_OF_SKILLS; i++)
+	for (long long unsigned int i = 0; i < __skills.size(); i++)
 	{
 		SkillNode *node = new SkillNode(255, 0, 0, __skills[i].name);
 		node->id = __skills[i].id;
