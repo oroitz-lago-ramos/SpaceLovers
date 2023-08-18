@@ -26,7 +26,7 @@ public:
 	SkillState currentState;
 	void autoLayout();
 
-	int calculateDepth(SkillNode *node, SkillNode *current, int maxDepth, int a);
+	int calculateDepth(SkillNode *node, SkillNode *current, int maxDepth);
 
 	void render();
 	void getNodes();

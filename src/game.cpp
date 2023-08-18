@@ -28,7 +28,7 @@ Game::Game()
 	this->createButtons();
 	srand(time(NULL));
 	auto start = chrono::steady_clock::now();
-	this->loadGame();
+	// this->loadGame();
 	while (Game::isRunning)
 	{
 		auto end = chrono::steady_clock::now();
@@ -301,7 +301,6 @@ bool Game::loadGame()
 	Save saveData;
 
 	std::ifstream inFile("save.dat", std::ios::binary | std::ios::in);
-
 	if (inFile.is_open())
 	{
 		inFile.read(reinterpret_cast<char *>(&saveData.experience), sizeof(float));
