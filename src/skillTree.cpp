@@ -23,88 +23,97 @@ SkillTree::SkillTree()
 		"Back", false));
 	buttons.insert(new Button(
 		255, 0, 0, 175, 100, 150, 100, []()
-		{ SkillTree::instance->currentState = SPEED;}, 
+		{ SkillTree::instance->currentState = SPEED; },
 		"Vitesse", false));
 	buttons.insert(new Button(
 		255, 0, 0, 325, 100, 150, 100, []()
-		{ SkillTree::instance->currentState = POWER;},
+		{ SkillTree::instance->currentState = POWER; },
 		"Puissance", false));
 	buttons.insert(new Button(
 		255, 0, 0, 475, 100, 150, 100, []()
-		{ SkillTree::instance->currentState = DEFENSE;}, 
+		{ SkillTree::instance->currentState = DEFENSE; },
 		"Defense", false));
 	buttons.insert(new Button(
 		255, 0, 0, 625, 100, 150, 100, []()
-		{ SkillTree::instance->currentState = INGAMEITEM;}, 
+		{ SkillTree::instance->currentState = INGAMEITEM; },
 		"Boost", false));
 	this->getNodes();
 	char *exp = new char[100];
 	sprintf(exp, "Exp: %d", (int)Player::instance->experience);
 	this->totalExp = new Text(0, 250, 200, RIGHTPANELCENTERX, 50, 100, 50, exp, Graphics::font);
-	for (long long unsigned int i = 0; i < nodes[0].size(); i++)
-	{
-		for (long long unsigned int j = 0; j < nodes[0][i]->requirements.size(); j++)
+	for (int a = 0; a < 4; a++)
+		for (long long unsigned int i = 0; i < nodes[a].size(); i++)
 		{
-			for (long long unsigned int k = 0; k < nodes[0].size(); k++)
+			for (long long unsigned int j = 0; j < nodes[a][i]->requirements.size(); j++)
 			{
-				if (nodes[0][k] == nodes[0][i]->requirements[j])
+				for (long long unsigned int k = 0; k < nodes[a].size(); k++)
 				{
-					nodes[0][k]->requiredBy++;
+					if (nodes[a][k] == nodes[a][i]->requirements[j])
+					{
+						nodes[a][k]->requiredBy++;
+					}
 				}
 			}
 		}
-	}
-	for (SkillNode *node : nodes[0])
-	{
-		node->depth = this->calculateDepth(node, node, 0);
-	}
+	for (int a = 0; a < 4; a++)
+		for (SkillNode *node : nodes[a])
+		{
+			node->depth = this->calculateDepth(node, node, 0, a);
+		}
+
 	this->autoLayout();
-	for (SkillNode *node : nodes[0])
-	{
-		node->text = new Text(0, 255, 0, node->getX(), node->getY(), node->getWidth(), node->getHeight(), node->name.c_str(), Graphics::font);
-	}
+	for (int a = 0; a < 4; a++)
+		for (SkillNode *node : nodes[a])
+		{
+			node->text = new Text(0, 255, 0, node->getX(), node->getY(), node->getWidth(), node->getHeight(), node->name.c_str(), Graphics::font);
+		}
 }
 
-int SkillTree::calculateDepth(SkillNode *node, SkillNode *current, int maxDepth)
+int SkillTree::calculateDepth(SkillNode *node, SkillNode *current, int maxDepth, int a)
 {
+	static int loop = 0;
+	loop++;
 	if (node->requirements.size() > 0)
 	{
 		maxDepth++;
 	}
 	for (SkillNode *req : node->requirements)
 	{
-		maxDepth = this->calculateDepth(req, current, maxDepth);
+		maxDepth = this->calculateDepth(req, current, maxDepth, a);
 	}
 	return maxDepth;
 }
 
 void SkillTree::autoLayout()
 {
-	std::sort(nodes[0].begin(), nodes[0].end(), [](SkillNode *a, SkillNode *b)
-			  { return a->requirements.size() < b->requirements.size(); });
-	int x = 250;
-	int y = 550;
-	int nodeWidth = 100;
-	for (SkillNode *node : nodes[0])
+	for (int i = 0; i < 4; i++)
 	{
+		std::sort(nodes[i].begin(), nodes[i].end(), [](SkillNode *a, SkillNode *b)
+				  { return a->requirements.size() < b->requirements.size(); });
+		int x = 250;
+		int y = 550;
+		int nodeWidth = 100;
+		for (SkillNode *node : nodes[i])
+		{
 
-		if (node->requirements.size() == 0)
-		{
-			node->setY(y);
-			node->setX(x);
-			x += nodeWidth + 175;
-		}
-		else
-		{
-			node->setY(y - node->depth * 150);
-			for (SkillNode *req : node->requirements)
+			if (node->requirements.size() == 0)
 			{
-				int minx = req->getX();
-				minx -= (150 * (req->requiredBy - 1)) / 2;
-				minx += 150 * req->checkedRequirements;
+				node->setY(y);
+				node->setX(x);
+				x += nodeWidth + 175;
+			}
+			else
+			{
+				node->setY(y - node->depth * 150);
+				for (SkillNode *req : node->requirements)
+				{
+					int minx = req->getX();
+					minx -= (150 * (req->requiredBy - 1)) / 2;
+					minx += 150 * req->checkedRequirements;
 
-				node->setX(minx);
-				req->checkedRequirements++;
+					node->setX(minx);
+					req->checkedRequirements++;
+				}
 			}
 		}
 	}
@@ -118,11 +127,14 @@ SkillTree::~SkillTree()
 		this->buttons.erase(button);
 		button->~Button();
 	}
-	for (auto node : this->nodes[0])
-	{
-		node->~SkillNode();
-	}
-	delete this->totalExp;
+	for (int i = 0; i < 4; i++)
+		for (auto node : this->nodes[i])
+		{
+			delete node;
+		}
+	this->totalExp->~Text();
+	// this->currentSkillButton->~Button();
+	// delete this->totalExp;
 	delete this->currentSkillButton;
 }
 
@@ -132,7 +144,7 @@ void SkillTree::render()
 	{
 		button->render();
 	}
-	for (auto node : nodes[0])
+	for (auto node : nodes[this->currentState])
 	{
 		for (auto req : node->requirements)
 		{
@@ -140,7 +152,7 @@ void SkillTree::render()
 			SDL_RenderDrawLine(Graphics::renderer, node->getX(), node->getY(), req->getX(), req->getY());
 		}
 	}
-	for (auto node : nodes[0])
+	for (auto node : nodes[this->currentState])
 	{
 		node->render();
 		node->text->render();
@@ -165,7 +177,7 @@ void SkillTree::render()
 					break;
 				}
 			}
-			for (auto *node : this->nodes[0])
+			for (auto *node : this->nodes[this->currentState])
 			{
 				if (SDL_PointInRect(&point, &node->rect))
 				{
@@ -180,8 +192,7 @@ void SkillTree::render()
 								Player::instance->experience -= SkillTree::instance->selectedSkill->costs[SkillTree::instance->selectedSkill->level];
 								SkillTree::instance->selectedSkill->level++;
 								SkillTree::instance->totalExp->textUpdate(std::to_string((int)Player::instance->experience).c_str());
-							}
-						},
+							} },
 						"Upgrade", false);
 					this->buttons.insert(this->currentSkillButton);
 					break;
@@ -197,19 +208,20 @@ void SkillTree::getNodes()
 	{
 		SkillNode *node = new SkillNode(255, 0, 0, __skills[i].name);
 		node->id = __skills[i].id;
-		std::cout<<__skills[i].tree<<std::endl;
 		this->nodes[(int)__skills[i].tree].push_back(node);
-		std::cout<<"Coucou"<<std::endl;
 	}
-	for (long long unsigned int i = 0; i < sizeof(__skills) / sizeof(skill); i++)
+	for (int a = 0; a < 4; a++)
 	{
-		if (__skills[i].requirements.id != -1)
+		for (long long unsigned int i = 0; i < this->nodes[a].size(); i++)
 		{
-			for (long long unsigned int j = 0; j < sizeof(__skills) / sizeof(skill); j++)
+			if (__skills[this->nodes[a][i]->id].requirements.id != -1)
 			{
-				if (__skills[i].requirements.id == __skills[j].id)
+				for (auto node : this->nodes[a])
 				{
-					this->nodes[0][i]->addRequirement(this->nodes[0][j]);
+					if (node->id == __skills[this->nodes[a][i]->id].requirements.id)
+					{
+						this->nodes[a][i]->addRequirement(node);
+					}
 				}
 			}
 		}

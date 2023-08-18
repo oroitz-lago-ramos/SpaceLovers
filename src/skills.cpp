@@ -35,4 +35,9 @@ void initializeSkills()
 							"Vitessitude",
 							"Increases the speed by 0.01",
 							{100, 500, 1000, 5000, 10000}, SPEED};
+	__skills[5] = (skill){5, 0, 5, {2, 3}, []()
+							{ Player::instance->power *= 1.25;},
+							"MEGASTRENGTH",
+							"GIT GUD",
+							{100, 500, 1000, 5000, 10000}, POWER};
 }

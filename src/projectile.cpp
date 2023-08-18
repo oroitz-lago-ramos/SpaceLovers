@@ -110,8 +110,6 @@ void Projectile::checkCollisions()
 	if (SDL_HasIntersection(&this->rect, &Player::instance->rect))
 	{
 		Player::instance->takeDamage(this->power);
-		// std::cout << "Player hit" << std::endl;
-		// std::cout << Player::instance->lifePoints << std::endl;
 		this->~Projectile();
 
 		return;
