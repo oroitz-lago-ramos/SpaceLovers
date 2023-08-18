@@ -17,6 +17,7 @@ public:
 	TTF_Font *fontChoice;
 
 	void textUpdate(const char *message);
+	void createMultiLineText();
 };
 
 #endif

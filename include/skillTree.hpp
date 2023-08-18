@@ -20,6 +20,7 @@ public:
 
 	skill *selectedSkill;
 	Text *totalExp;
+	Button *currentSkillButton;
 	void autoLayout();
 
 	int calculateDepth(SkillNode *node, SkillNode *current, int maxDepth);

@@ -14,7 +14,7 @@ void initializeSkills()
 						  { Player::instance->power *= 1.05; },
 						  "Empower",
 						  "Increases the damage of your attacks by 5% per level",
-						  {100, 500, 1000, 5000, 10000}};
+						  {1, 500, 1000, 5000, 10000}};
 	__skills[1] = (skill){1, 0, 5, {-1, -1}, []()
 						  { Player::instance->maxLifePoints *= 1.05; },
 						  "Vitality",
@@ -23,7 +23,7 @@ void initializeSkills()
 	__skills[2] = (skill){2, 0, 5, {0, 3}, []()
 						  { Player::instance->power *= 1.15;},
 						  "Supremacy",
-						  "Increasedd the damage of your attacks by 15% per level",
+						  "Increases the damage of your attacks by 15% per level",
 						  {100, 500, 1000, 5000, 10000}};
 	__skills[3] = (skill){3, 0, 5, {1, 3}, []()
 						  { Player::instance->maxLifePoints *= 1.15;},

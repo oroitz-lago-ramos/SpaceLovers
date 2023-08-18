@@ -13,7 +13,7 @@ std::set<Button *> SkillTree::buttons = {};
 SkillTree *SkillTree::instance = nullptr;
 
 SkillTree::SkillTree()
-	: selectedSkill(nullptr), totalExp(nullptr)
+	: selectedSkill(nullptr), totalExp(nullptr), currentSkillButton(nullptr)
 {
 	SkillTree::instance = this;
 	Game::currentState = SKILLTREE;
@@ -24,7 +24,7 @@ SkillTree::SkillTree()
 	this->getNodes();
 	char *exp = new char[100];
 	sprintf(exp, "Exp: %d", (int)Player::instance->experience);
-	this->totalExp = new Text(0, 250, 200, RIGHTPANELCENTERX, 50, 100, 50, exp, "Kichenset.otf", 64);
+	this->totalExp = new Text(0, 250, 200, RIGHTPANELCENTERX, 50, 100, 50, exp, Graphics::font);
 	for (long long unsigned int i = 0; i < nodes.size(); i++)
 	{
 		for (long long unsigned int j = 0; j < nodes[i]->requirements.size(); j++)
@@ -107,6 +107,7 @@ SkillTree::~SkillTree()
 		node->~SkillNode();
 	}
 	delete this->totalExp;
+	delete this->currentSkillButton;
 }
 
 void SkillTree::render()
@@ -144,6 +145,7 @@ void SkillTree::render()
 			{
 				if (SDL_PointInRect(&point, &button->rect))
 				{
+					std::cout << "COUCOU" << std::endl;
 					button->onClick();
 					break;
 				}
@@ -153,11 +155,20 @@ void SkillTree::render()
 				if (SDL_PointInRect(&point, &node->rect))
 				{
 					this->selectedSkill = &__skills[node->id];
-					// if (__skills[node->id].level < __skills[node->id].maxLevel && Player::instance->experience >= __skills[node->id].costs[__skills[node->id].level])
-					// {
-					// 	// Player::instance->experience -= __skills[node->id].costs[__skills[node->id].level];
-					// 	// __skills[node->id].level++;
-					// }
+					this->buttons.erase(this->currentSkillButton);
+					delete this->currentSkillButton;
+					this->currentSkillButton = new Button(
+						255, 0, 0, RIGHTPANELCENTERX, 550, 100, 50, []()
+						{
+							if (SkillTree::instance->selectedSkill->level < SkillTree::instance->selectedSkill->maxLevel && Player::instance->experience >= SkillTree::instance->selectedSkill->costs[SkillTree::instance->selectedSkill->level])
+							{
+								Player::instance->experience -= SkillTree::instance->selectedSkill->costs[SkillTree::instance->selectedSkill->level];
+								SkillTree::instance->selectedSkill->level++;
+								SkillTree::instance->totalExp->textUpdate(std::to_string((int)Player::instance->experience).c_str());
+							}
+						},
+						"Upgrade", false);
+					this->buttons.insert(this->currentSkillButton);
 					break;
 				}
 			}
@@ -194,7 +205,31 @@ void SkillTree::renderRightPanel()
 	if (this->selectedSkill == nullptr)
 		return;
 
-	Text *skillName = new Text(0, 255, 0, RIGHTPANELCENTERX, 100, 100, 50, this->selectedSkill->name, "Kichenset.otf", 64);
+	Text *skillName = new Text(0, 250, 200, RIGHTPANELCENTERX, 100, 200, 50, this->selectedSkill->name.c_str(), Graphics::font);
+	skillName->render();
+	delete skillName;
+	char skillLevel[30];
+	snprintf(skillLevel, 30, "Level: %d/%d", this->selectedSkill->level, this->selectedSkill->maxLevel);
+	Text *skillLevelText = new Text(0, 250, 200, RIGHTPANELCENTERX, 150, 200, 50, skillLevel, Graphics::font);
+	skillLevelText->render();
+	delete skillLevelText;
+	char skillDescription[200];
+	snprintf(skillDescription, 200, "%s", this->selectedSkill->description.c_str());
+	Text *skillDescriptionText = new Text(0, 250, 200, RIGHTPANELCENTERX, 350, 200, 300, skillDescription, Graphics::font);
+	skillDescriptionText->render();
+	delete skillDescriptionText;
+	char skillCost[30];
+	if (this->selectedSkill->level < this->selectedSkill->maxLevel)
+	{
+		snprintf(skillCost, 30, "Cost: %d", this->selectedSkill->costs[this->selectedSkill->level]);
+	}
+	else
+	{
+		snprintf(skillCost, 30, "Max Level");
+	}
+	Text *skillCostText = new Text(0, 250, 200, RIGHTPANELCENTERX, 500, 200, 50, skillCost, Graphics::font);
+	skillCostText->render();
+	delete skillCostText;
 
-	char skillLevel[10];
+	this->currentSkillButton->render();
 }

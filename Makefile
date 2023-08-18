@@ -62,4 +62,4 @@ fclean: clean
 re: fclean all
 
 test: all
-	heob64.exe -d0 $(BIN_FOLDER)/$(TARGET).exe
+	$(BIN_FOLDER)/$(TARGET).exe
