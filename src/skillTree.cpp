@@ -80,7 +80,6 @@ int SkillTree::calculateDepth(SkillNode *node, SkillNode *current, int maxDepth)
 
 void SkillTree::autoLayout()
 {
-	std::cout << "AutoLayout" << std::endl;
 	for (int i = 0; i < 4; i++)
 	{
 		std::sort(nodes[i].begin(), nodes[i].end(), [](SkillNode *a, SkillNode *b)
@@ -197,7 +196,6 @@ void SkillTree::render()
 
 void SkillTree::getNodes()
 {
-	std::cout << "getNodes" << std::endl;
 	for (long long unsigned int i = 0; i < NUMBER_OF_SKILLS; i++)
 	{
 		SkillNode *node = new SkillNode(255, 0, 0, __skills[i].name);

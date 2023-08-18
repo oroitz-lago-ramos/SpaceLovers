@@ -27,7 +27,6 @@ Game::Game()
 	// Appel de la méthode de création des boutons
 	this->createButtons();
 	srand(time(NULL));
-		std::cout << "Frame time: " << Game::frameTime << std::endl;
 	auto start = chrono::steady_clock::now();
 	// this->loadGame();
 	while (Game::isRunning)
@@ -301,7 +300,6 @@ bool Game::loadGame()
 {
 	Save saveData;
 
-	std::cout << "Loading save file..\n." << std::endl;
 	std::ifstream inFile("save.dat", std::ios::binary | std::ios::in);
 	if (inFile.is_open())
 	{
@@ -315,13 +313,11 @@ bool Game::loadGame()
 		}
 		inFile.close();
 		Player::instance->experience = saveData.experience;
-		std::cout << "Experience : " << saveData.experience << std::endl;
 		if (!saveData.skills.empty())
 		{
 			for (auto p : saveData.skills)
 			{
-				std::cout << "Skill " << p.id << " level " << p.level << std::endl;
-				// __skills[p.id].level = p.level;
+				__skills[p.id].level = p.level;
 			}
 		}
 	}

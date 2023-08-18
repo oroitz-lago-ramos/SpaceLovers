@@ -8,11 +8,9 @@
 #include "skillNode.hpp"
 
 std::vector<skill> __skills;
-// skill __skills[NUMBER_OF_SKILLS];
 
 void initializeSkills()
 {
-	std::cout << "Initializing skills" << std::endl;
 	__skills.push_back((skill){0, 0, 5, {{-1, -1}}, []()
 						  { Player::instance->power *= 1.05; },
 						  "Empower",
@@ -38,7 +36,7 @@ void initializeSkills()
 							"Vitessitude",
 							"Increases the speed by 0.01",
 							{100, 500, 1000, 5000, 10000}, SPEED});
-	__skills.push_back((skill){5, 0, 5, {{2, 3}}, []()
+	__skills.push_back((skill){5, 0, 5, {{2, 3}, {0, 1}}, []()
 							{ Player::instance->power *= 1.25;},
 							"MEGASTRENGTH",
 							"GIT GUD",
