@@ -8,8 +8,6 @@
 #include "entity.hpp"
 #include "text.hpp"
 
-#define NUMBER_OF_SKILLS 6
-
 #pragma once
 
 enum SkillState
