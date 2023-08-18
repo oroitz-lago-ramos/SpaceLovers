@@ -58,7 +58,7 @@ SkillTree::SkillTree()
 	for (int a = 0; a < 4; a++)
 		for (SkillNode *node : nodes[a])
 		{
-			node->depth = this->calculateDepth(node, node, 0, a);
+			node->depth = this->calculateDepth(node, node, -1);
 		}
 
 	this->autoLayout();
@@ -69,23 +69,18 @@ SkillTree::SkillTree()
 		}
 }
 
-int SkillTree::calculateDepth(SkillNode *node, SkillNode *current, int maxDepth, int a)
+int SkillTree::calculateDepth(SkillNode *node, SkillNode *current, int maxDepth)
 {
-	static int loop = 0;
-	loop++;
-	if (node->requirements.size() > 0)
-	{
-		maxDepth++;
-	}
 	for (SkillNode *req : node->requirements)
 	{
-		maxDepth = this->calculateDepth(req, current, maxDepth, a);
+		maxDepth = std::max(maxDepth, this->calculateDepth(req, current, maxDepth));
 	}
-	return maxDepth;
+	return maxDepth + 1;
 }
 
 void SkillTree::autoLayout()
 {
+	std::cout << "AutoLayout" << std::endl;
 	for (int i = 0; i < 4; i++)
 	{
 		std::sort(nodes[i].begin(), nodes[i].end(), [](SkillNode *a, SkillNode *b)
@@ -133,9 +128,7 @@ SkillTree::~SkillTree()
 			delete node;
 		}
 	this->totalExp->~Text();
-	// this->currentSkillButton->~Button();
 	// delete this->totalExp;
-	delete this->currentSkillButton;
 }
 
 void SkillTree::render()
@@ -204,7 +197,8 @@ void SkillTree::render()
 
 void SkillTree::getNodes()
 {
-	for (long long unsigned int i = 0; i < sizeof(__skills) / sizeof(skill); i++)
+	std::cout << "getNodes" << std::endl;
+	for (long long unsigned int i = 0; i < NUMBER_OF_SKILLS; i++)
 	{
 		SkillNode *node = new SkillNode(255, 0, 0, __skills[i].name);
 		node->id = __skills[i].id;
@@ -214,13 +208,16 @@ void SkillTree::getNodes()
 	{
 		for (long long unsigned int i = 0; i < this->nodes[a].size(); i++)
 		{
-			if (__skills[this->nodes[a][i]->id].requirements.id != -1)
+			for (long long unsigned int j = 0; j < __skills[this->nodes[a][i]->id].requirements.size(); j++)
 			{
-				for (auto node : this->nodes[a])
+				if (__skills[this->nodes[a][i]->id].requirements[j].id != -1)
 				{
-					if (node->id == __skills[this->nodes[a][i]->id].requirements.id)
+					for (auto node : this->nodes[a])
 					{
-						this->nodes[a][i]->addRequirement(node);
+						if (node->id == __skills[this->nodes[a][i]->id].requirements[j].id)
+						{
+							this->nodes[a][i]->addRequirement(node);
+						}
 					}
 				}
 			}

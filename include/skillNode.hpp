@@ -31,7 +31,7 @@ typedef struct s_skill
 	int id;
 	int level;
 	int maxLevel;
-	t_pair requirements;
+	std::vector<t_pair> requirements;
 	std::function<void()> effect;
 	std::string name;
 	std::string description;
@@ -39,7 +39,8 @@ typedef struct s_skill
 	SkillState tree;
 } skill;
 
-extern skill __skills[NUMBER_OF_SKILLS];
+extern std::vector<skill> __skills;
+// extern skill __skills[NUMBER_OF_SKILLS];
 
 class SkillNode : public Entity
 {
