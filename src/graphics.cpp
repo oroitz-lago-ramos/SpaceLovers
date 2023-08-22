@@ -4,7 +4,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 
-int Graphics::windowWidth = 1000;
+int Graphics::windowWidth = 1100;
 int Graphics::screenWidth = 800;
 int Graphics::screenHeight = 600;
 

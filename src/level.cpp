@@ -23,13 +23,13 @@ Level::Level()
 	snprintf(str, 15, "Niveau %03d", this->getCurrentLvl());
 	char strXp[15];
 	snprintf(strXp, 15, "Xp: %07.0f", Player::instance->experience);
-	this->timer = new Text(0, 250, 200, Graphics::windowWidth - 100, 200, 100, 75, "60", Graphics::font);
-	this->levelRunning = new Text(0, 250, 200, Graphics::windowWidth - 100, 100, 150, 75, str, Graphics::font);
-	this->xpTotal = new Text(0, 250, 200, Graphics::windowWidth - 100, Graphics::screenHeight - 150, 150, 75, strXp, Graphics::font);
-	this->secondLeft = new Text(0, 250, 200, Graphics::windowWidth - 75, Graphics::screenHeight - 200, 150, 50, "", Graphics::font);
+	this->timer = new Text(0, 250, 200, Graphics::windowWidth - 150, 200, 150, 75, "", Graphics::font);
+	this->levelRunning = new Text(0, 250, 200, Graphics::windowWidth - 150, 100, 250, 75, str, Graphics::font);
+	this->xpTotal = new Text(0, 250, 200, Graphics::windowWidth - 150, Graphics::screenHeight - 150, 250, 75, strXp, Graphics::font);
+	this->secondLeft = new Text(0, 250, 200, Graphics::windowWidth - 125, Graphics::screenHeight - 200, 200, 50, "", Graphics::font);
 	char strFps[15];
 	snprintf(strFps, 15, "Fps: %04d", 1000000000 / Game::frameTime);
-	this->fps = new Text(0, 250, 200, Graphics::windowWidth - 100, Graphics::screenHeight - 100, 150, 75, strFps, Graphics::font);
+	this->fps = new Text(0, 250, 200, Graphics::windowWidth - 150, Graphics::screenHeight - 100, 200, 50, strFps, Graphics::font);
 	this->initPlayer();
 	int max = Player::instance->bestLevel - (Player::instance->bestLevel %5);
 	for (int i = this->getCurrentLvl(); i < max; i++)
@@ -91,8 +91,9 @@ void Level::countdown()
 	int second = Level::nanoSecond / 1000000000;
 	if (second >= 0)
 	{
-		this->count = std::to_string(second);
-		this->timer->textUpdate(this->count.c_str());
+		char str[3];
+		snprintf(str, 3, "%02d", second);
+		this->timer->textUpdate(str);
 	}
 	if (second == 0)
 	{

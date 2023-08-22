@@ -232,14 +232,14 @@ void Game::renderLoop()
 		powerUp->render();
 	}
 
-	Rect *rect = new Rect(0, 255, 0, Graphics::windowWidth - 100, Graphics::screenHeight - 50, 152, 32);
+	Rect *rect = new Rect(0, 255, 0, Graphics::windowWidth - 150, Graphics::screenHeight - 50, 202, 32);
 	rect->render(true);
 	delete rect;
-	rect = new Rect(30, 30, 30, Graphics::windowWidth - 100, Graphics::screenHeight - 50, 150, 30);
+	rect = new Rect(30, 30, 30, Graphics::windowWidth - 150, Graphics::screenHeight - 50, 200, 30);
 	rect->render(true);
 	delete rect;
 	float lifePointsPercents = Player::instance->lifePoints / Player::instance->maxLifePoints;
-	rect = new Rect(250 - 100 * lifePointsPercents, 150 * lifePointsPercents, 150 * lifePointsPercents, Graphics::windowWidth - 100, Graphics::screenHeight - 50, lifePointsPercents * 150, 30);
+	rect = new Rect(250 - 100 * lifePointsPercents, 150 * lifePointsPercents, 150 * lifePointsPercents, Graphics::windowWidth - 150, Graphics::screenHeight - 50, lifePointsPercents * 200, 30);
 	rect->render(true);
 	delete rect;
 }
