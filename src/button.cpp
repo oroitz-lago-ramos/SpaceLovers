@@ -7,7 +7,7 @@
 #include "entity.hpp"
 
 Button::Button(int r, int g, int b, int x, int y, int width, int height, std::function<void()> onClick, const char *message)
-	: Entity(r, g, b, x, y, width, height),
+	: Entity(r, g, b, x, y, width, height, true),
 	  onClick(onClick), message(message)
 {
 	// Permet d'ajouter un nouveau bouton à la liste
@@ -16,7 +16,7 @@ Button::Button(int r, int g, int b, int x, int y, int width, int height, std::fu
 }
 
 Button::Button(int r, int g, int b, int x, int y, int width, int height, std::function<void()> onClick, const char *message, bool add)
-	: Entity(r, g, b, x, y, width, height),
+	: Entity(r, g, b, x, y, width, height, true),
 	  onClick(onClick), message(message)
 {
 	// Permet d'ajouter un nouveau bouton à la liste
@@ -36,7 +36,7 @@ Button::~Button()
 void Button::text()
 {
 	TTF_Font *font = TTF_OpenFont("Kichenset.otf", 50);
-	SDL_Surface *text = TTF_RenderText_Blended(font, this->message, (SDL_Color){255, 0, 0, 255});
+	SDL_Surface *text = TTF_RenderText_Blended(font, this->message, (SDL_Color){0, 255, 0, 255});
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, text);
 	SDL_FreeSurface(text);
 	TTF_CloseFont(font);

@@ -17,15 +17,15 @@ Attack::Attack(Enemy *enemy, int type)
         this->timeSinceAttackStart = 0;
         this->attackDuration = 1000000000;
         this->attackCooldown = 3000000000;
-        this->multiplier = 1;
+        this->multiplier = 0.3;
     }
     if (type == 1)
     {
         this->timeSinceLastAttack = 0;
         this->timeSinceAttackStart = 0;
         this->attackDuration = 2000000000;
-        this->attackCooldown = 2000000000;
-        this->multiplier = 0.3;
+        this->attackCooldown = 3000000000;
+        this->multiplier = 0.65;
     }
 }
 

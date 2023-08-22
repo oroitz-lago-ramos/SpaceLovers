@@ -22,19 +22,19 @@ SkillTree::SkillTree()
 		{ Game::currentState = MENU; SkillTree::instance->~SkillTree(); },
 		"Back", false));
 	buttons.insert(new Button(
-		255, 0, 0, 175, 100, 150, 100, []()
+		255, 0, 0, 175, 100, 145, 100, []()
 		{ SkillTree::instance->currentState = SPEED; },
 		"Vitesse", false));
 	buttons.insert(new Button(
-		255, 0, 0, 325, 100, 150, 100, []()
+		255, 0, 0, 330, 100, 145, 100, []()
 		{ SkillTree::instance->currentState = POWER; },
 		"Puissance", false));
 	buttons.insert(new Button(
-		255, 0, 0, 475, 100, 150, 100, []()
+		255, 0, 0, 485, 100, 145, 100, []()
 		{ SkillTree::instance->currentState = DEFENSE; },
 		"Defense", false));
 	buttons.insert(new Button(
-		255, 0, 0, 625, 100, 150, 100, []()
+		255, 0, 0, 640, 100, 145, 100, []()
 		{ SkillTree::instance->currentState = INGAMEITEM; },
 		"Boost", false));
 	this->getNodes();
@@ -132,6 +132,8 @@ SkillTree::~SkillTree()
 
 void SkillTree::render()
 {
+	SDL_Rect rectSkillTree = {0, 0, Graphics::windowWidth, Graphics::screenHeight};
+	SDL_RenderCopy(Graphics::renderer, Graphics::skillTreeBackground, NULL, &rectSkillTree);
 	for (auto button : buttons)
 	{
 		button->render();

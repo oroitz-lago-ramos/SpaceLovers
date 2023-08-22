@@ -31,6 +31,8 @@ public:
 	static SDL_Texture *boosts[4];
 	static TTF_Font *font;
 	static TTF_Font *bigFont;
+	static SDL_Texture *menuBackground;
+	static SDL_Texture *skillTreeBackground;
 };
 
 #endif

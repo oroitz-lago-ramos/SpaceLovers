@@ -12,7 +12,7 @@
 
 Projectile::Projectile(int r, int g, int b, int x, int y, int power, float speed, float dirX, float dirY, bool target, int pierce)
 	: Character(r, g, b, x, y, 15, 15, speed, dirX, dirY),
-	  direction(0), power(power), target(nullptr), pierce(pierce), targetHit({nullptr, nullptr}), hits(0)
+	  direction(0), power(power), target(nullptr), pierce(pierce), targetHit{nullptr, nullptr}, hits(0)
 {
 	this->destroyTexture = false;
 	this->texture = Graphics::textures[PROJECTILE];

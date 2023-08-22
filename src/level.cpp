@@ -55,13 +55,13 @@ void Level::update()
 
 	if (this->timeSinceLastSpawn > 2000000000)
 	{
-		new Enemy(1 * this->difficulty, 1 * this->difficulty, 1 * this->difficulty, 1 * this->difficulty);
+		new Enemy(10 * this->difficulty, 5 * this->difficulty, 10 * this->difficulty, 1 * this->difficulty);
 		this->timeSinceLastSpawn = 0;
 	}
 	
 	if (this->timeSinceLastBoss > 26500000000)
 	{
-		new Enemy(20 * this->difficulty, 20 * this->difficulty, 20 * this->difficulty, 10 * this->difficulty, 20 * this->difficulty, ISBOSS | (1 << (rand() % 2 + 1)));
+		new Enemy(25 * this->difficulty, 25 * this->difficulty, 25 * this->difficulty, 20 * this->difficulty, 20 * this->difficulty, ISBOSS | (1 << (rand() % 2 + 1)));
 		this->timeSinceLastBoss = 0;
 	}
 

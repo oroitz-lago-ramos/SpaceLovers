@@ -7,13 +7,19 @@
 
 Entity::Entity(int r, int g, int b, int x, int y, int width, int height)
 	: r(r), g(g), b(b), x(x), y(y), width(width), height(height), rect({x - width / 2, y - height / 2, width, height}),
-	  texture(nullptr), destroyTexture(true)
+	  texture(nullptr), destroyTexture(true), drawRect(false)
+{
+}
+
+Entity::Entity(int r, int g, int b, int x, int y, int width, int height, bool drawRect)
+	: r(r), g(g), b(b), x(x), y(y), width(width), height(height), rect({x - width / 2, y - height / 2, width, height}),
+	  texture(nullptr), destroyTexture(true), drawRect(drawRect)
 {
 }
 
 Entity::~Entity()
 {
-	if (this -> destroyTexture == true)
+	if (this->destroyTexture == true)
 		SDL_DestroyTexture(this->texture);
 }
 
@@ -21,6 +27,11 @@ void Entity::render()
 {
 	if (this->texture != nullptr)
 	{
+		if (drawRect == true)
+		{
+			SDL_SetRenderDrawColor(Graphics::renderer, this->r, this->g, this->b, 175);
+			SDL_RenderFillRect(Graphics::renderer, &this->rect);
+		}
 		SDL_RenderCopy(Graphics::renderer, this->texture, NULL, &this->rect);
 	}
 	else

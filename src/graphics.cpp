@@ -13,6 +13,8 @@ SDL_Renderer *Graphics::renderer = nullptr;
 SDL_Texture *Graphics::textures[] = {};
 SDL_Texture *Graphics::backgrounds[] = {};
 SDL_Texture *Graphics::boosts[] = {};
+SDL_Texture *Graphics::menuBackground = nullptr;
+SDL_Texture *Graphics::skillTreeBackground = nullptr;
 // Initialisation d'un tableau de bouton à 0
 std::set<Button *> Graphics::buttons = {};
 TTF_Font *Graphics::font = nullptr;
@@ -24,7 +26,7 @@ Graphics::Graphics()
 	Graphics::window = SDL_CreateWindow("C++", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, this->windowWidth, this->screenHeight, SDL_WINDOW_SHOWN);
 	Graphics::renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
 	TTF_Init();
-	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
+	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG | IMG_INIT_AVIF);
 	SDL_SetRenderDrawBlendMode(Graphics::renderer, SDL_BLENDMODE_BLEND);
 	SDL_Surface *enemy = IMG_Load("assets/ennemies.png");
 	Graphics::textures[ENEMYTEXTURE1] = SDL_CreateTextureFromSurface(Graphics::renderer, enemy);
@@ -59,6 +61,12 @@ Graphics::Graphics()
 	}
 	Graphics::font = TTF_OpenFont("Kichenset.otf", 32);
 	Graphics::bigFont = TTF_OpenFont("Kichenset.otf", 128);
+	SDL_Surface *menu = IMG_Load("assets/fondecran.avif");
+	Graphics::menuBackground = SDL_CreateTextureFromSurface(Graphics::renderer, menu);
+	SDL_FreeSurface(menu);
+	SDL_Surface *menuSkill = IMG_Load("assets/skillTreeBackground.jpg");
+	Graphics::skillTreeBackground = SDL_CreateTextureFromSurface(Graphics::renderer, menuSkill);
+	SDL_FreeSurface(menuSkill);
 }
 
 Graphics::~Graphics()
@@ -75,6 +83,12 @@ Graphics::~Graphics()
 	{
 		SDL_DestroyTexture(Graphics::backgrounds[i]);
 	}
+	for (int i = 0; i <= 3; i++)
+	{
+		SDL_DestroyTexture(Graphics::boosts[i]);
+	}
+	SDL_DestroyTexture(menuBackground);
+	SDL_DestroyTexture(skillTreeBackground);
 	SDL_DestroyRenderer(Graphics::renderer);
 	SDL_DestroyWindow(Graphics::window);
 	TTF_CloseFont(Graphics::font);

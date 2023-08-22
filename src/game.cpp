@@ -28,7 +28,7 @@ Game::Game()
 	this->createButtons();
 	srand(time(NULL));
 	auto start = chrono::steady_clock::now();
-	// this->loadGame();
+	this->loadGame();
 	while (Game::isRunning)
 	{
 		auto end = chrono::steady_clock::now();
@@ -96,19 +96,17 @@ Game::Game()
 Game::~Game()
 {
 	this->saveGame();
-	// Destruction des boutons
 }
 
-// Methode pour créer des boutons, chaque nouveau bouton doit être fait dans la méthode
 void Game::createButtons()
 {
 	new Button(
-		255, 255, 255, Graphics::screenWidth / 2, Graphics::screenHeight / 2, 100, 100, []()
+		255, 255, 255, 333, Graphics::screenHeight / 2, 100, 100, []()
 		{ Game::currentState = GAME; new Level(); },
 		"New game");
 
 	new Button(
-		255, 255, 255, 50, Graphics::screenHeight / 2, 100, 100, []()
+		255, 255, 255, 666, Graphics::screenHeight / 2, 100, 100, []()
 		{ Game::currentState = SKILLTREE; new SkillTree(); },
 		"Skill Tree");
 }
@@ -140,6 +138,8 @@ void Game::eventLoop()
 
 void Game::menuEventLoop()
 {
+	SDL_Rect menuBack = {0, 0, Graphics::windowWidth, Graphics::screenHeight};
+	SDL_RenderCopy(Graphics::renderer, Graphics::menuBackground, NULL, &menuBack);
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
@@ -231,20 +231,6 @@ void Game::renderLoop()
 		powerUp->update();
 		powerUp->render();
 	}
-
-	// A partir d'ici c'est des tests vous pouvez les enlever si ça gêne ! bisous (j'enlève l'image pour pas que ça gêne pendant les gitgit)
-	// SDL_Surface image = *IMG_Load("Flamme 2.png");
-	// SDL_Texture* heartTexture = SDL_CreateTextureFromSurface(Graphics::renderer, &image);
-	// SDL_FreeSurface(&image);
-
-	// for (int i = 0; i < Player::instance->maxLifePoints; ++i)
-	// {
-	//     int heartX = 10 + i * (10 + 5);
-	//     int heartY = 10;
-	//     SDL_Rect heartRect = {heartX, heartY, 10, 10};
-	//     SDL_RenderCopy(Graphics::renderer, heartTexture, NULL, &heartRect);
-	// }
-	// La j'ai essayé de faire un truc pour afficher des petites flammes à la place de la jauge mais ce sera pour plus tard j'imagine.bisous
 
 	Rect *rect = new Rect(0, 255, 0, Graphics::windowWidth - 100, Graphics::screenHeight - 50, 152, 32);
 	rect->render(true);

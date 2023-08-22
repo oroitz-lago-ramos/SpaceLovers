@@ -16,6 +16,7 @@ private:
 
 public:
 	Entity(int r, int g, int b, int x, int y, int width, int height);
+	Entity(int r, int g, int b, int x, int y, int width, int height, bool drawRect);
 	~Entity();
 	void render();
 	void setX(float x);
@@ -36,6 +37,7 @@ public:
 	SDL_Rect rect;
 	SDL_Texture *texture;
 	bool destroyTexture;
+	bool drawRect;
 };
 
 #endif
