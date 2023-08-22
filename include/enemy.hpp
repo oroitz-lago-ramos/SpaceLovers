@@ -6,7 +6,7 @@
 #define ATTACKSWEEP 4
 
 #include <SDL2/SDL.h>
-#include <vector>
+#include <set>
 #include "character.hpp"
 #include "attack.hpp"
 
@@ -25,7 +25,7 @@ public:
 
 	float xpValue;
 	int flags;
-	std::vector<Attack *> attacks;
+	std::set<Attack *> attacks;
 
 private:
 	void checkCollisions();

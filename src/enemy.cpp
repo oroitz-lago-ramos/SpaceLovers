@@ -8,7 +8,7 @@
 #include "character.hpp"
 #include "graphics.hpp"
 #include "game.hpp"
-#include <vector>
+#include <set>
 
 Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
 	: Character(200, 100, 100, (rand() % (Graphics::screenWidth - 40) + 20), 10, 40, 40, 0.01, lifePoints, power, defense),
@@ -36,18 +36,18 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue, float 
 	this->timeSinceLastShot = 0;
 	if (flags & ATTACKLASER)
 	{
-		this->attacks.push_back(new Attack(this, 0));
+		this->attacks.insert(new Attack(this, 0));
 	}
 	if (flags & ATTACKSWEEP)
 	{
-		this->attacks.push_back(new Attack(this, 1));
+		this->attacks.insert(new Attack(this, 1));
 	}
 }
 
 Enemy::~Enemy()
 {
 	Level::enemies.erase(this);
-	for (Attack *attack : this->attacks)
+	for (Attack *attack : std::set<Attack *>(this->attacks))
 	{
 		attack->~Attack();
 	}
