@@ -16,7 +16,7 @@ Player *Player::instance = nullptr;
 Player::Player()
 	// Pour changer la couleur on modifie les trois premiers paramètres
 	: Character(200, 200, 200, Graphics::screenWidth / 2 - 20, Graphics::screenHeight - 30, 70, 50, 0.02f, 100, 10, 10),
-	  experience(0), numberOfProjectiles(1)
+	  experience(0), numberOfProjectiles(1), bestLevel(0)
 {
 	this->destroyTexture = false;
 	this->isPlayer = true;

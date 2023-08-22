@@ -16,7 +16,7 @@ std::set<InGameItem *> Level::powerUps = {};
 Level *Level::instance = nullptr;
 
 Level::Level()
-	: timeSinceLastSpawn(0), timeSinceLastPoweUp(0), timeSinceLastBoss(0), nanoSecond(30000000000), difficulty(1), boardLevel(1), enemyKilled(0), xpEarned(0), currentLvl(1)
+	: timeSinceLastSpawn(4000000000), timeSinceLastPoweUp(0), timeSinceLastBoss(0), nanoSecond(30000000000), difficulty(1), boardLevel(1), enemyKilled(0), xpEarned(0), enemySpawnTimer(4000000000), currentLvl(1)
 {
 	Level::instance = this;
 	char str[15];
@@ -31,18 +31,22 @@ Level::Level()
 	snprintf(strFps, 15, "Fps: %04d", 1000000000 / Game::frameTime);
 	this->fps = new Text(0, 250, 200, Graphics::windowWidth - 100, Graphics::screenHeight - 100, 150, 75, strFps, Graphics::font);
 	this->initPlayer();
+	int max = Player::instance->bestLevel - (Player::instance->bestLevel %5);
+	for (int i = this->getCurrentLvl(); i < max; i++)
+	{
+		this->setCurrentLvl(this->getCurrentLvl()+1);
+	}
 }
 
 Level::~Level()
 {
-	for (auto projectile : std::set<Projectile *>(this->projectiles))
+	if (this->getCurrentLvl() > Player::instance->bestLevel)
 	{
-		projectiles.erase(projectile);
+		Player::instance->bestLevel = this->getCurrentLvl();
 	}
-	for (auto enemy : std::set<Enemy *>(this->enemies))
-	{
-		enemies.erase(enemy);
-	}
+	Level::instance->projectiles.clear();
+	Level::instance->enemies.clear();
+	Player::instance->playerBoost.clear();
 	Game::currentState = MENU;
 	Game::inputs = 0;
 }
@@ -53,12 +57,12 @@ void Level::update()
 	this->timeSinceLastPoweUp += Game::frameTime;
 	this->timeSinceLastBoss += Game::frameTime;
 
-	if (this->timeSinceLastSpawn > 2000000000)
+	if (this->timeSinceLastSpawn > this->enemySpawnTimer)
 	{
 		new Enemy(10 * this->difficulty, 5 * this->difficulty, 10 * this->difficulty, 1 * this->difficulty);
 		this->timeSinceLastSpawn = 0;
 	}
-	
+
 	if (this->timeSinceLastBoss > 26500000000)
 	{
 		new Enemy(25 * this->difficulty, 25 * this->difficulty, 25 * this->difficulty, 20 * this->difficulty, 20 * this->difficulty, ISBOSS | (1 << (rand() % 2 + 1)));
@@ -67,7 +71,7 @@ void Level::update()
 
 	if (this->timeSinceLastPoweUp > 20000000000)
 	{
-		new InGameItem(rand()%NUMBER_OF_BOOST);
+		new InGameItem(rand() % NUMBER_OF_BOOST);
 		this->timeSinceLastPoweUp = 0;
 	}
 	this->countdown();
@@ -94,15 +98,6 @@ void Level::countdown()
 	{
 		this->nanoSecond = 30000000000;
 		this->setCurrentLvl(this->getCurrentLvl() + 1);
-		this->boardLevel++;
-		if (this->boardLevel > 10)
-		{
-			this->boardLevel = 1;
-		}
-		this->difficulty *= 1.1;
-		char str[15];
-		snprintf(str, 15, "Niveau %03d", this->getCurrentLvl());
-		this->levelRunning->textUpdate(str);
 	}
 }
 
@@ -138,6 +133,16 @@ void Level::setCurrentLvl(int currentLvl)
 {
 	this->currentLvl = currentLvl;
 	this->timeSinceLastBoss = 0;
+	this->boardLevel++;
+	if (this->boardLevel > 10)
+	{
+		this->boardLevel = 1;
+	}
+	this->difficulty *= 1.1;
+	char str[15];
+	snprintf(str, 15, "Niveau %03d", this->getCurrentLvl());
+	this->levelRunning->textUpdate(str);
+	this->enemySpawnTimer *= 0.95;
 }
 
 int Level::getCurrentLvl()

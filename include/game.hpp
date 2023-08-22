@@ -15,6 +15,7 @@ typedef struct save
 {
 	float experience;
 	std::vector<t_pair> skills;
+	int bestLevelReached;
 } Save;
 
 enum GameState

@@ -256,6 +256,7 @@ void Game::saveGame()
 {
 	Save saveData;
 	saveData.experience = Player::instance->experience;
+	saveData.bestLevelReached = Player::instance->bestLevel;
 	for (long long unsigned int i = 0; i < __skills.size(); ++i)
 	{
 		t_pair saveSkill;
@@ -273,6 +274,7 @@ void Game::saveGame()
 		{
 			outFile.write(reinterpret_cast<const char *>(&skill), sizeof(t_pair));
 		}
+		outFile.write(reinterpret_cast<const char *>(&saveData.bestLevelReached), sizeof(int));
 
 		outFile.close();
 	}
@@ -285,6 +287,8 @@ void Game::saveGame()
 bool Game::loadGame()
 {
 	Save saveData;
+	saveData.experience = 0;
+	saveData.bestLevelReached = 0;
 
 	std::ifstream inFile("save.dat", std::ios::binary | std::ios::in);
 	if (inFile.is_open())
@@ -297,8 +301,10 @@ bool Game::loadGame()
 		{
 			inFile.read(reinterpret_cast<char *>(&saveData.skills[i]), sizeof(t_pair));
 		}
+		inFile.read(reinterpret_cast<char *>(&saveData.bestLevelReached), sizeof(int));
 		inFile.close();
 		Player::instance->experience = saveData.experience;
+		Player::instance->bestLevel = saveData.bestLevelReached;
 		if (!saveData.skills.empty())
 		{
 			for (auto p : saveData.skills)

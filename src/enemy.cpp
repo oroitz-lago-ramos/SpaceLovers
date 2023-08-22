@@ -12,7 +12,7 @@
 
 Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
 	: Character(200, 100, 100, (rand() % (Graphics::screenWidth - 40) + 20), 10, 40, 40, 0.01, lifePoints, power, defense),
-	  xpValue(xpValue), flags(0)
+	  xpValue(xpValue), flags(0), maxY(Graphics::screenHeight / 2), rightOrLeft(rand() % 2)
 {
 	this->destroyTexture = false;
 	this->shield = 0;
@@ -26,7 +26,7 @@ Enemy::Enemy(float lifePoints, float power, float defense, float xpValue)
 
 Enemy::Enemy(float lifePoints, float power, float defense, float xpValue, float shield, int flags)
 	: Character(255, 0, 0, Graphics::screenWidth / 2, 10, 70, 50, 0.01, lifePoints, power, defense, shield),
-	  xpValue(xpValue), flags(flags)
+	  xpValue(xpValue), flags(flags), maxY(Graphics::screenHeight / 5)
 {
 	this->destroyTexture = false;
 	this->texture = Graphics::textures[ENEMYTEXTURE2];
@@ -62,15 +62,10 @@ void Enemy::update()
 	{
 		this->shoot();
 	}
-
-	if (this->lifePoints <= 0)
+	
+	if (this->getY() >= this -> maxY)
 	{
-		this->die();
-	}
-	if (this->flags & ISBOSS && this->getY() >= Graphics::screenHeight / 5)
-	{
-		static int rightOrLeft = rand() % 2;
-		if (rightOrLeft == 1)
+		if (this->rightOrLeft == 1)
 		{
 			this->moveRight();
 		}
@@ -78,13 +73,9 @@ void Enemy::update()
 		{
 			this->moveLeft();
 		}
-		if (this->getX() >= Graphics::screenWidth - 35)
+		if (this->getX() >= Graphics::screenWidth - 35 || this->getX() <= 0 + 35)
 		{
-			rightOrLeft = 0;
-		}
-		if (this->getX() <= 0 + 35)
-		{
-			rightOrLeft = 1;
+			this->rightOrLeft ^= 1;
 		}
 	}
 	else
@@ -95,9 +86,14 @@ void Enemy::update()
 	{
 		this->~Enemy();
 	}
-	for (Attack *attack : this->attacks)
+	for (Attack *attack : std::set<Attack * >(this->attacks))
 	{
 		attack->update();
+	}
+	
+	if (this->lifePoints <= 0)
+	{
+		this->die();
 	}
 }
 

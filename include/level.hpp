@@ -40,6 +40,7 @@ public:
 	int getCurrentLvl();
 	int enemyKilled;
 	float xpEarned;
+	long long unsigned int enemySpawnTimer;
 	
 private:
 	int currentLvl;

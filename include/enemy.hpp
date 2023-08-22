@@ -26,6 +26,8 @@ public:
 	float xpValue;
 	int flags;
 	std::set<Attack *> attacks;
+	int maxY;
+	int rightOrLeft;
 
 private:
 	void checkCollisions();

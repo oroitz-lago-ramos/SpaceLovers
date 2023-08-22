@@ -18,23 +18,23 @@ SkillTree::SkillTree()
 	SkillTree::instance = this;
 	Game::currentState = SKILLTREE;
 	buttons.insert(new Button(
-		255, 0, 0, 50, 25, 100, 50, []()
+		170, 170, 170, 55, 25, 100, 50, []()
 		{ Game::currentState = MENU; SkillTree::instance->~SkillTree(); },
 		"Back", false));
 	buttons.insert(new Button(
-		255, 0, 0, 175, 100, 145, 100, []()
+		170, 170, 170, 225, 100, 145, 100, []()
 		{ SkillTree::instance->currentState = SPEED; },
 		"Vitesse", false));
 	buttons.insert(new Button(
-		255, 0, 0, 330, 100, 145, 100, []()
+		170, 170, 170, 380, 100, 145, 100, []()
 		{ SkillTree::instance->currentState = POWER; },
 		"Puissance", false));
 	buttons.insert(new Button(
-		255, 0, 0, 485, 100, 145, 100, []()
+		170, 170, 170, 535, 100, 145, 100, []()
 		{ SkillTree::instance->currentState = DEFENSE; },
 		"Defense", false));
 	buttons.insert(new Button(
-		255, 0, 0, 640, 100, 145, 100, []()
+		170, 170, 170, 690, 100, 145, 100, []()
 		{ SkillTree::instance->currentState = INGAMEITEM; },
 		"Boost", false));
 	this->getNodes();
@@ -84,7 +84,7 @@ void SkillTree::autoLayout()
 	{
 		std::sort(nodes[i].begin(), nodes[i].end(), [](SkillNode *a, SkillNode *b)
 				  { return a->requirements.size() < b->requirements.size(); });
-		int x = 50;
+		int x = 100;
 		int y = 350;
 		int nodeWidth = 100;
 		for (SkillNode *node : nodes[i])
@@ -200,7 +200,7 @@ void SkillTree::getNodes()
 {
 	for (long long unsigned int i = 0; i < __skills.size(); i++)
 	{
-		SkillNode *node = new SkillNode(255, 0, 0, __skills[i].name);
+		SkillNode *node = new SkillNode(170, 170, 170, __skills[i].name);
 		node->id = __skills[i].id;
 		this->nodes[(int)__skills[i].tree].push_back(node);
 	}

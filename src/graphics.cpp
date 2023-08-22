@@ -59,8 +59,8 @@ Graphics::Graphics()
 		Graphics::boosts[i] = SDL_CreateTextureFromSurface(Graphics::renderer, boost1);
 		SDL_FreeSurface(boost1);
 	}
-	Graphics::font = TTF_OpenFont("Kichenset.otf", 32);
-	Graphics::bigFont = TTF_OpenFont("Kichenset.otf", 128);
+	Graphics::font = TTF_OpenFont("ARIAL.TTF", 32);
+	Graphics::bigFont = TTF_OpenFont("ARIAL.TTF", 128);
 	SDL_Surface *menu = IMG_Load("assets/fondecran.avif");
 	Graphics::menuBackground = SDL_CreateTextureFromSurface(Graphics::renderer, menu);
 	SDL_FreeSurface(menu);

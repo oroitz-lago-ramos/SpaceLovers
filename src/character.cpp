@@ -72,10 +72,10 @@ void Character::takeDamage(float damage)
 		if (damage > this->shield)
 		{
 			damage = damage - this->shield;
-			this->lifePoints -= damage;
+			this->lifePoints -= damage * (100-this->defense) / 100;
 		}
 	}
-	this->lifePoints -= damage;
+	this->lifePoints -= damage * (100-this->defense) / 100;
 	this->asTakeDamage = 0;
 }
 

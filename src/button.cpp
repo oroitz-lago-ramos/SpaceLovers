@@ -35,7 +35,7 @@ Button::~Button()
 
 void Button::text()
 {
-	TTF_Font *font = TTF_OpenFont("Kichenset.otf", 50);
+	TTF_Font *font = TTF_OpenFont("ARIAL.TTF", 50);
 	SDL_Surface *text = TTF_RenderText_Blended(font, this->message, (SDL_Color){0, 255, 0, 255});
 	this->texture = SDL_CreateTextureFromSurface(Graphics::renderer, text);
 	SDL_FreeSurface(text);
