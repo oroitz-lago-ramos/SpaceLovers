@@ -115,7 +115,7 @@ void Level::initPlayer()
 	Player::instance->defense = 10;
 	Player::instance->speed = 0.02f;
 	Player::instance->reloadSpeed = 500000000;
-	Player::instance->projectileSpeed = 0;
+	Player::instance->projectileSpeed = 0.1f;
 	Player::instance->pierce = 0;
 	Player::instance->setX(Graphics::windowWidth / 2 - Player::instance->getWidth() / 2);
 	Player::instance->setY(Graphics::screenHeight - Player::instance->getHeight() - 50);
